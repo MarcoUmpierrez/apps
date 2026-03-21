@@ -12,13 +12,14 @@ export class Timer implements OnDestroy {
   // State Signals
   protected readonly isRunning = signal<boolean>(false);
   protected readonly isResting = signal<boolean>(false);
+  protected readonly volume = signal<number>(1);
   private readonly currentTime = signal<number>(0);
   protected readonly cycleCount = signal<number>(1);
 
-  public readonly workSeconds = signal<number>(20);
-  public readonly restSeconds = signal<number>(5);
+  public readonly workSeconds = signal<number>(30);
+  public readonly restSeconds = signal<number>(15);
 
-  private timerInterval: any = null;
+  private timerInterval: ReturnType<typeof setInterval> | null = null;
   private audioCtx: AudioContext | null = null;
 
   // Computed Values
@@ -36,10 +37,10 @@ export class Timer implements OnDestroy {
 
   public readonly progressOffset: Signal<string> = computed(() => {
     const total = this.isResting() ? this.restSeconds() : this.workSeconds();
-    if (total === 0) return '0%';
+    if (total <= 0) return '282.74%';
     const progressPercent = (this.currentTime() / total) * 100;
     const radius = 45;
-    const circumference = 2 * Math.PI * radius;
+    const circumference = 2 * Math.PI * radius; // Approx 282.74
     const offset = circumference - (progressPercent / 100) * circumference;
     return `${offset}%`;
   });
@@ -58,6 +59,24 @@ export class Timer implements OnDestroy {
     if (this.audioCtx.state === 'suspended') {
       this.audioCtx.resume();
     }
+  }
+
+  /**
+   * Updates the volume multiplier from the range input.
+   */
+  public updateVolume(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.volume.set(parseFloat(val));
+  }
+
+  public updateWorkSeconds(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.workSeconds.set(parseInt(val, 10) || 0);
+  }
+
+  public updateRestSeconds(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.restSeconds.set(parseInt(val, 10) || 0);
   }
 
   /**
@@ -83,11 +102,12 @@ export class Timer implements OnDestroy {
         this.currentTime.update(v => v - 1);
         this.playSound(this.isResting() ? 'rest' : 'work');
       } else {
-        this.playSound('switch');
         if (!this.isResting()) {
+          this.playSound('bell');
           this.isResting.set(true);
           this.currentTime.set(this.restSeconds());
         } else {
+          this.playSound('switch');
           this.isResting.set(false);
           this.cycleCount.update(v => v + 1);
           this.currentTime.set(this.workSeconds());
@@ -109,33 +129,58 @@ export class Timer implements OnDestroy {
   }
 
   /**
-   * Handles audio feedback for various timer events.
+   * Handles audio feedback using the volume signal as a multiplier.
    */
-  private playSound(type: 'work' | 'rest' | 'switch'): void {
+  private playSound(type: 'work' | 'rest' | 'switch' | 'bell'): void {
     if (!this.audioCtx) return;
     const now = this.audioCtx.currentTime;
+    const masterVol = this.volume();
 
-    const playTone = (freq: number, duration: number, startTime: number) => {
+    const playTone = (freq: number, duration: number, startTime: number, gainVal: number = 0.1, type: OscillatorType = 'sine') => {
       const osc = this.audioCtx!.createOscillator();
       const gain = this.audioCtx!.createGain();
+      osc.type = type;
       osc.connect(gain);
       gain.connect(this.audioCtx!.destination);
+
       osc.frequency.setValueAtTime(freq, startTime);
-      gain.gain.setValueAtTime(0.05, startTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.02);
+
+      const finalGain = gainVal * masterVol;
+      gain.gain.setValueAtTime(finalGain, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration - 0.01);
+
       osc.start(startTime);
       osc.stop(startTime + duration);
     };
 
-    if (type === 'work') playTone(900, 0.1, now);
-    else if (type === 'rest') playTone(400, 0.1, now);
-    else {
-      [0, 0.15, 0.3].forEach((offset, i) => playTone(i === 2 ? 1200 : 800, 0.2, now + offset));
+    switch (type) {
+      case 'work':
+        playTone(900, 0.08, now, 0.15);
+        break;
+      case 'rest':
+        playTone(400, 0.1, now, 0.12);
+        break;
+      case 'switch':
+        [0, 0.12, 0.24].forEach((offset, i) => {
+          playTone(i === 2 ? 1400 : 1000, 0.3, now + offset, 0.25);
+        });
+        break;
+      case 'bell':
+        // Boxing Bell Synthesis: Layered frequencies for a metallic "cling"
+        const frequencies = [880, 1320, 1760]; // Harmonics
+        frequencies.forEach(f => {
+          playTone(f, 0.8, now, 0.2, 'triangle');
+        });
+        // Sharp transient
+        playTone(2200, 0.1, now, 0.3, 'sine');
+        break;
     }
   }
 
   public ngOnDestroy(): void {
     this.stopTimer();
-    if (this.audioCtx) this.audioCtx.close();
+    if (this.audioCtx) {
+      this.audioCtx.close();
+    }
   }
 }
