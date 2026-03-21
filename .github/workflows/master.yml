@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+# Added permissions so the JamesIves action has the right to create the branch
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,11 +26,21 @@ jobs:
       - name: Build
         run: npx ng build --base-href /apps/
 
+      - name: Debug Folder Structure
+        run: ls -R dist/
+
       - name: Fix for GitHub Pages
-        run: cp dist/apps/browser/index.html dist/apps/browser/404.html
+        run: |
+          if [ -d "dist/apps/browser" ]; then
+            cp dist/apps/browser/index.html dist/apps/browser/404.html
+            echo "DEPLOY_PATH=dist/apps/browser" >> $GITHUB_ENV
+          else
+            cp dist/browser/index.html dist/browser/404.html
+            echo "DEPLOY_PATH=dist/browser" >> $GITHUB_ENV
+          fi
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/apps/browser
+          folder: ${{ env.DEPLOY_PATH }}
           branch: gh-pages
