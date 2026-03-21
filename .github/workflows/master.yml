@@ -25,8 +25,11 @@ jobs:
       - name: Fix for GitHub Pages
         run: cp dist/apps/browser/index.html dist/apps/browser/404.html
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist/apps/browser
-          branch: gh-pages
+          path: dist/apps/browser
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
