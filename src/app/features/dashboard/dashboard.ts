@@ -28,7 +28,7 @@ export class Dashboard {
       title: 'Focus Timer',
       description: 'A minimalist, hands-free interval timer that beeps every second and switches sounds between work and rest so you never have to glance at your phone.',
       icon: '⏱️',
-      url: '/timer',
+      url: 'timer',
       category: 'Tools',
       color: 'bg-linear-to-br from-rose-700 to-pink-800'
     },
