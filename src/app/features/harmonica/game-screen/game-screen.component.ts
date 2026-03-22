@@ -572,8 +572,8 @@ export class GameScreenComponent {
 
         const inHitWindow =
           !updated.hit &&
-          updated.progress > 75 &&
-          updated.progress < 95 &&
+          updated.progress > this.HIT_ZONE_TOP_T * 100 &&
+          updated.progress < this.HIT_ZONE_BOT_T * 100 &&
           action?.cell === updated.cell &&
           action?.type === updated.type;
 
