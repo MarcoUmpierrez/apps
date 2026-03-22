@@ -5,6 +5,7 @@ import {
   signal,
   OnInit,
   ChangeDetectionStrategy,
+  effect,
 } from '@angular/core';
 
 type CellState = 'idle' | 'highlighted' | 'selected-correct' | 'selected-wrong';
@@ -51,13 +52,13 @@ export class MemoryGameComponent implements OnInit {
   public readonly correct      = output<void>();
   public readonly wrong        = output<void>();
 
-  public readonly cells      = signal<MemoryCell[]>(
+  public readonly cells        = signal<MemoryCell[]>(
     Array.from({ length: 9 }, (_, i) => ({ index: i, state: 'idle' }))
   );
   public readonly phase      = signal<'watching' | 'input'>('watching');
 
-  private pattern: number[]    = [];
-  private userInput: number[]  = [];
+  private pattern   : number[]  = [];
+  private userInput : number[]  = [];
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
   public ngOnInit(): void {
@@ -103,14 +104,16 @@ export class MemoryGameComponent implements OnInit {
     if (this.userInput.includes(index)) return;
 
     this.userInput.push(index);
+    const position = this.userInput.indexOf(index);
 
-    if (this.pattern.includes(index)) {
+    if (this.pattern.length > position && this.pattern[position] === index) {
       this.setCellState(index, 'selected-correct');
       if (this.userInput.length === this.pattern.length) {
         this.correct.emit();
         setTimeout(() => this.startRound(), 500);
       }
     } else {
+      this.phase.set('watching');
       this.setCellState(index, 'selected-wrong');
       this.wrong.emit();
       setTimeout(() => this.startRound(), 500);

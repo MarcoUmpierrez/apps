@@ -43,6 +43,7 @@
           }
           @case ('memory') {
             <app-memory-game
+              #memoryGame
               [active]="gameActive()"
               [memoryLevel]="memoryLevel()"
               (correct)="onMemoryCorrect()"

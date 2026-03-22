@@ -7,6 +7,7 @@ import {
   OnDestroy,
   inject,
   ChangeDetectionStrategy,
+  viewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameMode, GameStoreService } from '../services/game-store.service';
@@ -67,6 +68,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
+  readonly memoryGame   = viewChild<MemoryGameComponent>('memoryGame');
+
   ngOnInit(): void {
     const m = this.route.snapshot.paramMap.get('mode') as GameMode;
     this.mode.set(m ?? 'math');
@@ -85,7 +88,11 @@ export class GameComponent implements OnInit, OnDestroy {
     this.maxTime.set(timer);
     this.timeLeft.set(timer);
     this.gameActive.set(true);
+
     this.startCountdown();
+    if (this.mode() === 'memory') {
+      this.memoryGame()?.startRound();
+    }
   }
 
   tryAgain(): void {
