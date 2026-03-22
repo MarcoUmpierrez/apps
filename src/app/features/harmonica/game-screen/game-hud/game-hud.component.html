@@ -1,0 +1,41 @@
+<div class="px-6 py-4 flex justify-between items-start bg-slate-900/90 border-b border-white/5 z-40">
+  <!-- Left: song title + guide + key badge -->
+  <div class="flex flex-col gap-1 w-1/3">
+    <div class="text-sm font-black uppercase text-white/90 truncate">
+      {{ songTitle() }}
+    </div>
+    <div
+      class="font-black text-xs uppercase tracking-tighter"
+      [class.text-emerald-400]="nextGuide() !== 'Esperando nota...'"
+      [class.text-white]="nextGuide() === 'Esperando nota...'"
+      [class.opacity-20]="nextGuide() === 'Esperando nota...'"
+    >
+      {{ nextGuide() }}
+    </div>
+    <div class="text-[9px] w-fit bg-emerald-500/20 px-2 py-0.5 rounded-full text-emerald-400 border border-emerald-500/30 font-bold">
+      KEY: {{ currentKey() }}
+    </div>
+  </div>
+
+  <!-- Center: combo + shout overlay -->
+  <div class="flex flex-col items-center justify-center w-1/3 relative">
+    <div class="text-[10px] uppercase font-bold opacity-40">Combo</div>
+    <div class="text-4xl font-black italic text-violet-500 leading-none">x{{ combo() }}</div>
+
+    <div class="absolute top-1/2 left-1/2 z-60 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+      @for (shout of comboShouts(); track shout.id) {
+        <div class="italic font-black uppercase text-4xl text-(--color-accent)
+                    drop-shadow-[0_0_20px_rgba(250,204,21,0.5)]
+                    animate-[shout-pop_1s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]">
+          {{ shout.text }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Right: score -->
+  <div class="flex flex-col items-end w-1/3">
+    <div class="text-[10px] uppercase font-bold opacity-40">Score</div>
+    <div class="text-3xl font-mono font-black text-white">{{ formattedScore }}</div>
+  </div>
+</div>

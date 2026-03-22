@@ -1,0 +1,64 @@
+<div class="fixed inset-0 flex flex-col items-center justify-center z-50 p-8 bg-(--bg-main)">
+  <button
+    class="absolute top-8 left-8 text-sm font-bold uppercase tracking-widest opacity-50 hover:opacity-100"
+    (click)="back.emit()">
+    ← Back
+  </button>
+
+  <h2 class="text-3xl font-black mb-8 italic text-violet-500">OPTIONS</h2>
+
+  <div class="w-full max-w-md space-y-6 bg-slate-800/20 p-8 rounded-3xl border border-white/5">
+
+    <!-- Key selector -->
+    <div>
+      <label class="block text-xs uppercase font-bold tracking-widest mb-4 opacity-50">
+        Harmonica key (tonality)
+      </label>
+      <div class="grid grid-cols-4 gap-2">
+        @for (key of availableKeys; track key) {
+          <button
+            class="rounded-lg border p-2 text-xs font-bold transition-all duration-200"
+            [class.bg-emerald-500]="isKeyActive(key)"
+            [class.bg-transparent]="!isKeyActive(key)"
+            [class.text-white]="isKeyActive(key)"
+            [class.text-inherit]="!isKeyActive(key)"
+            [class.border-emerald-500]="isKeyActive(key)"
+            [class.border-(--border-ui)]="!isKeyActive(key)"
+            (click)="setKey(key)">
+            {{ key }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Difficulty -->
+    <div>
+      <label class="block text-xs uppercase font-bold tracking-widest mb-4 opacity-50">
+        Difficulty
+      </label>
+      <div class="flex gap-2">
+        <button
+          class="flex-1 py-3 rounded-xl border border-white/10 text-sm font-bold transition-all"
+          [class.bg-emerald-500]="isDifficulty('easy')"
+          [class.text-white]="isDifficulty('easy')"
+          (click)="setDifficulty('easy')">
+          EASY
+        </button>
+        <button
+          class="flex-1 py-3 rounded-xl border border-white/10 text-sm font-bold transition-all"
+          [class.bg-emerald-500]="isDifficulty('normal')"
+          [class.text-white]="isDifficulty('normal')"
+          (click)="setDifficulty('normal')">
+          NORMAL
+        </button>
+        <button
+          class="flex-1 py-3 rounded-xl border border-white/10 text-sm font-bold transition-all"
+          [class.bg-emerald-500]="isDifficulty('hard')"
+          [class.text-white]="isDifficulty('hard')"
+          (click)="setDifficulty('hard')">
+          DIFFICULT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

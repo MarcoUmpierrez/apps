@@ -1,0 +1,24 @@
+@switch (currentScreen()) {
+  @case ('home') {
+    <app-home-screen
+      (startFreePlay)="startGame('free')"
+      (showSongs)="navigate('songs')"
+      (showOptions)="navigate('options')"
+    />
+  }
+  @case ('songs') {
+    <app-songs-screen
+      (back)="navigate('home')"
+      (selectSong)="startGame($event)"
+    />
+  }
+  @case ('options') {
+    <app-options-screen (back)="navigate('home')" />
+  }
+  @case ('game') {
+    <app-game-screen
+      [songKey]="activeSongKey()"
+      (exit)="navigate('home')"
+    />
+  }
+}

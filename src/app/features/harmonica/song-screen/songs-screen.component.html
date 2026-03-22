@@ -1,0 +1,23 @@
+<div class="fixed inset-0 flex flex-col items-center justify-center z-50 p-8 bg-(--bg-main)">
+  <button
+    class="absolute top-8 left-8 text-sm font-bold uppercase tracking-widest opacity-50 hover:opacity-100"
+    (click)="back.emit()">
+    ← Back
+  </button>
+
+  <h2 class="text-3xl font-black mb-8 italic">SONG LIST</h2>
+
+  <div class="space-y-3 w-full max-w-md overflow-y-auto max-h-[60vh] pr-2">
+    @for (song of songs; track song.key) {
+      <div
+        class="w-full max-w-100 cursor-pointer rounded-3xl border border-(--border-ui) bg-(--bg-card) p-6 backdrop-blur-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-(--color-blow) flex justify-between items-center"
+        (click)="selectSong.emit(song.key)">
+        <div>
+          <h4 class="font-bold">{{ song.name }}</h4>
+          <p class="text-xs opacity-60">{{ song.desc }}</p>
+        </div>
+        <span class="text-emerald-500 font-bold">▶</span>
+      </div>
+    }
+  </div>
+</div>

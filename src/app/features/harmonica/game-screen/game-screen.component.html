@@ -1,0 +1,51 @@
+<div class="flex flex-col h-screen bg-slate-950">
+
+  <app-game-hud
+    #hudEl
+    [songTitle]="songTitle"
+    [nextGuide]="nextNoteGuide()"
+    [currentKey]="currentKey()"
+    [combo]="combo()"
+    [score]="score()"
+  />
+
+  <!-- ── Highway ──────────────────────────────────────────────────────────── -->
+  <div class="relative grow flex flex-col justify-center">
+    <div class="relative mx-auto h-[65vh] w-full max-w-150 border-x-4 border-(--border-ui) bg-(--highway-bg)">
+      <app-highway-canvas
+        #highwayEl
+        [activeNotes]="activeNotes()"
+        [highlightedLanes]="highlightedLanes()"
+        [activeCellStates]="activeCellStates()"
+        [laneCount]="lanes.length"
+        class="w-full h-full"
+      />
+    </div>
+  </div>
+
+  <!-- ── Hole labels ────────────────────────────────────────────────────── -->
+  <div class="mx-auto flex w-full max-w-150 border-t-2 border-(--border-ui) bg-(--bg-card)">
+    @for (hole of lanes; track hole) {
+      <div class="flex-1 py-2.5 text-center font-extrabold text-(--text-main)">{{ hole }}</div>
+    }
+  </div>
+
+  <!-- ── Exit ──────────────────────────────────────────────────────────── -->
+  <div class="p-4 flex justify-center bg-slate-900/50">
+    <button
+      class="px-8 py-2 text-xs font-bold uppercase tracking-widest bg-emerald-500 text-white hover:bg-emerald-300 border border-white/10 rounded-full transition-all"
+      (click)="onExit()"
+    >
+      Leave session
+    </button>
+  </div>
+
+</div>
+
+@if (showResultPopup()) {
+  <app-result-popup
+    [finalScore]="score()"
+    (restart)="onRestart()"
+    (exit)="onExit()"
+  />
+}

@@ -16,11 +16,11 @@ interface WebApp {
 @Component({
   selector: 'app-dashboard',
   imports: [],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dashboard {
+export class DashboardComponent {
   protected readonly title = signal('dashboard');
   private readonly apps = signal<WebApp[]>([
     {
@@ -40,6 +40,15 @@ export class Dashboard {
       url: 'brain',
       category: 'Games',
       color: 'bg-linear-to-br from-green-700 to-yellow-800'
+    },
+    {
+      id: '3',
+      title: 'Harmonica Hero',
+      description: 'A harmonica game to play and learn songs.',
+      icon: '🪗',
+      url: 'harmonica',
+      category: 'Games',
+      color: 'bg-linear-to-br from-blue-700 to-purple-800'
     },
   ]);
 

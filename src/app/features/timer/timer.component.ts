@@ -1,26 +1,26 @@
-import { Component, signal, computed, effect, OnDestroy, type Signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, OnDestroy, type Signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-timer',
   imports: [RouterLink],
-  templateUrl: './timer.html',
-  styleUrl: './timer.css',
+  templateUrl: './timer.component.html',
+  styleUrl: './timer.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Timer implements OnDestroy {
+export class TimerComponent implements OnDestroy {
   // State Signals
-  protected readonly isRunning = signal<boolean>(false);
-  protected readonly isResting = signal<boolean>(false);
-  protected readonly volume = signal<number>(1);
-  private readonly currentTime = signal<number>(0);
+  private readonly currentTime  = signal<number>(0);
+  protected readonly isRunning  = signal<boolean>(false);
+  protected readonly isResting  = signal<boolean>(false);
+  protected readonly volume     = signal<number>(1);
   protected readonly cycleCount = signal<number>(1);
 
-  public readonly workSeconds = signal<number>(30);
-  public readonly restSeconds = signal<number>(15);
+  public readonly workSeconds   = signal<number>(30);
+  public readonly restSeconds   = signal<number>(15);
 
   private timerInterval: ReturnType<typeof setInterval> | null = null;
-  private audioCtx: AudioContext | null = null;
+  private audioCtx     : AudioContext | null                   = null;
 
   // Computed Values
   public readonly displayTime: Signal<string> = computed(() => {
