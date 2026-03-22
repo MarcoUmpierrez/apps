@@ -25,14 +25,13 @@ interface ActiveNote {
   hit: boolean;
 }
 
-interface Particle {
+interface HitEffect {
   id: number;
-  x: number;
-  y: number;
+  laneIndex: number; // 0-based lane
+  depthT: number;    // depth at moment of hit (0..1)
   color: string;
-  size: number;
-  vx: number;
-  vy: number;
+  age: number;       // frames elapsed, 0 → DURATION
+  sparks: { angle: number; speed: number; size: number }[];
 }
 
 interface ComboShout {
@@ -84,7 +83,7 @@ export class GameScreenComponent {
   protected readonly activeNotes      = signal<ActiveNote[]>([]);
   protected readonly highlightedLanes = signal<Set<number>>(new Set());
   protected readonly activeCellStates = signal<Map<number, NoteType>>(new Map());
-  protected readonly particles        = signal<Particle[]>([]);
+  protected readonly hitEffects       = signal<HitEffect[]>([]);
   protected readonly comboShouts      = signal<ComboShout[]>([]);
 
   protected readonly notesByLane = computed(() => {
@@ -112,7 +111,8 @@ export class GameScreenComponent {
   private readonly HIT_ZONE_TOP_T = 0.745;
   private readonly HIT_ZONE_BOT_T = 0.86;
   // Note thickness in progress units
-private readonly NOTE_THICKNESS         = 4;
+  private readonly NOTE_THICKNESS         = 4;
+  private readonly HIT_EFFECT_DURATION = 60; // frames (1s at 60fps)
 
   private resizeObserver!: ResizeObserver;
 
@@ -193,7 +193,6 @@ private readonly NOTE_THICKNESS         = 4;
   private renderFrame(): void {
     const canvas = this.highwayCanvas().nativeElement;
     const ctx    = canvas.getContext('2d')!;
-    // CSS dimensions (not raw pixel buffer)
     const rect   = canvas.getBoundingClientRect();
     const W      = rect.width;
     const H      = rect.height;
@@ -206,6 +205,7 @@ private readonly NOTE_THICKNESS         = 4;
     this.drawGrid(ctx, W, H, N);
     this.drawHitZone(ctx, W, H, N);
     this.drawNotes(ctx, W, H, N);
+    this.drawHitEffects(ctx, W, H, N);  // ← add this
 
     ctx.restore();
   }
@@ -410,12 +410,79 @@ private readonly NOTE_THICKNESS         = 4;
     }
   }
 
+  private drawHitEffects(ctx: CanvasRenderingContext2D, W: number, H: number, N: number): void {
+    const surviving: HitEffect[] = [];
+
+    for (const effect of this.hitEffects()) {
+      const t = effect.age / this.HIT_EFFECT_DURATION; // 0 → 1
+      if (t >= 1) continue;
+      surviving.push({ ...effect, age: effect.age + 1 });
+
+      const laneT  = (effect.laneIndex + 0.5) / N;
+      const laneL  = effect.laneIndex / N;
+      const laneR  = (effect.laneIndex + 1) / N;
+      const center = this.project(W, H, laneT, effect.depthT);
+      const left   = this.project(W, H, laneL, effect.depthT);
+      const right  = this.project(W, H, laneR, effect.depthT);
+      const noteW  = right.x - left.x;
+
+      // ── Phase 1 (t < 0.25): note flashes yellow ───────────────────────
+      if (t < 0.25) {
+        const flashT    = t / 0.25;             // 0 → 1 within flash phase
+        const noteThick = this.NOTE_THICKNESS;
+        const topDepth  = Math.max(0.001, effect.depthT - noteThick / 100 / 2);
+        const botDepth  = Math.min(0.999, effect.depthT + noteThick / 100 / 2);
+        const tl = this.project(W, H, laneL + 0.004 / N, topDepth);
+        const tr = this.project(W, H, laneR - 0.004 / N, topDepth);
+        const bl = this.project(W, H, laneL + 0.004 / N, botDepth);
+        const br = this.project(W, H, laneR - 0.004 / N, botDepth);
+
+        ctx.beginPath();
+        ctx.moveTo(tl.x, tl.y);
+        ctx.lineTo(tr.x, tr.y);
+        ctx.lineTo(br.x, br.y);
+        ctx.lineTo(bl.x, bl.y);
+        ctx.closePath();
+
+        ctx.fillStyle   = `rgba(250,204,21,${1 - flashT * 0.3})`;
+        ctx.shadowColor = '#facc15';
+        ctx.shadowBlur  = 20 * (1 - flashT);
+        ctx.fill();
+        ctx.shadowBlur  = 0;
+      }
+
+      // ── Phase 2 (t >= 0.15): sparks radiate outward ───────────────────
+      if (t >= 0.15) {
+        const sparkT = (t - 0.15) / 0.85; // 0 → 1 within spark phase
+        const eased  = 1 - (1 - sparkT) ** 2; // ease-out
+
+        for (const spark of effect.sparks) {
+          const dist = spark.speed * eased * (noteW * 0.25); // was 0.6
+          const alpha = 1 - sparkT;
+          const sx    = center.x + Math.cos(spark.angle) * dist;
+          const sy    = center.y + Math.sin(spark.angle) * dist * 0.45; // flatten Y for perspective feel
+
+          ctx.beginPath();
+          ctx.arc(sx, sy, spark.size * (1 - sparkT * 0.5), 0, Math.PI * 2);
+          ctx.fillStyle   = sparkT < 0.4 ? `rgba(255,255,255,${alpha})` : `rgba(250,204,21,${alpha})`;
+          ctx.shadowColor = '#facc15';
+          ctx.shadowBlur  = 8 * alpha;
+          ctx.fill();
+          ctx.shadowBlur  = 0;
+        }
+      }
+    }
+
+    // Advance ages and prune finished effects
+    this.hitEffects.set(surviving);
+  }
+
   // ── Private: game lifecycle ───────────────────────────────────────────────
 
   private async startGame(): Promise<void> {
     this.stopLoop();
     this.activeNotes.set([]);
-    this.particles.set([]);
+    this.hitEffects.set([]);
     this.comboShouts.set([]);
     this.highlightedLanes.set(new Set());
     this.activeCellStates.set(new Map());
@@ -547,15 +614,10 @@ private readonly NOTE_THICKNESS         = 4;
   }
 
   private handleHit(note: ActiveNote, highlights: Set<number>): void {
-    const x     = ((note.cell - 1) + 0.5) / LANES.length * 100;
-    const color = note.type === 'blow' ? '#10b981' : '#8b5cf6';
-
-    this.createExplosion(x, note.progress, color);
+    this.createHitEffect(note);
     this.gameService.addScore(100);
     this.gameService.incrementCombo();
-
     if (this.gameService.combo() % 5 === 0) this.triggerComboShout();
-
     highlights.add(note.cell - 1);
   }
 
@@ -566,36 +628,26 @@ private readonly NOTE_THICKNESS         = 4;
       id:   this.shoutIdCounter++,
       text: SHOUTS[Math.floor(Math.random() * SHOUTS.length)],
     };
-
     this.comboShouts.update(s => [...s, shout]);
-
     setTimeout(() => {
-      this.createExplosion(50, 50, '#facc15');
       this.comboShouts.update(s => s.filter(c => c.id !== shout.id));
     }, 1000);
   }
 
-  private createExplosion(x: number, y: number, color: string): void {
-    const burst: Particle[] = Array.from({ length: 15 }, () => {
-      const angle    = Math.random() * Math.PI * 2;
-      const velocity = Math.random() * 150 + 50;
-      return {
-        id:    this.particleIdCounter++,
-        x,
-        y,
-        color,
-        size:  Math.random() * 8 + 4,
-        vx:    Math.cos(angle) * velocity,
-        vy:    Math.sin(angle) * velocity,
-      };
-    });
+  private createHitEffect(note: ActiveNote): void {
+    const effect: HitEffect = {
+      id:        this.particleIdCounter++,
+      laneIndex: note.cell - 1,
+      depthT:    Math.min(0.999, note.progress / 100),
+      color:     note.type === 'blow' ? '#10b981' : '#8b5cf6',
+      age:       0,
+      sparks: Array.from({ length: 18 }, () => ({
+        angle: Math.random() * Math.PI * 2,
+        speed: Math.random() * 8 + 4,   // was 28 + 12
+        size:  Math.random() * 2.5 + 1, // slightly smaller to feel denser
+      })),
+    };
 
-    this.particles.update(p => [...p, ...burst]);
-
-    const burstIds = new Set(burst.map(p => p.id));
-    setTimeout(
-      () => this.particles.update(p => p.filter(particle => !burstIds.has(particle.id))),
-      600,
-    );
+    this.hitEffects.update(e => [...e, effect]);
   }
 }

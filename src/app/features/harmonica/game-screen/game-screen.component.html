@@ -61,24 +61,6 @@
         #highwayCanvas
         class="absolute inset-0 w-full h-full z-1"
       ></canvas>
-
-      <!--
-        Particles remain in HTML – they burst outside the perspective plane
-        so they don't need projection math.
-      -->
-      @for (particle of particles(); track particle.id) {
-        <div
-          class="absolute pointer-events-none rounded-full z-20 animate-[particle-fade_0.6s_ease-out_forwards]"
-          [style.left]="particle.x + '%'"
-          [style.top]="particle.y + '%'"
-          [style.width.px]="particle.size"
-          [style.height.px]="particle.size"
-          [style.background-color]="particle.color"
-          [style.box-shadow]="'0 0 15px ' + particle.color"
-          [style.--tw-x]="particle.vx + 'px'"
-          [style.--tw-y]="particle.vy + 'px'"
-        ></div>
-      }
     </div>
   </div>
 
