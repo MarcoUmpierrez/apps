@@ -11,7 +11,7 @@ export const routes: Routes = [
     /** * @description Entry point for the apps overview.
      */
     loadComponent: () =>
-      import('./features/dashboard/dashboard').then(c => c.Dashboard),
+      import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent),
     title: 'Dashboard'
   },
   {
@@ -20,7 +20,7 @@ export const routes: Routes = [
      * loads the component directly as the primary view for this path.
      */
     loadComponent: () =>
-      import('./features/timer/timer').then(c => c.Timer),
+      import('./features/timer/timer.component').then(c => c.TimerComponent),
     title: 'Timer App'
   },
   {
@@ -40,6 +40,14 @@ export const routes: Routes = [
     path: 'brain/game/:mode',
     loadComponent: () =>
       import('./features/brain/game/game.component').then((m) => m.GameComponent),
+  },
+  {
+    path: 'harmonica',
+    title: 'Harmonica Hero',
+    loadComponent: () =>
+      import('./features/harmonica/harmonica-hero.component').then(
+        (m) => m.HarmonicaHeroComponent
+      ),
   },
   {
     path: '',
