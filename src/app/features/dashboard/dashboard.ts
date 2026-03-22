@@ -32,6 +32,15 @@ export class Dashboard {
       category: 'Tools',
       color: 'bg-linear-to-br from-rose-700 to-pink-800'
     },
+    {
+      id: '2',
+      title: 'Brain game',
+      description: 'A fun collection of quick mental workouts.',
+      icon: '🧠',
+      url: 'brain',
+      category: 'Games',
+      color: 'bg-linear-to-br from-green-700 to-yellow-800'
+    },
   ]);
 
   /** Signal for UI state */

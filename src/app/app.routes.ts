@@ -24,6 +24,24 @@ export const routes: Routes = [
     title: 'Timer App'
   },
   {
+    path: 'brain',
+    title: 'Brain Games',
+    loadComponent: () =>
+      import('./features/brain/menu/menu.component').then((m) => m.MenuComponent),
+  },
+  {
+    path: 'brain/settings',
+    loadComponent: () =>
+      import('./features/brain/settings/settings.component').then(
+        (m) => m.SettingsComponent
+      ),
+  },
+  {
+    path: 'brain/game/:mode',
+    loadComponent: () =>
+      import('./features/brain/game/game.component').then((m) => m.GameComponent),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'dashboard'
