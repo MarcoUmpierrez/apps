@@ -77,13 +77,193 @@ export const SONGS: Record<string, Song> = {
       { t: 37600, h: 4, type: 'blow' },
     ],
   },
-  blues_riff: {
-    name: 'Shuffle Riff',
-    desc: 'Typical blues',
+  mary_had_a_little_lamb: {
+    name: 'Mary Had a Little Lamb',
+    desc: 'Only holes 4-6, great for beginners',
     notes: [
-      { t: 1000, h: 2, type: 'draw' }, { t: 1500, h: 3, type: 'draw' }, { t: 2000, h: 4, type: 'blow' },
-      { t: 2500, h: 4, type: 'draw' }, { t: 3500, h: 2, type: 'draw' }, { t: 4000, h: 3, type: 'draw' },
-      { t: 4500, h: 4, type: 'blow' }, { t: 5000, h: 4, type: 'draw' },
+      // Verse 1 — Mary had a little lamb, little lamb, little lamb
+      { t: 1000, h: 5, type: 'blow' }, // E  Ma-
+      { t: 1400, h: 4, type: 'draw' }, // D  -ry
+      { t: 1800, h: 4, type: 'blow' }, // C  had
+      { t: 2200, h: 4, type: 'draw' }, // D  a
+      { t: 2600, h: 5, type: 'blow' }, // E  lit-
+      { t: 3000, h: 5, type: 'blow' }, // E  -tle
+      { t: 3600, h: 5, type: 'blow' }, // E  lamb, [half]
+      { t: 4400, h: 4, type: 'draw' }, // D  lit-
+      { t: 4800, h: 4, type: 'draw' }, // D  -tle
+      { t: 5400, h: 4, type: 'draw' }, // D  lamb, [half]
+      { t: 6200, h: 5, type: 'blow' }, // E  lit-
+      { t: 6600, h: 6, type: 'blow' }, // G  -tle
+      { t: 7200, h: 6, type: 'blow' }, // G  lamb. [half]
+      // Verse 2 — Mary had a little lamb, its fleece was white as snow
+      { t: 8200, h: 5, type: 'blow' }, // E  Ma-
+      { t: 8600, h: 4, type: 'draw' }, // D  -ry
+      { t: 9000, h: 4, type: 'blow' }, // C  had
+      { t: 9400, h: 4, type: 'draw' }, // D  a
+      { t: 9800, h: 5, type: 'blow' }, // E  lit-
+      { t: 10200, h: 5, type: 'blow' },// E  -tle
+      { t: 10600, h: 5, type: 'blow' },// E  lamb,
+      { t: 11000, h: 5, type: 'blow' },// E  its
+      { t: 11600, h: 4, type: 'draw' },// D  fleece
+      { t: 12000, h: 4, type: 'draw' },// D  was
+      { t: 12400, h: 5, type: 'blow' },// E  white
+      { t: 12800, h: 4, type: 'draw' },// D  as
+      { t: 13400, h: 4, type: 'blow' },// C  snow. [final]
+    ],
+  },
+
+  twinkle_twinkle: {
+    name: 'Twinkle Twinkle Little Star',
+    desc: 'Full melody - holes 4-6',
+    notes: [
+      // Twinkle twinkle little star
+      { t: 1000, h: 4, type: 'blow' }, // C
+      { t: 1400, h: 4, type: 'blow' }, // C
+      { t: 1800, h: 6, type: 'blow' }, // G
+      { t: 2200, h: 6, type: 'blow' }, // G
+      { t: 2600, h: 6, type: 'draw' }, // A
+      { t: 3000, h: 6, type: 'draw' }, // A
+      { t: 3400, h: 6, type: 'blow' }, // G [half]
+      // How I wonder what you are
+      { t: 4200, h: 5, type: 'draw' }, // F
+      { t: 4600, h: 5, type: 'draw' }, // F
+      { t: 5000, h: 5, type: 'blow' }, // E
+      { t: 5400, h: 5, type: 'blow' }, // E
+      { t: 5800, h: 4, type: 'draw' }, // D
+      { t: 6200, h: 4, type: 'draw' }, // D
+      { t: 6600, h: 4, type: 'blow' }, // C [half]
+      // Up above the world so high
+      { t: 7400, h: 6, type: 'blow' }, // G
+      { t: 7800, h: 6, type: 'blow' }, // G
+      { t: 8200, h: 5, type: 'draw' }, // F
+      { t: 8600, h: 5, type: 'draw' }, // F
+      { t: 9000, h: 5, type: 'blow' }, // E
+      { t: 9400, h: 5, type: 'blow' }, // E
+      { t: 9800, h: 4, type: 'draw' }, // D [half]
+      // Like a diamond in the sky
+      { t: 10600, h: 6, type: 'blow' },// G
+      { t: 11000, h: 6, type: 'blow' },// G
+      { t: 11400, h: 5, type: 'draw' },// F
+      { t: 11800, h: 5, type: 'draw' },// F
+      { t: 12200, h: 5, type: 'blow' },// E
+      { t: 12600, h: 5, type: 'blow' },// E
+      { t: 13000, h: 4, type: 'draw' },// D [half]
+      // Twinkle twinkle little star
+      { t: 13800, h: 4, type: 'blow' },// C
+      { t: 14200, h: 4, type: 'blow' },// C
+      { t: 14600, h: 6, type: 'blow' },// G
+      { t: 15000, h: 6, type: 'blow' },// G
+      { t: 15400, h: 6, type: 'draw' },// A
+      { t: 15800, h: 6, type: 'draw' },// A
+      { t: 16200, h: 6, type: 'blow' },// G [half]
+      // How I wonder what you are
+      { t: 17000, h: 5, type: 'draw' },// F
+      { t: 17400, h: 5, type: 'draw' },// F
+      { t: 17800, h: 5, type: 'blow' },// E
+      { t: 18200, h: 5, type: 'blow' },// E
+      { t: 18600, h: 4, type: 'draw' },// D
+      { t: 19000, h: 4, type: 'draw' },// D
+      { t: 19400, h: 4, type: 'blow' },// C [final]
+    ],
+  },
+
+  ode_to_joy: {
+    name: 'Ode to Joy',
+    desc: 'Beethoven\'s 9th - main theme',
+    notes: [
+      // Line 1 — E E F G  G F E D  C C D E  E. D  D.
+      { t: 1000, h: 5, type: 'blow' }, // E
+      { t: 1420, h: 5, type: 'blow' }, // E
+      { t: 1840, h: 5, type: 'draw' }, // F
+      { t: 2260, h: 6, type: 'blow' }, // G
+      { t: 2780, h: 6, type: 'blow' }, // G
+      { t: 3200, h: 5, type: 'draw' }, // F
+      { t: 3620, h: 5, type: 'blow' }, // E
+      { t: 4040, h: 4, type: 'draw' }, // D
+      { t: 4560, h: 4, type: 'blow' }, // C
+      { t: 4980, h: 4, type: 'blow' }, // C
+      { t: 5400, h: 4, type: 'draw' }, // D
+      { t: 5820, h: 5, type: 'blow' }, // E
+      { t: 6340, h: 5, type: 'blow' }, // E [dotted quarter]
+      { t: 7180, h: 4, type: 'draw' }, // D
+      { t: 8000, h: 4, type: 'draw' }, // D [half]
+      // Line 2 — E E F G  G F E D  C C D E  D. C  C.
+      { t: 9000, h: 5, type: 'blow' }, // E
+      { t: 9420, h: 5, type: 'blow' }, // E
+      { t: 9840, h: 5, type: 'draw' }, // F
+      { t: 10260, h: 6, type: 'blow' },// G
+      { t: 10780, h: 6, type: 'blow' },// G
+      { t: 11200, h: 5, type: 'draw' },// F
+      { t: 11620, h: 5, type: 'blow' },// E
+      { t: 12040, h: 4, type: 'draw' },// D
+      { t: 12560, h: 4, type: 'blow' },// C
+      { t: 12980, h: 4, type: 'blow' },// C
+      { t: 13400, h: 4, type: 'draw' },// D
+      { t: 13820, h: 5, type: 'blow' },// E
+      { t: 14340, h: 4, type: 'draw' },// D [dotted quarter]
+      { t: 15180, h: 4, type: 'blow' },// C
+      { t: 16000, h: 4, type: 'blow' },// C [half - final]
+    ],
+  },
+
+  jingle_bells: {
+    name: 'Jingle Bells',
+    desc: 'Chorus - two rounds',
+    notes: [
+      // Chorus 1 — Jingle bells, jingle bells, jingle all the way
+      { t: 1000, h: 5, type: 'blow' }, // E  jin-
+      { t: 1400, h: 5, type: 'blow' }, // E  -gle
+      { t: 1800, h: 5, type: 'blow' }, // E  bells, [half]
+      { t: 2600, h: 5, type: 'blow' }, // E  jin-
+      { t: 3000, h: 5, type: 'blow' }, // E  -gle
+      { t: 3400, h: 5, type: 'blow' }, // E  bells, [half]
+      { t: 4200, h: 5, type: 'blow' }, // E  jin-
+      { t: 4600, h: 6, type: 'blow' }, // G  -gle
+      { t: 5000, h: 4, type: 'blow' }, // C  all
+      { t: 5400, h: 4, type: 'draw' }, // D  the
+      { t: 5800, h: 5, type: 'blow' }, // E  way! [long]
+      // Oh what fun it is to ride in a one-horse open sleigh
+      { t: 7000, h: 5, type: 'draw' }, // F  Oh
+      { t: 7400, h: 5, type: 'draw' }, // F  what
+      { t: 7800, h: 5, type: 'draw' }, // F  fun [half]
+      { t: 8600, h: 5, type: 'draw' }, // F  it
+      { t: 9000, h: 5, type: 'draw' }, // F  is
+      { t: 9400, h: 5, type: 'blow' }, // E  to
+      { t: 9800, h: 5, type: 'blow' }, // E  ride
+      { t: 10200, h: 5, type: 'blow' },// E  in
+      { t: 10600, h: 5, type: 'blow' },// E  a
+      { t: 11000, h: 4, type: 'draw' },// D  one-
+      { t: 11400, h: 4, type: 'draw' },// D  -horse
+      { t: 11800, h: 5, type: 'blow' },// E  o-
+      { t: 12200, h: 4, type: 'draw' },// D  -pen
+      { t: 12600, h: 6, type: 'blow' },// G  sleigh, [long]
+      // Chorus 2 — Jingle bells, jingle bells, jingle all the way
+      { t: 13800, h: 5, type: 'blow' },// E
+      { t: 14200, h: 5, type: 'blow' },// E
+      { t: 14600, h: 5, type: 'blow' },// E [half]
+      { t: 15400, h: 5, type: 'blow' },// E
+      { t: 15800, h: 5, type: 'blow' },// E
+      { t: 16200, h: 5, type: 'blow' },// E [half]
+      { t: 17000, h: 5, type: 'blow' },// E
+      { t: 17400, h: 6, type: 'blow' },// G
+      { t: 17800, h: 4, type: 'blow' },// C
+      { t: 18200, h: 4, type: 'draw' },// D
+      { t: 18600, h: 5, type: 'blow' },// E [long]
+      // Oh what fun it is to ride in a one-horse open sleigh, hey!
+      { t: 19800, h: 5, type: 'draw' },// F
+      { t: 20200, h: 5, type: 'draw' },// F
+      { t: 20600, h: 5, type: 'draw' },// F [half]
+      { t: 21400, h: 5, type: 'draw' },// F
+      { t: 21800, h: 5, type: 'draw' },// F
+      { t: 22200, h: 5, type: 'blow' },// E
+      { t: 22600, h: 5, type: 'blow' },// E
+      { t: 23000, h: 5, type: 'blow' },// E
+      { t: 23400, h: 5, type: 'blow' },// E
+      { t: 23800, h: 4, type: 'draw' },// D
+      { t: 24200, h: 4, type: 'draw' },// D
+      { t: 24600, h: 5, type: 'blow' },// E
+      { t: 25000, h: 4, type: 'draw' },// D
+      { t: 25400, h: 4, type: 'blow' },// C [final]
     ],
   },
 };
