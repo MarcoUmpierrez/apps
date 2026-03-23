@@ -68,6 +68,26 @@ export class HighwayCanvasComponent {
   private readonly NOTE_THICKNESS         = 4;
   private readonly HIT_EFFECT_DURATION    = 60;
 
+  // ── Cached rendering values (recomputed on resize, not per-frame) ─────────
+  /**
+   * Cap DPR at 2. Modern phones report 3–4×, which means 9–16× more pixels
+   * to fill per frame. 2× is visually indistinguishable and dramatically faster.
+   */
+  private dpr             = Math.min(devicePixelRatio, 2);
+  private cachedColorBlow = '#10b981';
+  private cachedColorDraw = '#8b5cf6';
+  /**
+   * Effective height used for ALL perspective math.
+   * On portrait screens H can be 2–3× W, which makes the highway extremely
+   * tall and the notes fly across it very fast. We clamp the perspective height
+   * to at most 2.2× the width so the highway depth looks consistent across
+   * orientations. The canvas is still drawn at its real size; only the
+   * vanishing-point projection uses this clamped value.
+   */
+  private perspH          = 0;
+  /** Y offset to re-centre the clamped perspective inside the real canvas. */
+  private perspOffsetY    = 0;
+
   // Exposed as getters so the parent can derive the hit window from the
   // same source of truth — no risk of the visual zone and logic drifting apart.
   readonly HIT_ZONE_TOP_T = 0.745;
@@ -98,7 +118,7 @@ export class HighwayCanvasComponent {
     const N      = this.laneCount();
 
     ctx.save();
-    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
 
     this.drawGrid(ctx, W, H, N);
@@ -129,17 +149,43 @@ export class HighwayCanvasComponent {
   // ── Private: canvas setup ─────────────────────────────────────────────────
 
   private syncCanvasSize(): void {
-    const canvas        = this.canvasEl().nativeElement;
+    const canvas            = this.canvasEl().nativeElement;
+    const container         = this.containerEl().nativeElement;
     const { width, height } = canvas.getBoundingClientRect();
-    canvas.width        = width  * devicePixelRatio;
-    canvas.height       = height * devicePixelRatio;
-    const ctx           = canvas.getContext('2d')!;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
+
+    // Re-evaluate DPR each resize (user may have moved to a different display).
+    this.dpr        = Math.min(devicePixelRatio, 2);
+    canvas.width    = width  * this.dpr;
+    canvas.height   = height * this.dpr;
+
+    const ctx       = canvas.getContext('2d')!;
+    ctx.scale(this.dpr, this.dpr);
+
+    // ── Responsive perspective ───────────────────────────────────────────
+    // Clamp the highway depth to a portrait-safe maximum so the playfield
+    // doesn't balloon on tall/narrow screens.
+    const maxPerspH  = width * 2.2;
+    this.perspH      = Math.min(height, maxPerspH);
+    this.perspOffsetY = (height - this.perspH) / 2;
+
+    // Cache CSS custom-property colours (getComputedStyle is slow per-frame).
+    const style           = getComputedStyle(container);
+    const blow            = style.getPropertyValue('--color-blow').trim();
+    const draw            = style.getPropertyValue('--color-draw').trim();
+    this.cachedColorBlow  = blow || '#10b981';
+    this.cachedColorDraw  = draw || '#8b5cf6';
   }
 
   // ── Private: perspective projection ──────────────────────────────────────
 
-  private project(W: number, H: number, laneT: number, depthT: number): { x: number; y: number } {
+  /**
+   * All projection uses `this.perspH` (clamped) and shifts the result by
+   * `this.perspOffsetY` so that on portrait screens the highway is centred
+   * and sized consistently rather than stretching to fill the full height.
+   */
+  private project(W: number, _H: number, laneT: number, depthT: number): { x: number; y: number } {
+    const H          = this.perspH;
+    const yOff       = this.perspOffsetY;
     const vpX        = W / 2;
     const vpY        = H * this.VP_Y_FRACTION;
     const horizLeft  = vpX - (W * this.HORIZON_WIDTH_FRACTION) / 2;
@@ -148,17 +194,21 @@ export class HighwayCanvasComponent {
     const rightEdge  = horizRight + depthT * (W - horizRight);
     return {
       x: leftEdge + laneT * (rightEdge - leftEdge),
-      y: vpY + depthT * (H - vpY),
+      y: yOff + vpY + depthT * (H - vpY),
     };
   }
 
   // ── Private: draw methods ─────────────────────────────────────────────────
 
   private drawGrid(ctx: CanvasRenderingContext2D, W: number, H: number, N: number): void {
+    const pH         = this.perspH;
+    const yOff       = this.perspOffsetY;
     const vpX        = W / 2;
-    const vpY        = H * this.VP_Y_FRACTION;
+    const vpY        = yOff + pH * this.VP_Y_FRACTION;
     const horizLeft  = vpX - (W * this.HORIZON_WIDTH_FRACTION) / 2;
     const horizRight = vpX + (W * this.HORIZON_WIDTH_FRACTION) / 2;
+    // Bottom Y is the bottom of the perspective area, not the full canvas H.
+    const botY       = yOff + pH;
 
     ctx.lineWidth   = 1;
     ctx.strokeStyle = 'rgba(255,255,255,0.15)';
@@ -169,23 +219,24 @@ export class HighwayCanvasComponent {
       const hx = horizLeft + t * (horizRight - horizLeft);
       ctx.beginPath();
       ctx.moveTo(hx, vpY);
-      ctx.lineTo(bx, H);
+      ctx.lineTo(bx, botY);
       ctx.stroke();
     }
 
     ctx.lineWidth   = 2;
     ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    // Reduce bloom cost: halve shadowBlur (invisible difference at small sizes).
     ctx.shadowColor = 'rgba(255,255,255,0.2)';
-    ctx.shadowBlur  = 8;
+    ctx.shadowBlur  = 4;
 
     ctx.beginPath();
     ctx.moveTo(horizLeft, vpY);
-    ctx.lineTo(0, H);
+    ctx.lineTo(0, botY);
     ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(horizRight, vpY);
-    ctx.lineTo(W, H);
+    ctx.lineTo(W, botY);
     ctx.stroke();
 
     ctx.shadowBlur = 0;
@@ -193,7 +244,7 @@ export class HighwayCanvasComponent {
     const FRET_COUNT = 14;
     for (let j = 1; j <= FRET_COUNT; j++) {
       const t      = (j / FRET_COUNT) ** 2;
-      const y      = vpY + t * (H - vpY);
+      const y      = vpY + t * (botY - vpY);
       const leftX  = horizLeft  + t * (0 - horizLeft);
       const rightX = horizRight + t * (W - horizRight);
 
@@ -225,22 +276,21 @@ export class HighwayCanvasComponent {
     ctx.lineTo(botLeft.x,  botLeft.y);
     ctx.closePath();
     ctx.fillStyle   = 'rgba(250,204,21,0.18)';
+    // shadowBlur is the single most expensive canvas operation on mobile.
+    // Use a tight blur on the fill and skip the bloom pass on the top border.
     ctx.shadowColor = '#facc15';
-    ctx.shadowBlur  = 20;
+    ctx.shadowBlur  = 10;
     ctx.fill();
     ctx.shadowBlur  = 0;
 
-    // Top border — bloom pass then sharp pass
+    // Top border — single sharp pass (bloom pass removed for mobile perf)
     ctx.beginPath();
     ctx.moveTo(topLeft.x, topLeft.y);
     ctx.lineTo(topRight.x, topRight.y);
-    ctx.lineWidth   = 10;
-    ctx.strokeStyle = 'rgba(250,204,21,0.20)';
-    ctx.stroke();
     ctx.lineWidth   = 3;
     ctx.strokeStyle = '#facc15';
     ctx.shadowColor = '#facc15';
-    ctx.shadowBlur  = 18;
+    ctx.shadowBlur  = 10;
     ctx.stroke();
     ctx.shadowBlur  = 0;
 
@@ -251,7 +301,7 @@ export class HighwayCanvasComponent {
     ctx.lineWidth   = 2;
     ctx.strokeStyle = 'rgba(250,204,21,0.55)';
     ctx.shadowColor = '#facc15';
-    ctx.shadowBlur  = 10;
+    ctx.shadowBlur  = 6;
     ctx.stroke();
     ctx.shadowBlur  = 0;
 
@@ -281,15 +331,15 @@ export class HighwayCanvasComponent {
       if (isHighlighted) {
         ctx.fillStyle   = 'rgba(250,204,21,0.55)';
         ctx.shadowColor = '#facc15';
-        ctx.shadowBlur  = 30;
+        ctx.shadowBlur  = 15;
       } else if (cellType === 'blow') {
         ctx.fillStyle   = 'rgba(16,185,129,0.45)';
         ctx.shadowColor = '#10b981';
-        ctx.shadowBlur  = 20;
+        ctx.shadowBlur  = 10;
       } else {
         ctx.fillStyle   = 'rgba(139,92,246,0.45)';
         ctx.shadowColor = '#8b5cf6';
-        ctx.shadowBlur  = 20;
+        ctx.shadowBlur  = 10;
       }
 
       ctx.fill();
@@ -300,6 +350,9 @@ export class HighwayCanvasComponent {
   private drawNotes(ctx: CanvasRenderingContext2D, W: number, H: number, N: number): void {
     const thickness = this.NOTE_THICKNESS;
     const INSET     = 0.04;
+    // Use cached colours — getComputedStyle must NOT be called per-note per-frame.
+    const blowColor = this.cachedColorBlow;
+    const drawColor = this.cachedColorDraw;
 
     for (const note of this.activeNotes()) {
       if (note.progress < -thickness || note.progress > 105) continue;
@@ -315,9 +368,7 @@ export class HighwayCanvasComponent {
       const botLeft  = this.project(W, H, tL, depthBot);
       const botRight = this.project(W, H, tR, depthBot);
 
-      const color = note.type === 'blow'
-        ? getComputedStyle(this.containerEl().nativeElement).getPropertyValue('--color-blow').trim() || '#10b981'
-        : getComputedStyle(this.containerEl().nativeElement).getPropertyValue('--color-draw').trim() || '#8b5cf6';
+      const color = note.type === 'blow' ? blowColor : drawColor;
 
       ctx.beginPath();
       ctx.moveTo(topLeft.x,  topLeft.y);
@@ -328,7 +379,7 @@ export class HighwayCanvasComponent {
 
       ctx.fillStyle   = color;
       ctx.shadowColor = color;
-      ctx.shadowBlur  = 16;
+      ctx.shadowBlur  = 8;   // was 16 — halved; saves significant GPU time
       ctx.fill();
       ctx.shadowBlur  = 0;
 
@@ -376,7 +427,7 @@ export class HighwayCanvasComponent {
         ctx.closePath();
         ctx.fillStyle   = `rgba(250,204,21,${1 - flashT * 0.3})`;
         ctx.shadowColor = '#facc15';
-        ctx.shadowBlur  = 20 * (1 - flashT);
+        ctx.shadowBlur  = 12 * (1 - flashT);  // was 20
         ctx.fill();
         ctx.shadowBlur  = 0;
       }
@@ -396,7 +447,7 @@ export class HighwayCanvasComponent {
           ctx.arc(sx, sy, spark.size * (1 - sparkT * 0.5), 0, Math.PI * 2);
           ctx.fillStyle   = sparkT < 0.4 ? `rgba(255,255,255,${alpha})` : `rgba(250,204,21,${alpha})`;
           ctx.shadowColor = '#facc15';
-          ctx.shadowBlur  = 8 * alpha;
+          ctx.shadowBlur  = 5 * alpha;   // was 8
           ctx.fill();
           ctx.shadowBlur  = 0;
         }
