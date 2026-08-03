@@ -168,8 +168,8 @@ export const HUNT_STOPS: Stop[] = [
       ],
     },
     notebookInstruction: {
-      en: "Write the letter Y in your notebook — you'll need it later.",
-      es: 'Escribe la letra Y en tu cuaderno — la necesitarás más tarde.',
+      en: "Write the letter R in your notebook — you'll need it later.",
+      es: 'Escribe la letra R en tu cuaderno — la necesitarás más tarde.',
     },
   },
   {
@@ -339,8 +339,8 @@ export const HUNT_STOPS: Stop[] = [
       ],
     },
     notebookInstruction: {
-      en: "Write the letter E in your notebook — you'll need it later.",
-      es: 'Escribe la letra E en tu cuaderno — la necesitarás más tarde.',
+      en: "Write the letter O in your notebook — you'll need it later.",
+      es: 'Escribe la letra O en tu cuaderno — la necesitarás más tarde.',
     },
   },
   {
@@ -520,67 +520,134 @@ export const HUNT_STOPS: Stop[] = [
       ],
     },
     notebookInstruction: {
-      en: "Write the letter S in your notebook — you'll need it later.",
-      es: 'Escribe la letra S en tu cuaderno — la necesitarás más tarde.',
+      en: "Write the letter M in your notebook — you'll need it later.",
+      es: 'Escribe la letra M en tu cuaderno — la necesitarás más tarde.',
     },
   },
   {
     id: 'stop-4-road-trip',
     order: 4,
     chapterIcon: '🚗',
+    chapterImage: 'scavenger-hunt/photos/girl.png',
+    pageNumber: 56,
     isFinale: false,
     title: {
       en: 'The Trip We Definitely Under-Planned',
       es: 'El Viaje que Definitivamente No Planeamos Bien',
     },
     narrative: {
-      en: 'We got lost twice, argued about the radio, and found the best diner of our lives by complete accident.',
-      es: 'Nos perdimos dos veces, discutimos por la radio, y encontramos el mejor restaurante de nuestras vidas por pura casualidad.',
+      en: "We had argued and things weren't looking good. That day I got a message from her, asking me to come see her. She gave me her location with just a photo, expecting me to guess where she was. I found her lying on the towel, asleep, with her fisherman hat covering her face. I knelt down on the sand and leaned over her to kiss her. She woke up immediately, half surprised and half smiling. We sat together enjoying the evening by the sea, until night fell. Other things happened that I'll leave to the reader's imagination. What I do remember is that a few meters further on, there was a gym where a lot of people go every day, some without wanting to but forced to. If I had to describe it, I'd use the following riddle.",
+      es: 'Habíamos discutido y la cosa no pintaba bien. Ese día recibí un mensaje de ella, pidiéndome que fuese a verla. Me dio su ubicación solo con una foto, esperando que yo adivinara dónde estaba. Me la encontré tumbada sobre la toalla, dormida, con su sombrero de pescador cubriéndole la cara. Apoyé una rodilla sobre la arena y me incliné sobre ella para besarla. Ella despertó inmediatamente, entre sorprendida y sonriendo. Nos sentamos juntos a disfrutar de la tarde frente al mar, hasta que se hizo de noche. Ocurrieron otras cosas que dejaré a la imaginación del lector. Lo que si recuerdo, es que a unos pocos metros más adelante, había un gimnasio donde mucha gente va todos los días, algunos sin ganas pero obligados. Si tuviera que describirlo, usaría el siguiente acertijo.',
+    },
+    narrativeRich: [
+      [
+        {
+          text: {
+            en: 'We had argued and things weren’t looking good. That day I got a message from her, asking me to come see her ',
+            es: 'Habíamos discutido y la cosa no pintaba bien. Ese día recibí un mensaje de ella, pidiéndome que fuese a verla ',
+          },
+        },
+        {
+          text: { en: 'in a very convincing way', es: 'de una manera muy convincente' },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: '. She gave me her location with just a photo, expecting me to guess where she was. I found her lying on the towel, asleep, with her ',
+            es: '. Me dio su ubicación solo con una foto, esperando que yo adivinara dónde estaba. Me la encontré tumbada sobre la toalla, dormida, con su ',
+          },
+        },
+        { text: { en: 'fisherman hat', es: 'sombrero de pescador' }, style: 'empty' },
+        { text: { en: ' covering her face.', es: ' cubriéndole la cara.' } },
+      ],
+      [
+        {
+          text: {
+            en: 'I knelt down on the sand and leaned over her ',
+            es: 'Apoyé una rodilla sobre la arena y me incliné sobre ella ',
+          },
+        },
+        { text: { en: 'to kiss her', es: 'para besarla' }, style: 'empty' },
+        {
+          text: {
+            en: '. She woke up immediately, half surprised and half smiling. We sat together enjoying the evening by the sea, until night fell. ',
+            es: '. Ella despertó inmediatamente, entre sorprendida y sonriendo. Nos sentamos juntos a disfrutar de la tarde frente al mar, hasta que se hizo de noche. ',
+          },
+        },
+        {
+          text: { en: 'What happened that night', es: 'Lo que ocurrió esa noche' },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " Other things happened that I'll leave to the reader's imagination. What I do remember is that a few meters further on, there was a ",
+            es: ' Ocurrieron otras cosas que dejaré a la imaginación del lector. Lo que si recuerdo, es que a unos pocos metros más adelante, había un ',
+          },
+        },
+        { text: { en: 'gym', es: 'gimnasio' }, style: 'empty' },
+        {
+          text: {
+            en: " where a lot of people go every day, some without wanting to but forced to. If I had to describe it, I'd use the following riddle:",
+            es: ' donde mucha gente va todos los días, algunos sin ganas pero obligados. Si tuviera que describirlo, usaría el siguiente acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: 'House of iron and sweat, where time stands still\nwhile distance advances without leaving the ground.\nHere weight is sought out, and load brings no chill,\nit lifts the warrior who comes to challenge iron\'s sound.\nThey count here in repetitions, not in words or lore,\nand though you enter to break down, you leave stronger than before.\nWhat place am I?',
+        es: 'Casa de hierro y sudor, donde el tiempo se detiene\nmientras la distancia avanza sin moverse del lugar.\nDonde la carga se busca y el peso no desanima,\nsino que eleva al guerrero que al metal viene a retar.\nCuentan aquí por repeticiones, no por palabras ni historias,\ny aunque entras para romperte, sales con más fortaleza.\n¿Qué lugar soy?',
+      },
+      acceptedAnswers: [
+        { en: 'gym', es: 'gimnasio' },
+        { en: 'gymnasium', es: 'gimnasio' },
+      ],
+      hints: [
+        {
+          en: "It's a place people go to get stronger, often complaining the whole time.",
+          es: 'Es un lugar al que la gente va para ponerse fuerte, a menudo quejándose todo el rato.',
+        },
+        {
+          en: 'Full of weights, machines, and mirrors everywhere.',
+          es: 'Lleno de pesas, máquinas y espejos por todas partes.',
+        },
+        { en: "It's a gym.", es: 'Es un gimnasio.' },
+      ],
     },
     location: {
-      lat: 40.0004, // PLACEHOLDER — replace before the real day
-      lng: -3.0004, // PLACEHOLDER — replace before the real day
+      lat: 28.1327056,
+      lng: -15.4428304,
       radiusMeters: 40,
-      label: { en: 'Where the road trip stopped', es: 'Donde paró el viaje' },
+      label: { en: 'The gym', es: 'El gimnasio' },
     },
     minigame: {
       kind: 'sequence-reorder',
       prompt: {
-        en: 'Put the road trip back in order.',
-        es: 'Ordena el viaje correctamente.',
+        en: 'Put the events in the right order.',
+        es: 'Ordena los hechos correctamente.',
       },
       itemsInCorrectOrder: [
-        { en: 'We got in the car', es: 'Nos subimos al auto' },
-        { en: 'We got lost', es: 'Nos perdimos' },
-        { en: 'We found the best diner ever', es: 'Encontramos el mejor restaurante' },
-        {
-          en: 'We watched the sunset from the hood of the car',
-          es: 'Vimos el atardecer desde el capó del auto',
-        },
+        { en: 'She texted me on WhatsApp', es: 'Me escribió un mensaje de WhatsApp' },
+        { en: 'I found her lying down', es: 'La encontré acostada' },
+        { en: 'We spent the afternoon together', es: 'Pasamos la tarde juntos' },
+        { en: 'We left together that night', es: 'Nos fuimos juntos en la noche' },
       ],
       hints: [
-        { en: 'It starts before we even left.', es: 'Empieza antes de que saliéramos.' },
-        { en: 'Food came before the view.', es: 'La comida vino antes de la vista.' },
-        { en: 'Car, lost, diner, sunset.', es: 'Auto, perdidos, restaurante, atardecer.' },
+        { en: 'It starts with a message.', es: 'Empieza con un mensaje.' },
+        {
+          en: 'Finding her came before the afternoon together.',
+          es: 'Encontrarla vino antes de la tarde juntos.',
+        },
+        {
+          en: 'WhatsApp message, found her lying down, afternoon together, left at night.',
+          es: 'Mensaje de WhatsApp, la encontré acostada, tarde juntos, nos fuimos de noche.',
+        },
       ],
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
-    personalQuestion: {
-      kind: 'notebook-code',
-      question: {
-        en: 'Combine the letters from your notebook so far into one word.',
-        es: 'Combina las letras de tu cuaderno hasta ahora en una sola palabra.',
-      },
-      referencedStopOrders: [1, 2, 3],
-      acceptedAnswers: [{ en: 'YES', es: 'YES' }],
-      hints: [
-        {
-          en: 'Look back at what you wrote at the first three stops.',
-          es: 'Revisa lo que escribiste en las primeras tres paradas.',
-        },
-        { en: "It's a three-letter word.", es: 'Es una palabra de tres letras.' },
-        { en: 'YES.', es: 'YES.' },
-      ],
+    notebookInstruction: {
+      en: "Write the letter A in your notebook — you'll need it later.",
+      es: 'Escribe la letra A en tu cuaderno — la necesitarás más tarde.',
     },
   },
   {
@@ -635,6 +702,10 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Think about who bought the tickets.', es: 'Piensa en quién compró los boletos.' },
         { en: 'It was yours.', es: 'Fue tuya.' },
       ],
+    },
+    notebookInstruction: {
+      en: "Write the letter N in your notebook — you'll need it later.",
+      es: 'Escribe la letra N en tu cuaderno — la necesitarás más tarde.',
     },
   },
   {
@@ -692,6 +763,10 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'A time capsule note.', es: 'Una nota de cápsula del tiempo.' },
       ],
     },
+    notebookInstruction: {
+      en: "Write the letter C in your notebook — you'll need it later.",
+      es: 'Escribe la letra C en tu cuaderno — la necesitarás más tarde.',
+    },
   },
   {
     id: 'stop-7-family-dinner',
@@ -734,22 +809,23 @@ export const HUNT_STOPS: Stop[] = [
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
     personalQuestion: {
-      kind: 'free-text',
+      kind: 'notebook-code',
       question: {
-        en: 'What did you bring that night to make a good impression?',
-        es: '¿Qué llevaste esa noche para causar buena impresión?',
+        en: "Combine the letters from your notebook — you're missing just the very last one. What word is it?",
+        es: 'Combina las letras de tu cuaderno — solo te falta la última. ¿Qué palabra es?',
       },
-      acceptedAnswers: [
-        { en: 'flowers', es: 'flores' },
-        { en: 'wine', es: 'vino' },
-      ],
+      referencedStopOrders: [1, 2, 3, 4, 5, 6],
+      acceptedAnswers: [{ en: 'ROMANCE', es: 'ROMANCE' }],
       hints: [
-        { en: 'It was a classic move.', es: 'Fue un movimiento clásico.' },
         {
-          en: 'Something you hand to the host at the door.',
-          es: 'Algo que le das al anfitrión en la puerta.',
+          en: "It's exactly what this whole day has been about.",
+          es: 'Es justo de lo que ha tratado todo este día.',
         },
-        { en: 'Flowers (or wine).', es: 'Flores (o vino).' },
+        {
+          en: "You already have six letters — you're just missing the very last one.",
+          es: 'Ya tienes seis letras — solo te falta la última.',
+        },
+        { en: 'Romance.', es: 'Romance.' },
       ],
     },
   },
