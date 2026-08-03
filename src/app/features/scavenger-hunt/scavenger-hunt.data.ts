@@ -111,10 +111,10 @@ export const HUNT_STOPS: Stop[] = [
       ],
     },
     location: {
-      lat: 40.0001, // PLACEHOLDER — replace before the real day
-      lng: -3.0001, // PLACEHOLDER — replace before the real day
+      lat: 28.1296718,
+      lng: -15.4454363,
       radiusMeters: 40,
-      label: { en: 'The coffee shop', es: 'La cafetería' },
+      label: { en: 'Ruby restaurant', es: 'Restaurante Rubí' },
     },
     minigame: {
       kind: 'riddle-mc',
