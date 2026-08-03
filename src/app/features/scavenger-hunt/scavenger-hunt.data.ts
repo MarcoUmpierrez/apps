@@ -119,43 +119,52 @@ export const HUNT_STOPS: Stop[] = [
     minigame: {
       kind: 'riddle-mc',
       prompt: {
-        en: "I'm warm, I'm brown, and I kept you talking for hours before you even knew you liked me. What am I?",
-        es: 'Soy cálido, soy marrón, y te mantuve hablando por horas antes de que supieras que te gustaba. ¿Qué soy?',
+        en: 'What did we eat that day?',
+        es: '¿Qué comimos ese día?',
       },
       options: [
-        { en: 'A blanket', es: 'Una manta' },
-        { en: 'A cup of coffee', es: 'Una taza de café' },
-        { en: 'A campfire', es: 'Una fogata' },
-        { en: 'A sweater', es: 'Un suéter' },
+        { en: 'fried eggs over potatoes', es: 'Huevos rotos' },
+        { en: 'Fried marinated pork', es: 'Cerdo frito en adobo' },
+        { en: 'Canarian wrinkly potatoes', es: 'Papas arrugadas' },
+        { en: 'Russian potato salad', es: 'Ensaladilla rusa' },
       ],
-      correctIndex: 1,
+      correctIndex: 0,
       hints: [
         {
-          en: 'Think about what was on the table between us.',
-          es: 'Piensa en lo que había en la mesa entre nosotros.',
+          en: "It's a classic Spanish comfort dish with something breakfast-y in the name.",
+          es: 'Es un plato español clásico con algo típico del desayuno en el nombre.',
         },
         {
-          en: 'It was in a cup, and it went cold because we forgot about it.',
-          es: 'Estaba en una taza, y se enfrió porque lo olvidamos.',
+          en: 'Fried potatoes topped with eggs, the yolks broken right over them.',
+          es: 'Patatas fritas cubiertas de huevos, con la yema rota encima.',
         },
-        { en: "It's the coffee.", es: 'Es el café.' },
+        { en: 'Huevos rotos.', es: 'Huevos rotos.' },
       ],
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
     personalQuestion: {
       kind: 'multiple-choice',
-      question: { en: 'What did I order that day?', es: '¿Qué pedí ese día?' },
+      question: {
+        en: 'What were we going to do at the restaurant?',
+        es: '¿Qué íbamos a hacer en el restaurante?',
+      },
       options: [
-        { en: 'A cappuccino', es: 'Un capuchino' },
-        { en: 'A plain black coffee', es: 'Un café negro' },
-        { en: 'Hot chocolate', es: 'Chocolate caliente' },
-        { en: 'Tea', es: 'Té' },
+        { en: 'Watch the football game', es: 'Ver el fútbol' },
+        { en: 'Drink until nightfall', es: 'Beber hasta la noche' },
+        { en: 'Fill out the taxes', es: 'Cumplimentar los impuestos' },
+        { en: 'Talk about the weather', es: 'Hablar sobre el tiempo' },
       ],
-      correctIndex: 1,
+      correctIndex: 2,
       hints: [
-        { en: 'I always keep it simple.', es: 'Siempre lo mantengo sencillo.' },
-        { en: 'No milk, no sugar.', es: 'Sin leche, sin azúcar.' },
-        { en: 'A plain black coffee.', es: 'Un café negro.' },
+        {
+          en: "It wasn't fun, but it needed to get done before a deadline.",
+          es: 'No era divertido, pero había que hacerlo antes de una fecha límite.',
+        },
+        {
+          en: "It involved paperwork we'd been putting off all week.",
+          es: 'Implicaba papeleo que llevábamos toda la semana posponiendo.',
+        },
+        { en: 'Fill out the taxes.', es: 'Cumplimentar los impuestos.' },
       ],
     },
     notebookInstruction: {
