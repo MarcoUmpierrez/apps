@@ -176,55 +176,166 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-2-park-bench',
     order: 2,
     chapterIcon: '🌇',
+    chapterImage: 'scavenger-hunt/photos/hippo.png',
+    pageNumber: 158,
     isFinale: false,
     title: { en: 'The Bench We Kept Coming Back To', es: 'La Banca a la que Siempre Volvimos' },
     narrative: {
-      en: 'We came back to this same bench more times than either of us admitted, always right as the sky did something worth watching.',
-      es: 'Volvimos a esta misma banca más veces de las que ninguno admitió, siempre justo cuando el cielo hacía algo digno de ver.',
+      en: "We were hungry again, as usual, and wanted to try somewhere new. We remembered that Roberth had recommended a rather peculiar place. The entrance felt like a sauna, the heat was overwhelming. We ordered some chicken wings and a four-cheese pizza. That's when she told me about her friends from the lawyers' gossip group, and each one's family problems. The food was so good that we went back for seconds three more times, the last one ordering a tasty pizza because we realized we were turning into pigs, we needed to focus on eating well and not overdoing it. This other restaurant has a very distinctive name, maybe because of how you end up after eating, because it's something the owners really like; every time I see it, I think of that riddle.",
+      es: 'Volvíamos a tener hambre como de costumbre y queríamos probar un sitio nuevo. Recordamos que Roberth nos recomendó un lugar un tanto particular. La entrada parecía una sauna, el calor era agobiante. Nos pedimos unas alitas de pollo y una pizza 4 quesos. Ahí me contó sobre sus amigas del grupo de los chismes de abogadas, los problemas familiares de cada una. La comida estuvo muy buena, tanto que repetimos hasta tres veces más, la última pidiendo una pizza sabrosa porque vimos que nos estábamos poniendo como cochinos, debíamos centrarnos en cuidar nuestra alimentación y no abusar. Este otro restaurante tiene un nombre muy característico, quizás por como acabas después de comer, porque es algo que le gusta mucho a los dueños; cada vez que lo veo, pienso en aquél acertijo.',
+    },
+    narrativeRich: [
+      [
+        { text: { en: 'We were hungry again, ', es: 'Volvíamos a tener hambre ' } },
+        { text: { en: 'as usual', es: 'como de costumbre' }, style: 'crossed' },
+        {
+          text: {
+            en: ' and wanted to try somewhere new. We remembered that ',
+            es: ' y queríamos probar un sitio nuevo. Recordamos que ',
+          },
+        },
+        { text: { en: 'Roberth', es: 'Roberth' }, style: 'empty' },
+        {
+          text: {
+            en: ' had recommended a rather peculiar place. The entrance felt like a sauna, the ',
+            es: ' nos recomendó un lugar un tanto particular. La entrada parecía una sauna, el ',
+          },
+        },
+        { text: { en: 'heat', es: 'calor' }, style: 'empty' },
+        {
+          text: {
+            en: ' was overwhelming. We ordered some ',
+            es: ' era agobiante. Nos pedimos unas ',
+          },
+        },
+        { text: { en: 'chicken wings', es: 'alitas de pollo' }, style: 'empty' },
+        { text: { en: ' and a ', es: ' y una ' } },
+        { text: { en: 'four-cheese pizza', es: 'pizza 4 quesos' }, style: 'empty' },
+        {
+          text: {
+            en: ". That's when she told me about her friends from the lawyers' ",
+            es: '. Ahí me contó sobre sus amigas del grupo de los ',
+          },
+        },
+        { text: { en: 'gossip', es: 'chismes' }, style: 'crossed' },
+        {
+          text: {
+            en: ' group, and each one’s family problems.',
+            es: ' de abogadas, los problemas familiares de cada una.',
+          },
+        },
+      ],
+      [
+        {
+          text: {
+            en: 'The food was so good that we went back for seconds three more times, the last one ordering ',
+            es: 'La comida estuvo muy buena, tanto que repetimos hasta tres veces más, la última pidiendo ',
+          },
+        },
+        { text: { en: 'a tasty pizza', es: 'una pizza sabrosa' }, style: 'empty' },
+        { text: { en: ' because we realized ', es: ' porque vimos que ' } },
+        {
+          text: {
+            en: 'we were turning into pigs',
+            es: 'nos estábamos poniendo como cochinos',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: ' we needed to focus on eating well and not overdoing it.',
+            es: ' debíamos centrarnos en cuidar nuestra alimentación y no abusar.',
+          },
+        },
+      ],
+      [
+        { text: { en: 'This other ', es: 'Este otro ' } },
+        { text: { en: 'restaurant', es: 'restaurante' }, style: 'empty' },
+        {
+          text: {
+            en: ' has a very distinctive name, maybe ',
+            es: ' tiene un nombre muy característico, quizás ',
+          },
+        },
+        {
+          text: {
+            en: 'because of how you end up after eating',
+            es: 'por como acabas después de comer',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " because it's something the owners really like; every time I see it, I think of that riddle:",
+            es: ' porque es algo que le gusta mucho a los dueños; cada vez que lo veo, pienso en aquél acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: 'In the water I float calm though I weigh more than a ton,\nmy skin is very thick and my mouth a giant span.\nI\'m named "river horse" by the ancient Greek tongue,\nand though I seem clumsy, in water I\'m a giant among.\nWho am I?',
+        es: 'En el agua floto tranquilo aunque peso más de una tonelada,\nmi piel es muy gruesa y mi boca una enorme enramada.\nTengo nombre de "caballo de río" según el griego antiguo,\ny aunque parezca torpe, en el agua soy un gigante contiguo.\n¿Quién soy?',
+      },
+      acceptedAnswers: [
+        { en: 'hippopotamus', es: 'hipopótamo' },
+        { en: 'hippo', es: 'hipopótamo' },
+      ],
+      hints: [
+        {
+          en: "It's a huge animal that spends most of its time in rivers and lakes.",
+          es: 'Es un animal enorme que pasa la mayor parte del tiempo en ríos y lagos.',
+        },
+        {
+          en: "Its name literally means 'river horse' in Greek.",
+          es: "Su nombre significa literalmente 'caballo de río' en griego.",
+        },
+        { en: "It's a hippopotamus.", es: 'Es un hipopótamo.' },
+      ],
     },
     location: {
-      lat: 40.0002, // PLACEHOLDER — replace before the real day
-      lng: -3.0002, // PLACEHOLDER — replace before the real day
+      lat: 28.130502,
+      lng: -15.4470371,
       radiusMeters: 40,
-      label: { en: 'The park bench', es: 'La banca del parque' },
+      label: { en: 'Hippo pizzeria', es: 'Pizzería Hipopótamo' },
     },
     minigame: {
       kind: 'word-scramble',
       prompt: {
-        en: 'Unscramble the word that describes the sky that evening.',
-        es: 'Desordena las letras para encontrar la palabra que describe el cielo esa noche.',
+        en: 'Unscramble the drink you had with our chicken wings.',
+        es: 'Desordena las letras de la bebida que tomaste con las alitas de pollo.',
       },
-      answer: { en: 'SUNSET', es: 'ATARDECER' },
+      answer: { en: 'SANGRIA', es: 'SANGRÍA' },
       hints: [
         {
-          en: 'It happens once a day, right before the sky goes dark.',
-          es: 'Sucede una vez al día, justo antes de que oscurezca.',
+          en: "It's a fruity Spanish drink, usually red.",
+          es: 'Es una bebida española afrutada, normalmente roja.',
         },
         {
-          en: 'Orange, pink, and a little bit of gold.',
-          es: 'Naranja, rosa, y un poco de dorado.',
+          en: 'Made with wine, chopped fruit, and a splash of something sweet.',
+          es: 'Se hace con vino, fruta troceada y un toque de algo dulce.',
         },
-        { en: 'Sunset.', es: 'Atardecer.' },
+        { en: 'Sangria.', es: 'Sangría.' },
       ],
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
     personalQuestion: {
       kind: 'free-text',
       question: {
-        en: 'What did we always say we should do here, but never did?',
-        es: '¿Qué siempre dijimos que haríamos aquí, pero nunca hicimos?',
+        en: 'What did he eat with two eggs that looked like a mountain of food?',
+        es: '¿Qué comió él con dos huevos que parecía un montón de comida?',
       },
-      acceptedAnswers: [{ en: 'watch the stars', es: 'ver las estrellas' }],
+      acceptedAnswers: [{ en: 'milanesa', es: 'milanesa' }],
       hints: [
         {
-          en: 'It involves looking up, much later at night.',
-          es: 'Implica mirar hacia arriba, mucho más tarde en la noche.',
+          en: "It's a big breaded cutlet, crispy on the outside.",
+          es: 'Es una gran carne empanada, crujiente por fuera.',
         },
         {
-          en: "We'd need a blanket and a lot of patience.",
-          es: 'Necesitaríamos una manta y mucha paciencia.',
+          en: 'Usually beef or chicken, fried until golden, topped with two fried eggs.',
+          es: 'Normalmente de carne o pollo, frita hasta dorar, con dos huevos fritos encima.',
         },
-        { en: 'Watch the stars.', es: 'Ver las estrellas.' },
+        { en: 'Milanesa.', es: 'Milanesa.' },
       ],
     },
     notebookInstruction: {
