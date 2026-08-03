@@ -8,14 +8,107 @@ import { Stop } from './scavenger-hunt.types';
  */
 export const HUNT_STOPS: Stop[] = [
   {
-    id: 'stop-1-coffee-shop',
+    id: 'stop-1-rubi-shop',
     order: 1,
-    chapterIcon: '☕',
+    chapterIcon: '♦️',
+    chapterImage: 'scavenger-hunt/photos/rubi.png',
+    pageNumber: 237,
     isFinale: false,
     title: { en: 'Where It (Sort Of) Started', es: 'Donde (Casi) Empezó Todo' },
     narrative: {
-      en: 'Before either of us called it a date, we sat here for three hours over one cup of coffee that went cold.',
-      es: 'Antes de que ninguno de los dos lo llamara una cita, nos sentamos aquí tres horas con un café que se enfrió.',
+      en: "That day we had woken up late. We'd had a night of passion and were exhausted. Still, we couldn't relax because we had to deal with the dreaded taxes. We decided to work outside, hoping to clear our heads a little before facing such a task. We stepped out into a stifling heat, typical of summer, unusual for this time of year, with all the rain and cold weather we'd had. We were looking for somewhere to sit down, eat, and work on the taxes but we felt too lazy, we didn't feel like going far, so we decided to sit down at one of the restaurants nearby. What stood out most about this restaurant was the symbol decorating it, I could describe it certainly with some unique features, that reminded me of this riddle.",
+      es: 'Aquél día nos habíamos levantado tarde. Habíamos tenido una noche de pasión y estábamos muy cansados. Sin embargo, no nos podíamos relajar porque teníamos que rellenar los dichosos impuestos. Decidimos trabajar al aire libre, intentando refrescar un poco nuestras ideas antes de enfrentarnos a semejante tarea. Salimos y nos topamos con un calor sofocante, propio del verano inusual este año, con tantas lluvias y tiempo frío. Buscábamos un lugar donde sentarnos a comer y trabajar en los impuestos pero no nos apetecía ir muy lejos, así que decidimos sentarnos en uno de los restaurantes de la zona. Lo más que identificaba este restaurante era el símbolo que lo decoraba, ciertamente con unas características únicas, que me hicieron recordar este acertijo.',
+    },
+    narrativeRich: [
+      [
+        { text: { en: 'That day', es: 'Aquél día' }, style: 'empty' },
+        {
+          text: {
+            en: " we had woken up late. We'd had a ",
+            es: ' nos habíamos levantado tarde. Habíamos tenido una ',
+          },
+        },
+        { text: { en: 'night of passion', es: 'noche de pasión' }, style: 'crossed' },
+        {
+          text: {
+            en: ' and were exhausted. Still, we couldn’t relax because we had to deal with the dreaded ',
+            es: 'y estábamos muy cansados. Sin embargo, no nos podíamos relajar porque teníamos que rellenar los dichosos ',
+          },
+        },
+        { text: { en: 'taxes', es: 'impuestos' }, style: 'empty' },
+        {
+          text: {
+            en: '. We decided to work outside, hoping to clear our heads a little before facing such a task. We stepped out into a stifling heat, ',
+            es: '. Decidimos trabajar al aire libre, intentando refrescar un poco nuestras ideas antes de enfrentarnos a semejante tarea. Salimos y nos topamos con un calor sofocante, ',
+          },
+        },
+        { text: { en: 'typical of summer', es: 'propio del verano' }, style: 'crossed' },
+        {
+          text: {
+            en: " unusual for this time of year, with all the rain and cold weather we'd had.",
+            es: ' inusual este año, con tantas lluvias y tiempo frío.',
+          },
+        },
+      ],
+      [
+        {
+          text: {
+            en: 'We were looking for somewhere to sit down, eat, and ',
+            es: 'Buscábamos un lugar donde sentarnos a comer y ',
+          },
+        },
+        { text: { en: 'work on the taxes', es: 'trabajar en los impuestos' }, style: 'empty' },
+        { text: { en: ' but ', es: ' pero ' } },
+        { text: { en: 'we felt too lazy', es: 'nos daba pereza' }, style: 'crossed' },
+        {
+          text: {
+            en: " we didn't feel like going far, so we decided to sit down at one of the ",
+            es: ' no nos apetecía ir muy lejos, así que decidimos sentarnos en uno de los ',
+          },
+        },
+        { text: { en: 'restaurants nearby', es: 'restaurantes de la zona' }, style: 'empty' },
+        { text: { en: '.', es: '.' } },
+      ],
+      [
+        {
+          text: {
+            en: 'What stood out most about this ',
+            es: 'Lo más que identificaba este ',
+          },
+        },
+        { text: { en: 'restaurant', es: 'restaurante' }, style: 'empty' },
+        {
+          text: {
+            en: ' was the symbol decorating it, ',
+            es: ' era el símbolo que lo decoraba, ',
+          },
+        },
+        { text: { en: 'I could describe it', es: 'podría describirlo' }, style: 'crossed' },
+        {
+          text: {
+            en: ' certainly with some unique features, that reminded me of this riddle:',
+            es: ' ciertamente con unas características únicas, que me hicieron recordar este acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: "I hold fire trapped within my heart,\nthough cold to the touch I tend to be.\nI am the red lip of passion's art,\nand on kings’ crowns I gleam for all to see.\nI'm not a rose, yet I share its hue,\nand after diamonds, few outvalue.\nWhat am I?",
+        es: 'Tengo fuego atrapado en el corazón,\naunque frío al tacto suelo estar.\nSoy el labio rojo de la pasión,\ny en coronas de reyes me verás deslumbrar.\nNo soy una rosa, pero comparto su color,\ny tras el diamante, pocos superan mi valor.\n¿Qué soy?',
+      },
+      acceptedAnswers: [{ en: 'ruby', es: 'rubí' }],
+      hints: [
+        {
+          en: 'Think of something small, red, and valuable.',
+          es: 'Piensa en algo pequeño, rojo y valioso.',
+        },
+        {
+          en: "It's a gemstone, the same color as a rose.",
+          es: 'Es una piedra preciosa, del mismo color que una rosa.',
+        },
+        { en: "It's a ruby.", es: 'Es un rubí.' },
+      ],
     },
     location: {
       lat: 40.0001, // PLACEHOLDER — replace before the real day

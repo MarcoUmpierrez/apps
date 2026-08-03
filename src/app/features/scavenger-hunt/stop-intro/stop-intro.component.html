@@ -1,17 +1,119 @@
 <div
   class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
 >
-  <p class="text-sm font-semibold uppercase tracking-widest text-amber-700">{{ chapterLabel() }}</p>
-  <div class="text-6xl">{{ stop().chapterIcon }}</div>
-  <h2 class="font-['Caveat',_cursive] text-4xl font-bold text-amber-900">
-    {{ stop().title[lang()] }}
-  </h2>
-  <p class="max-w-md text-amber-800">{{ stop().narrative[lang()] }}</p>
-  <button
-    type="button"
-    (click)="onContinue()"
-    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
-  >
-    {{ t('continueLabel') }}
-  </button>
+  <div class="relative w-full max-w-md -rotate-1">
+    <div class="journal-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="journal-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+
+    <div class="journal-page relative px-6 py-8">
+      <svg
+        class="absolute right-4 top-14 h-8 w-8 rotate-12 text-amber-700/40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 3 L13.5 9 L20 10 L14.5 14 L16 21 L12 17.2 L8 21 L9.5 14 L4 10 L10.5 9 Z" />
+      </svg>
+
+      <svg
+        class="absolute bottom-10 left-4 h-10 w-10 -rotate-6 text-amber-700/30"
+        viewBox="0 0 40 40"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      >
+        <path d="M6 20 Q6 8 18 8 Q30 8 30 18 Q30 26 22 26 Q16 26 16 20 Q16 16 20 16" />
+      </svg>
+
+      @if (stop().chapterImage; as chapterImage) {
+        <div class="mb-4 flex justify-center">
+          <img
+            [src]="chapterImage"
+            alt=""
+            class="h-28 w-28 -rotate-2 rounded-sm border-4 border-white object-cover shadow-md shadow-amber-900/30"
+          />
+        </div>
+      }
+
+      <div class="space-y-3 text-left">
+        @if (stop().narrativeRich; as paragraphs) {
+          @for (paragraph of paragraphs; track $index) {
+            <p class="font-['Caveat',cursive] text-xl leading-relaxed text-amber-900/80">
+              @for (run of paragraph; track $index) {
+                @switch (run.style) {
+                  @case ('crossed') {
+                    <span class="text-amber-900/40 line-through decoration-2 decoration-wavy">{{
+                      run.text[lang()]
+                    }}</span>
+                  }
+                  @case ('empty') {
+                    <span class="narrative-empty">{{ run.text[lang()] }}</span>
+                  }
+                  @default {
+                    <span>{{ run.text[lang()] }}</span>
+                  }
+                }
+              }
+            </p>
+          }
+        } @else {
+          <p class="font-serif leading-relaxed text-amber-900">{{ stop().narrative[lang()] }}</p>
+        }
+
+        @if (stop().narrativeRiddle; as riddle) {
+          <div class="riddle-card mt-4 rounded-lg border border-amber-800/25 bg-amber-100/40 px-4 py-4">
+            <p class="whitespace-pre-line text-center font-serif italic leading-relaxed text-amber-900">
+              {{ riddle.poem[lang()] }}
+            </p>
+            <input
+              type="text"
+              [(ngModel)]="riddleInput"
+              (keyup.enter)="onSubmitRiddle()"
+              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl border-2 border-amber-300 bg-white/70 px-4 py-3 text-center text-lg font-medium text-amber-900"
+            />
+            <button
+              type="button"
+              (click)="onSubmitRiddle()"
+              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+            >
+              {{ t('submit') }}
+            </button>
+            @if (riddleWrongFlash()) {
+              <p class="mt-2 text-center text-sm font-semibold text-red-700">
+                {{ t('wrongTryAgain') }}
+              </p>
+            }
+            <app-hint-panel
+              [hints]="riddle.hints"
+              [lang]="lang()"
+              [attemptCount]="riddleAttemptCount()"
+              (revealed)="onContinue()"
+            />
+          </div>
+        } @else {
+          <p class="font-['Caveat',cursive] text-lg italic text-amber-700/70">
+            {{ t('diaryClosing') }}
+          </p>
+        }
+      </div>
+
+      <p class="mt-6 text-center font-['Caveat',cursive] text-lg text-amber-700/70">
+        — {{ stop().pageNumber ?? stop().order }} —
+      </p>
+    </div>
+  </div>
+
+  @if (!stop().narrativeRiddle) {
+    <button
+      type="button"
+      (click)="onContinue()"
+      class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+    >
+      {{ t('continueLabel') }}
+    </button>
+  }
 </div>

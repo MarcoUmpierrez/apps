@@ -29,6 +29,21 @@ export interface StopLocation {
 /** Nudge -> specific -> reveals the answer outright. */
 export type HintTriplet = [BilingualText, BilingualText, BilingualText];
 
+/** A run of narrative text: 'crossed' renders struck through, 'empty' renders as an unreadable ink blot. Plain prose omits `style`. */
+export interface NarrativeRun {
+  text: BilingualText;
+  style?: 'crossed' | 'empty';
+}
+
+export type NarrativeParagraph = NarrativeRun[];
+
+/** A riddle woven into the stop-intro narrative, gating the Continue button behind a correct guess. */
+export interface NarrativeRiddle {
+  poem: BilingualText;
+  acceptedAnswers: BilingualText[];
+  hints: HintTriplet;
+}
+
 interface MinigameBase {
   prompt: BilingualText;
   hints: HintTriplet;
@@ -120,9 +135,17 @@ export interface Stop {
   id: string;
   order: number;
   chapterIcon: string;
+  /** Optional photo shown instead of chapterIcon on the stop-intro screen. */
+  chapterImage?: string;
+  /** Overrides the page number printed at the bottom of the stop-intro journal page. Defaults to `order`. */
+  pageNumber?: number;
   isFinale: boolean;
   title: BilingualText;
   narrative: BilingualText;
+  /** Rich, tagged version of the intro narrative (crossed-out / redacted runs). Replaces `narrative` on stop-intro when present. */
+  narrativeRich?: NarrativeParagraph[];
+  /** Gates the stop-intro Continue button behind a riddle answer, when present. */
+  narrativeRiddle?: NarrativeRiddle;
   location: StopLocation;
   /** Omitted on the finale stop. */
   minigame?: MinigameConfig;

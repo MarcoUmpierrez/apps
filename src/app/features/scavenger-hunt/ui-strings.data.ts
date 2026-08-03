@@ -21,7 +21,6 @@ export type UiStringKey =
   | 'revealIt'
   | 'shakeToRevealPrompt'
   | 'enableMotion'
-  | 'chapterOf'
   | 'stampCollected'
   | 'notebookCallout'
   | 'downloadMemory'
@@ -32,7 +31,8 @@ export type UiStringKey =
   | 'ourJourney'
   | 'devModeUnlockedToast'
   | 'skipDev'
-  | 'jumpToStop';
+  | 'jumpToStop'
+  | 'diaryClosing';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -56,18 +56,18 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     revealIt: 'Reveal it',
     shakeToRevealPrompt: 'Shake your phone to reveal it!',
     enableMotion: 'Enable motion',
-    chapterOf: 'Chapter {current} of {total}',
     stampCollected: 'Stamp collected!',
     notebookCallout: 'Write this in your notebook',
     downloadMemory: 'Download memory',
     skipVideo: 'Skip',
     proposalQuestion: 'Will you be my girlfriend?',
-    yesButton: 'Yes 💛',
-    sheSaidYes: 'She said YES 🎉',
+    yesButton: 'Yes!',
+    sheSaidYes: 'She said YES!',
     ourJourney: 'Our journey',
     devModeUnlockedToast: 'Debug mode unlocked',
     skipDev: 'Skip (dev)',
     jumpToStop: 'Jump to stop',
+    diaryClosing: 'More on the next page...',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -90,18 +90,18 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     revealIt: 'Revelarlo',
     shakeToRevealPrompt: '¡Agita tu teléfono para revelarlo!',
     enableMotion: 'Activar movimiento',
-    chapterOf: 'Capítulo {current} de {total}',
     stampCollected: '¡Sello coleccionado!',
     notebookCallout: 'Escribe esto en tu cuaderno',
     downloadMemory: 'Descargar recuerdo',
     skipVideo: 'Omitir',
     proposalQuestion: '¿Quieres ser mi novia?',
-    yesButton: 'Sí 💛',
-    sheSaidYes: 'Ella dijo SÍ 🎉',
+    yesButton: '¡Sí!',
+    sheSaidYes: '¡Ella dijo SÍ!',
     ourJourney: 'Nuestro viaje',
     devModeUnlockedToast: 'Modo de depuración desbloqueado',
     skipDev: 'Omitir (dev)',
     jumpToStop: 'Ir a parada',
+    diaryClosing: 'Más en la siguiente página...',
   },
 };
 
