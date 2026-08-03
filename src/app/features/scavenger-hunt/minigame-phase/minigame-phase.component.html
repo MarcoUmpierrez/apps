@@ -1,0 +1,33 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-4 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6"
+>
+  @let minigame = stop().minigame;
+  @if (minigame) {
+    @switch (minigame.kind) {
+      @case ('riddle-mc') {
+        <app-riddle-mc [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('word-scramble') {
+        <app-word-scramble [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('wordle-guess') {
+        <app-wordle-guess [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('sequence-reorder') {
+        <app-sequence-reorder [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('sliding-tile-puzzle') {
+        <app-sliding-tile-puzzle [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('shake-to-reveal') {
+        <app-shake-to-reveal [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('jigsaw-puzzle') {
+        <app-jigsaw-puzzle [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('memory-match') {
+        <app-memory-match [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+    }
+  }
+</div>

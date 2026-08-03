@@ -1,0 +1,51 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-8 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <div>
+    <h1 class="font-['Caveat',_cursive] text-6xl font-bold text-amber-900">Greta's Journey</h1>
+    <p class="mt-3 text-amber-700">
+      {{
+        selectedLanguage() === 'es'
+          ? 'Un viaje a través de nuestra historia.'
+          : 'A journey through our story.'
+      }}
+    </p>
+  </div>
+
+  <div class="flex gap-3">
+    <button
+      type="button"
+      (click)="selectLanguage('en')"
+      [class.bg-amber-700]="selectedLanguage() === 'en'"
+      [class.text-white]="selectedLanguage() === 'en'"
+      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+    >
+      English
+    </button>
+    <button
+      type="button"
+      (click)="selectLanguage('es')"
+      [class.bg-amber-700]="selectedLanguage() === 'es'"
+      [class.text-white]="selectedLanguage() === 'es'"
+      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+    >
+      Español
+    </button>
+  </div>
+
+  <button
+    type="button"
+    (pointerdown)="onBeginPointerDown()"
+    (pointerup)="onBeginPointerUp()"
+    (pointercancel)="onBeginPointerCancel()"
+    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    {{ t('begin') }}
+  </button>
+
+  @if (devModeToastVisible()) {
+    <div class="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white">
+      {{ t('devModeUnlockedToast') }}
+    </div>
+  }
+</div>

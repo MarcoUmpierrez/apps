@@ -1,0 +1,30 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <h2 class="font-['Caveat',_cursive] text-4xl font-bold text-amber-900">{{ t('ourJourney') }}</h2>
+
+  @if (photos().length > 0) {
+    <img
+      [src]="photos()[activeIndex()]"
+      alt=""
+      class="h-64 w-full max-w-xs rounded-2xl border-4 border-white object-cover shadow-xl"
+    />
+
+    <button
+      type="button"
+      (click)="onDownload()"
+      [disabled]="!collageDataUrl()"
+      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800 disabled:opacity-40"
+    >
+      {{ isBuildingCollage() ? '…' : t('downloadMemory') }}
+    </button>
+  }
+
+  <button
+    type="button"
+    (click)="onContinue()"
+    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    {{ t('continueLabel') }}
+  </button>
+</div>

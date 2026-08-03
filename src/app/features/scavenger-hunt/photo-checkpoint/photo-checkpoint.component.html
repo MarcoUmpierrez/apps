@@ -1,0 +1,30 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <div class="text-6xl">📸</div>
+  <p class="max-w-xs text-lg font-semibold text-amber-900">
+    {{ stop().photoCheckpoint?.prompt?.[lang()] }}
+  </p>
+
+  <label
+    class="min-h-14 w-full max-w-xs touch-manipulation cursor-pointer rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    {{ isProcessing() ? '…' : t('takePhoto') }}
+    <input
+      type="file"
+      accept="image/*"
+      capture="environment"
+      class="hidden"
+      [disabled]="isProcessing()"
+      (change)="onFileSelected($event)"
+    />
+  </label>
+
+  <button
+    type="button"
+    (click)="onSkip()"
+    class="text-sm font-semibold text-amber-700 underline underline-offset-2"
+  >
+    {{ t('skipPhoto') }}
+  </button>
+</div>

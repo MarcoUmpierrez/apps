@@ -1,0 +1,23 @@
+<div
+  class="relative flex min-h-dvh flex-col items-center justify-center gap-6 overflow-hidden bg-linear-to-b from-rose-100/60 to-amber-100/60 p-6 text-center"
+>
+  <div class="pointer-events-none absolute inset-0">
+    @for (piece of confettiPieces; track piece) {
+      <span
+        class="absolute top-[-10%] block h-2 w-2 rounded-sm animate-[confetti-fall_2.8s_linear_infinite]"
+        [style.left.%]="(piece * 37) % 100"
+        [style.animation-delay.s]="(piece % 10) * 0.3"
+        [style.background-color]="confettiColor(piece)"
+      ></span>
+    }
+  </div>
+
+  <div class="text-7xl">🎉</div>
+  <h2 class="font-['Caveat',_cursive] text-5xl font-bold text-rose-900">{{ t('sheSaidYes') }}</h2>
+
+  <div class="flex flex-wrap justify-center gap-2">
+    @for (stop of stops; track stop.id) {
+      <span class="text-3xl">{{ stop.chapterIcon }}</span>
+    }
+  </div>
+</div>

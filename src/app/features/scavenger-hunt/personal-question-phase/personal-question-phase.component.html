@@ -1,0 +1,18 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-4 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6"
+>
+  @let question = stop().personalQuestion;
+  @if (question) {
+    @switch (question.kind) {
+      @case ('multiple-choice') {
+        <app-multiple-choice-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('free-text') {
+        <app-free-text-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+      }
+      @case ('notebook-code') {
+        <app-notebook-code-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+      }
+    }
+  }
+</div>

@@ -1,0 +1,25 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <div class="animate-[stamp-in_0.4s_ease-out] text-7xl">{{ stop().chapterIcon }}</div>
+  <h3 class="font-['Caveat',_cursive] text-3xl font-bold text-amber-900">
+    {{ t('stampCollected') }}
+  </h3>
+
+  @if (stop().notebookInstruction; as instruction) {
+    <div class="max-w-xs rounded-xl border-2 border-dashed border-amber-400 bg-amber-50 p-4">
+      <p class="mb-1 text-xs font-bold uppercase tracking-widest text-amber-600">
+        📓 {{ t('notebookCallout') }}
+      </p>
+      <p class="text-amber-900">{{ instruction[lang()] }}</p>
+    </div>
+  }
+
+  <button
+    type="button"
+    (click)="onContinue()"
+    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    {{ t('continueLabel') }}
+  </button>
+</div>

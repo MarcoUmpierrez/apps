@@ -1,0 +1,151 @@
+export type Language = 'en' | 'es';
+
+export interface BilingualText {
+  en: string;
+  es: string;
+}
+
+export type HuntPhase =
+  | 'cover'
+  | 'stop-intro'
+  | 'geo-check'
+  | 'minigame'
+  | 'photo-checkpoint'
+  | 'personal-question'
+  | 'stop-stamp'
+  | 'finale-montage'
+  | 'finale-video'
+  | 'proposal-question'
+  | 'epilogue';
+
+export interface StopLocation {
+  lat: number;
+  lng: number;
+  /** Advisory "arrived" threshold in meters — never a hard gate, a manual override always exists. */
+  radiusMeters: number;
+  label: BilingualText;
+}
+
+/** Nudge -> specific -> reveals the answer outright. */
+export type HintTriplet = [BilingualText, BilingualText, BilingualText];
+
+interface MinigameBase {
+  prompt: BilingualText;
+  hints: HintTriplet;
+}
+
+export interface RiddleMcMinigame extends MinigameBase {
+  kind: 'riddle-mc';
+  options: BilingualText[];
+  correctIndex: number;
+}
+
+export interface WordScrambleMinigame extends MinigameBase {
+  kind: 'word-scramble';
+  answer: BilingualText;
+}
+
+export interface WordleGuessMinigame extends MinigameBase {
+  kind: 'wordle-guess';
+  targetWord: BilingualText;
+  maxGuesses: number;
+}
+
+export interface SequenceReorderMinigame extends MinigameBase {
+  kind: 'sequence-reorder';
+  itemsInCorrectOrder: BilingualText[];
+}
+
+export interface SlidingTilePuzzleMinigame extends MinigameBase {
+  kind: 'sliding-tile-puzzle';
+  imageAsset: string;
+  gridSize: 3 | 4;
+}
+
+export interface ShakeToRevealMinigame extends MinigameBase {
+  kind: 'shake-to-reveal';
+  revealedWord: BilingualText;
+}
+
+export interface JigsawPuzzleMinigame extends MinigameBase {
+  kind: 'jigsaw-puzzle';
+  imageAsset: string;
+  pieceCount: 9 | 12;
+}
+
+export interface MemoryMatchMinigame extends MinigameBase {
+  kind: 'memory-match';
+  pairs: BilingualText[];
+}
+
+export type MinigameConfig =
+  | RiddleMcMinigame
+  | WordScrambleMinigame
+  | WordleGuessMinigame
+  | SequenceReorderMinigame
+  | SlidingTilePuzzleMinigame
+  | ShakeToRevealMinigame
+  | JigsawPuzzleMinigame
+  | MemoryMatchMinigame;
+
+interface QuestionBase {
+  question: BilingualText;
+  hints: HintTriplet;
+}
+
+export interface MultipleChoiceQuestion extends QuestionBase {
+  kind: 'multiple-choice';
+  options: BilingualText[];
+  correctIndex: number;
+}
+
+export interface FreeTextQuestion extends QuestionBase {
+  kind: 'free-text';
+  acceptedAnswers: BilingualText[];
+}
+
+export interface NotebookCodeQuestion extends QuestionBase {
+  kind: 'notebook-code';
+  /** Stop orders whose notebookInstruction letters combine into the expected code, in order. */
+  referencedStopOrders: number[];
+  acceptedAnswers: BilingualText[];
+}
+
+export type PersonalQuestionConfig =
+  | MultipleChoiceQuestion
+  | FreeTextQuestion
+  | NotebookCodeQuestion;
+
+export interface Stop {
+  id: string;
+  order: number;
+  chapterIcon: string;
+  isFinale: boolean;
+  title: BilingualText;
+  narrative: BilingualText;
+  location: StopLocation;
+  /** Omitted on the finale stop. */
+  minigame?: MinigameConfig;
+  photoCheckpoint?: { prompt: BilingualText };
+  /** Omitted on the finale stop. */
+  personalQuestion?: PersonalQuestionConfig;
+  notebookInstruction?: BilingualText;
+}
+
+export interface StopProgress {
+  arrived: boolean;
+  minigameSolved: boolean;
+  photoDataUrl: string | null;
+  personalQuestionSolved: boolean;
+  stampCollected: boolean;
+}
+
+export interface HuntProgress {
+  language: Language | null;
+  /** Index into the fixed, authored HUNT_STOPS array — stops are always visited in this order. */
+  currentStopIndex: number;
+  currentPhase: HuntPhase;
+  stops: Record<string, StopProgress>;
+  devModeUnlocked: boolean;
+  epilogueUnlocked: boolean;
+}

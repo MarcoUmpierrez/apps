@@ -1,0 +1,17 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <p class="text-sm font-semibold uppercase tracking-widest text-amber-700">{{ chapterLabel() }}</p>
+  <div class="text-6xl">{{ stop().chapterIcon }}</div>
+  <h2 class="font-['Caveat',_cursive] text-4xl font-bold text-amber-900">
+    {{ stop().title[lang()] }}
+  </h2>
+  <p class="max-w-md text-amber-800">{{ stop().narrative[lang()] }}</p>
+  <button
+    type="button"
+    (click)="onContinue()"
+    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    {{ t('continueLabel') }}
+  </button>
+</div>

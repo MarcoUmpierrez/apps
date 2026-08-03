@@ -1,0 +1,28 @@
+<div class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-slate-950 p-6 text-center">
+  @if (!videoErrored()) {
+    <video
+      [src]="videoAsset"
+      autoplay
+      playsinline
+      class="max-h-[70dvh] w-full max-w-sm rounded-2xl"
+      (ended)="onContinue()"
+      (error)="onVideoError()"
+    ></video>
+  } @else {
+    <div class="animate-pulse text-7xl">💛</div>
+    <p class="font-['Caveat',_cursive] text-4xl font-bold text-amber-100">
+      {{
+        lang() === 'es'
+          ? 'Cada capítulo de esta historia... valió la pena.'
+          : 'Every chapter of this story... was worth it.'
+      }}
+    </p>
+  }
+  <button
+    type="button"
+    (click)="onContinue()"
+    class="text-sm font-semibold text-amber-200 underline underline-offset-2"
+  >
+    {{ t('skipVideo') }}
+  </button>
+</div>

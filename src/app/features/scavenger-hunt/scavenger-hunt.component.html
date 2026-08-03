@@ -1,0 +1,70 @@
+<div
+  class="parchment-vignette touch-manipulation overscroll-none bg-cover bg-center pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"
+  [style.background-image]="'url(scavenger-hunt/textures/parchment-page.jpg)'"
+>
+  @switch (phase()) {
+    @case ('cover') {
+      <app-cover-screen />
+    }
+    @case ('stop-intro') {
+      <app-stop-intro />
+    }
+    @case ('geo-check') {
+      <app-geo-check />
+    }
+    @case ('minigame') {
+      <app-minigame-phase />
+    }
+    @case ('photo-checkpoint') {
+      <app-photo-checkpoint />
+    }
+    @case ('personal-question') {
+      <app-personal-question-phase />
+    }
+    @case ('stop-stamp') {
+      <app-stop-stamp />
+    }
+    @case ('finale-montage') {
+      <app-photo-montage />
+    }
+    @case ('finale-video') {
+      <app-finale-video />
+    }
+    @case ('proposal-question') {
+      <app-proposal-question />
+    }
+    @case ('epilogue') {
+      <app-epilogue />
+    }
+  }
+
+  @if (devModeUnlocked()) {
+    <app-debug-panel />
+  }
+
+  <div class="pointer-events-none fixed inset-0 z-40 text-amber-800/80">
+    <div class="absolute inset-2 border-4 border-amber-800/70"></div>
+    <div class="absolute inset-4 border border-amber-700/40"></div>
+
+    <div class="absolute top-1 left-1">
+      <app-corner-flourish />
+    </div>
+    <div class="absolute top-1 right-1 -scale-x-100">
+      <app-corner-flourish />
+    </div>
+    <div class="absolute bottom-1 left-1 -scale-y-100">
+      <app-corner-flourish />
+    </div>
+    <div class="absolute right-1 bottom-1 -scale-x-100 -scale-y-100">
+      <app-corner-flourish />
+    </div>
+  </div>
+
+  <div
+    class="fixed inset-0 z-[999] hidden items-center justify-center bg-slate-950 p-6 text-center text-white landscape:max-sm:flex"
+  >
+    <p class="text-lg font-semibold">
+      📱 Please rotate your phone back to portrait to continue the journey.
+    </p>
+  </div>
+</div>
