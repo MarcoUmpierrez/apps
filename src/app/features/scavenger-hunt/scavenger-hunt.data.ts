@@ -347,56 +347,176 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-3-bookstore',
     order: 3,
     chapterIcon: '📚',
+    chapterImage: 'scavenger-hunt/photos/krauss.png',
+    pageNumber: 23,
     isFinale: false,
     title: {
       en: 'The Bookstore Neither of Us Left Empty-Handed',
       es: 'La Librería de la que Ninguno Salió con las Manos Vacías',
     },
     narrative: {
-      en: 'You disappeared into the aisles and I lost you for twenty minutes, and it was somehow one of my favorite twenty minutes.',
-      es: 'Desapareciste entre los pasillos y te perdí de vista por veinte minutos, y de alguna forma fueron de mis veinte minutos favoritos.',
+      en: "I was waiting for her, she had told me she'd made plans with some friends and would be back soon, so I sat down to wait for her in the shade of the statue. She wanted to surprise me, and when she got close she gave a little jump trying to scare me. Instead, what it got out of me was a big smile, from how adorable it was. That day, like many others, we decided to walk along the beach. We walked side by side, while I listened to her tell her incredible stories. She told me about her experiences, what she'd learned from them, how much she's grown since then... I listened patiently, unknowingly being pulled into that huge world hidden inside that small creature. Walking along the beach had become a habit, since it let us hear the murmur of the waves and watch the sunset. One day, we even kept walking, further than our usual stopping point, until we reached a hidden lookout point where very few people go. The statue where I waited for her belongs to a famous person with a particular surname, one that could be expressed as a riddle.",
+      es: 'Estaba esperando por ella, me había dicho que había quedado con unas amigas y que volvería pronto, así que me senté a esperarla a la sombra de la estatua. Ella quiso sorprenderme y cuando estuvo cerca de mí dio un pequeño salto intentando asustarme. En vez de eso, lo que me sacó fue una gran sonrisa, por ese acto adorable. Ese día, como muchos otros decidimos caminar por la playa. Caminábamos uno al lado del otro, mientras la escuchaba narrar sus increíbles historias. Me contaba sobre sus vivencias, lo que había aprendido de ellas, cuánto ha crecido desde entonces... Yo la escuchaba pacientemente, siendo absorbido sin saberlo por ese gran mundo que esconde esa pequeña criatura. Pasear por la playa se había convertido en un hábito, ya que nos permitía oír el murmullo de las olas y ver la puesta de sol. Un día, incluso seguimos caminando, más allá de nuestro tope habitual, hasta llegar a un recóndito mirador donde muy pocas personas van. La estatua donde la esperé pertenece a una persona famosa con un apellido particular, que podría expresarse en forma de acertijo.',
+    },
+    narrativeRich: [
+      [
+        {
+          text: {
+            en: "I was waiting for her, she had told me she'd made plans with some friends and would be back soon, so I sat down to wait for her ",
+            es: 'Estaba esperando por ella, me había dicho que había quedado con unas amigas y que volvería pronto, así que me senté a esperarla ',
+          },
+        },
+        {
+          text: { en: 'in the shade of the statue', es: 'a la sombra de la estatua' },
+          style: 'empty',
+        },
+        {
+          text: {
+            en: '. She wanted to surprise me, and when she got close she gave a little jump trying to scare me. Instead, what it got out of me was a big smile, from how adorable it was. ',
+            es: '. Ella quiso sorprenderme y cuando estuvo cerca de mí dio un pequeño salto intentando asustarme. En vez de eso, lo que me sacó fue una gran sonrisa, por ese acto adorable. ',
+          },
+        },
+        {
+          text: {
+            en: "Of course it didn't scare me, because I'm a very strong man",
+            es: 'Por supuesto no me asustó porque soy un hombre muy fuerte',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: ' That day, like many others, we decided to walk along the ',
+            es: ' Ese día, como muchos otros decidimos caminar por la ',
+          },
+        },
+        { text: { en: 'beach', es: 'playa' }, style: 'empty' },
+        {
+          text: {
+            en: '. We walked side by side, while I listened to her tell her incredible stories. ',
+            es: '. Caminábamos uno al lado del otro, mientras la escuchaba narrar sus increíbles historias. ',
+          },
+        },
+        {
+          text: {
+            en: 'Sometimes she mentioned her exes a lot',
+            es: 'Algunas veces mencionaba mucho a sus ex parejas',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " She told me about her experiences, what she'd learned from them, how much she's grown since then... I listened patiently, unknowingly being pulled into that huge world hidden inside that small creature.",
+            es: ' Me contaba sobre sus vivencias, lo que había aprendido de ellas, cuánto ha crecido desde entonces... Yo la escuchaba pacientemente, siendo absorbido sin saberlo por ese gran mundo que esconde esa pequeña criatura.',
+          },
+        },
+      ],
+      [
+        { text: { en: 'Walking along the ', es: 'Pasear por la ' } },
+        { text: { en: 'beach', es: 'playa' }, style: 'empty' },
+        { text: { en: ' had become a habit, ', es: ' se había convertido en un hábito, ' } },
+        {
+          text: {
+            en: 'mostly for lack of transport',
+            es: 'principalmente por falta de transporte',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: ' since it let us hear the murmur of the ',
+            es: ' ya que nos permitía oír el murmullo de las ',
+          },
+        },
+        { text: { en: 'waves', es: 'olas' }, style: 'empty' },
+        {
+          text: {
+            en: ' and watch the sunset. One day, we even kept walking, further than our usual stopping point, until we reached a hidden ',
+            es: ' y ver la puesta de sol. Un día, incluso seguimos caminando, más allá de nuestro tope habitual, hasta llegar a un recóndito ',
+          },
+        },
+        { text: { en: 'lookout point', es: 'mirador' }, style: 'empty' },
+        { text: { en: ' where very few people go.', es: ' donde muy pocas personas van.' } },
+      ],
+      [
+        {
+          text: {
+            en: 'The statue where I waited for her belongs to a famous person with a particular surname, one that could be expressed as a riddle:',
+            es: 'La estatua donde la esperé pertenece a una persona famosa con un apellido particular, que podría expresarse en forma de acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: "On an island where the sun burns bright,\na tenor was born with a stellar voice,\nyet his surname comes from another home:\nfrom northern winds, far from the sea's noise.\nIt starts like the first letter of a ship in port,\nfollowed by the call of a singing bird,\nand ends resounding with a bronze report,\nlike the music of a great German master's word.\nWhat surname is it?",
+        es: 'En una isla donde el sol vibra,\nnació un tenor de voz estelar,\npero su nombre es de otra cuna:\nde vientos del norte, lejanos del mar.\nEmpieza como la primera letra de un barco en el puerto,\nsigue la voz de un ave al cantar,\ny al final resuena con fuerza de bronce,\ncomo la música de un gran compositor alemán.\n¿Qué apellido es?',
+      },
+      acceptedAnswers: [
+        { en: 'Krauss', es: 'Krauss' },
+        { en: 'Kraus', es: 'Kraus' },
+      ],
+      hints: [
+        {
+          en: 'He was a world-famous tenor born right here in the Canary Islands.',
+          es: 'Fue un tenor de fama mundial nacido aquí mismo, en Canarias.',
+        },
+        {
+          en: 'His surname sounds German, though he was born in Las Palmas de Gran Canaria.',
+          es: 'Su apellido suena alemán, aunque nació en Las Palmas de Gran Canaria.',
+        },
+        { en: 'Kraus.', es: 'Kraus.' },
+      ],
     },
     location: {
-      lat: 40.0003, // PLACEHOLDER — replace before the real day
-      lng: -3.0003, // PLACEHOLDER — replace before the real day
+      lat: 28.1301049,
+      lng: -15.4491612,
       radiusMeters: 40,
-      label: { en: 'The bookstore', es: 'La librería' },
+      label: { en: "Alfredo Kraus's statue", es: 'Estatua Alfredo Kraus' },
     },
     minigame: {
       kind: 'wordle-guess',
       prompt: {
-        en: 'Guess the word: what did you spend twenty minutes browsing?',
-        es: 'Adivina la palabra: ¿qué estuviste hojeando por veinte minutos?',
+        en: 'Our new favorite place to eat burgers is called...',
+        es: 'Nuestro nuevo lugar favorito para comer hamburguesas se llama...',
       },
-      targetWord: { en: 'NOVEL', es: 'NOVELA' },
+      targetWord: { en: 'CHEDDAR', es: 'CHEDDAR' },
       maxGuesses: 6,
       hints: [
         {
-          en: "It's a type of book, usually a long story.",
-          es: 'Es un tipo de libro, generalmente una historia larga.',
+          en: "It's a type of cheese, often orange.",
+          es: 'Es un tipo de queso, a menudo de color naranja.',
         },
-        { en: 'Five letters in English.', es: 'Seis letras en español.' },
-        { en: 'Novel.', es: 'Novela.' },
+        {
+          en: 'A classic burger topping, sharp and melty.',
+          es: 'Un topping clásico de hamburguesa, fuerte y derretible.',
+        },
+        { en: 'Cheddar.', es: 'Cheddar.' },
       ],
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
     personalQuestion: {
       kind: 'multiple-choice',
       question: {
-        en: 'What section did you disappear into?',
-        es: '¿En qué sección desapareciste?',
+        en: 'On our fourth date, she took a photo with...:',
+        es: 'En nuestra cuarta cita, ella se sacó una foto con...:',
       },
       options: [
-        { en: 'Poetry', es: 'Poesía' },
-        { en: 'Mystery', es: 'Misterio' },
-        { en: 'Fantasy', es: 'Fantasía' },
-        { en: 'History', es: 'Historia' },
+        { en: 'A horse', es: 'Un caballo' },
+        { en: 'A flower in her hair', es: 'Una flor en el cabello' },
+        { en: 'A sports car', es: 'Un coche deportivo' },
+        { en: 'A frog holding a phone', es: 'Una rana con un teléfono' },
       ],
-      correctIndex: 2,
+      correctIndex: 3,
       hints: [
-        { en: 'Dragons might be involved.', es: 'Podrían estar involucrados los dragones.' },
-        { en: "It's a genre with made-up worlds.", es: 'Es un género con mundos inventados.' },
-        { en: 'Fantasy.', es: 'Fantasía.' },
+        {
+          en: "It wasn't a person, or even a mammal.",
+          es: 'No era una persona, ni siquiera un mamífero.',
+        },
+        {
+          en: 'It was small, green, and holding something surprisingly modern.',
+          es: 'Era pequeño, verde, y sostenía algo sorprendentemente moderno.',
+        },
+        { en: 'A frog holding a phone.', es: 'Una rana con un teléfono.' },
       ],
     },
     notebookInstruction: {

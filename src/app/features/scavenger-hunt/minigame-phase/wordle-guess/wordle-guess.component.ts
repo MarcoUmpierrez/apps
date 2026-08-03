@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { isAnswerCorrect } from '../../fuzzy-match.util';
+import { normalizeAnswer } from '../../fuzzy-match.util';
 import { Language, WordleGuessMinigame } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
 
@@ -110,12 +110,15 @@ export class WordleGuessComponent {
 
   onSubmitGuess(): void {
     const guess = this.currentGuess.trim();
-    if (!guess) return;
+    if (!guess || guess.length !== this.targetLength()) return;
 
     this.guesses.update((g) => [...g, guess]);
     this.currentGuess = '';
 
-    if (isAnswerCorrect(guess, [this.config().targetWord], this.lang())) {
+    // Exact match only — the per-letter color feedback is the game's own
+    // forgiveness mechanic, so guesses aren't fuzzy/typo-tolerant like the
+    // free-text questions elsewhere.
+    if (normalizeAnswer(guess) === normalizeAnswer(this.config().targetWord[this.lang()])) {
       this.solvedLocally.set(true);
       this.solved.emit();
       return;
