@@ -2,13 +2,19 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { HUNT_STOPS } from '../scavenger-hunt.data';
 import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
+import { BurgerBuildGameComponent } from './burger-build-game/burger-build-game.component';
 import { DirtWipeGameComponent } from './dirt-wipe-game/dirt-wipe-game.component';
 import { TowerOfHanoiGameComponent } from './tower-of-hanoi-game/tower-of-hanoi-game.component';
 import { WallBreakGameComponent } from './wall-break-game/wall-break-game.component';
 
 @Component({
   selector: 'app-letter-minigame-phase',
-  imports: [WallBreakGameComponent, DirtWipeGameComponent, TowerOfHanoiGameComponent],
+  imports: [
+    WallBreakGameComponent,
+    DirtWipeGameComponent,
+    TowerOfHanoiGameComponent,
+    BurgerBuildGameComponent,
+  ],
   templateUrl: './letter-minigame-phase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

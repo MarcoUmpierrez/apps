@@ -156,10 +156,19 @@ export interface TowerOfHanoiLetterMinigame extends LetterMinigameBase {
   discCount: number;
 }
 
+export type BurgerIngredientKind = 'bun-bottom' | 'meat' | 'cheese' | 'lettuce' | 'onion' | 'bun-top';
+
+/** Tap ingredients from a shuffled tray, in the right order, to stack a burger bottom-to-top. */
+export interface BurgerBuildLetterMinigame extends LetterMinigameBase {
+  kind: 'burger-build';
+  ingredientsInOrder: BurgerIngredientKind[];
+}
+
 export type LetterMinigameConfig =
   | WallBreakLetterMinigame
   | DirtWipeLetterMinigame
-  | TowerOfHanoiLetterMinigame;
+  | TowerOfHanoiLetterMinigame
+  | BurgerBuildLetterMinigame;
 
 export interface Stop {
   id: string;

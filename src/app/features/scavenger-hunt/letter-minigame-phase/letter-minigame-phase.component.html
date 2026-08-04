@@ -13,6 +13,9 @@
       @case ('tower-of-hanoi') {
         <app-tower-of-hanoi-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
       }
+      @case ('burger-build') {
+        <app-burger-build-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
     }
   }
 </div>

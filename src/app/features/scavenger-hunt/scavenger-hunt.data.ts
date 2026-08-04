@@ -340,7 +340,7 @@ export const HUNT_STOPS: Stop[] = [
     letterMinigame: {
       kind: 'dirt-wipe',
       letter: 'O',
-      clearThresholdPercent: 90,
+      clearThresholdPercent: 60,
     },
   },
   {
@@ -644,9 +644,10 @@ export const HUNT_STOPS: Stop[] = [
       ],
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
-    notebookInstruction: {
-      en: "Write the letter A in your notebook — you'll need it later.",
-      es: 'Escribe la letra A en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'burger-build',
+      letter: 'A',
+      ingredientsInOrder: ['bun-bottom', 'meat', 'cheese', 'lettuce', 'onion', 'bun-top'],
     },
   },
   {

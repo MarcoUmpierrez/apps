@@ -22,7 +22,7 @@ const WRONG_FLASH_MS = 900;
   selector: 'app-tower-of-hanoi-game',
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
-      @if (!revealed()) {
+      @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('hanoiPrompt') }}</p>
 
         <div class="flex w-full items-end justify-around gap-2">
@@ -88,7 +88,7 @@ export class TowerOfHanoiGameComponent implements OnInit {
   readonly selectedPole = signal<number | null>(null);
   readonly wrongFlash = signal(false);
 
-  readonly revealed = computed(() => this.poles()[2].length === this.config().discCount);
+  readonly taskComplete = computed(() => this.poles()[2].length === this.config().discCount);
 
   ngOnInit(): void {
     const count = this.config().discCount;
@@ -113,7 +113,7 @@ export class TowerOfHanoiGameComponent implements OnInit {
   }
 
   onPoleClick(poleIndex: number): void {
-    if (this.revealed()) return;
+    if (this.taskComplete()) return;
 
     const selected = this.selectedPole();
     const poles = this.poles();

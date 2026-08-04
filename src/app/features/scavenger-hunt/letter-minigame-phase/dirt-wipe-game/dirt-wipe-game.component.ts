@@ -27,7 +27,7 @@ const DIRT_IMAGE_SRC = 'scavenger-hunt/textures/dirt.jpg';
   selector: 'app-dirt-wipe-game',
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
-      @if (!revealed()) {
+      @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('dirtWipePrompt') }}</p>
 
         <div
@@ -95,7 +95,7 @@ export class DirtWipeGameComponent implements AfterViewInit {
 
   readonly canvasSize = CANVAS_SIZE;
   readonly clearedPercent = signal(0);
-  readonly revealed = computed(
+  readonly taskComplete = computed(
     () => this.clearedPercent() >= this.config().clearThresholdPercent,
   );
 
@@ -122,7 +122,7 @@ export class DirtWipeGameComponent implements AfterViewInit {
   }
 
   onPointerDown(event: PointerEvent): void {
-    if (this.revealed()) return;
+    if (this.taskComplete()) return;
     (event.target as HTMLElement).setPointerCapture(event.pointerId);
     this.isDragging = true;
     const point = this.toCanvasPoint(event);
@@ -131,7 +131,7 @@ export class DirtWipeGameComponent implements AfterViewInit {
   }
 
   onPointerMove(event: PointerEvent): void {
-    if (!this.isDragging || this.revealed()) return;
+    if (!this.isDragging || this.taskComplete()) return;
     const point = this.toCanvasPoint(event);
     this.erase(this.lastPoint ?? point, point);
     this.lastPoint = point;

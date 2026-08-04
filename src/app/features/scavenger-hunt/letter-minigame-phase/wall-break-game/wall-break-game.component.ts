@@ -26,7 +26,7 @@ const SHAKE_DURATION_MS = 500;
   styleUrl: './wall-break-game.component.css',
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
-      @if (!revealed()) {
+      @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('wallBreakPrompt') }}</p>
 
         <div
@@ -107,13 +107,13 @@ export class WallBreakGameComponent implements OnDestroy {
   readonly hitsLanded = signal(0);
   readonly justHit = signal(false);
 
-  readonly revealed = computed(() => this.hitsLanded() >= this.config().hitsRequired);
+  readonly taskComplete = computed(() => this.hitsLanded() >= this.config().hitsRequired);
   /** The wall itself stays fully opaque the whole time — only the crack overlay grows,
    * so the letter behind it is never visible before the wall is actually broken. */
   readonly crackOpacity = computed(() => this.hitsLanded() / this.config().hitsRequired);
 
   private readonly decayIntervalId = setInterval(() => {
-    if (this.revealed()) return;
+    if (this.taskComplete()) return;
     this.charge.update((c) => Math.max(0, c - DECAY_PER_TICK));
   }, DECAY_INTERVAL_MS);
   private shakeTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -132,12 +132,12 @@ export class WallBreakGameComponent implements OnDestroy {
   }
 
   onCharge(): void {
-    if (this.revealed()) return;
+    if (this.taskComplete()) return;
     this.charge.update((c) => Math.min(100, c + CHARGE_PER_TAP));
   }
 
   onHit(): void {
-    if (this.revealed() || this.charge() < 100) return;
+    if (this.taskComplete() || this.charge() < 100) return;
     this.charge.set(0);
     this.hitsLanded.update((h) => h + 1);
 

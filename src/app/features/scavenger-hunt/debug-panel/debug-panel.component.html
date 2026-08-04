@@ -11,7 +11,7 @@
         {{ t('skipDev') }}
       </button>
       <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">{{ t('jumpToStop') }}</p>
-      <div class="flex flex-col gap-1">
+      <div class="mb-3 flex flex-col gap-1">
         @for (stop of stops; track stop.id; let i = $index) {
           <button
             type="button"
@@ -19,6 +19,19 @@
             class="min-h-11 touch-manipulation rounded-lg bg-slate-800 px-2 py-1 text-left"
           >
             {{ stop.order }}. {{ stop.title[lang()] }}
+          </button>
+        }
+      </div>
+
+      <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">Jump to screen</p>
+      <div class="flex flex-col gap-1">
+        @for (phase of phases; track phase) {
+          <button
+            type="button"
+            (click)="onJumpToPhase(phase)"
+            class="min-h-11 touch-manipulation rounded-lg bg-slate-800 px-2 py-1 text-left"
+          >
+            {{ phase }}
           </button>
         }
       </div>
