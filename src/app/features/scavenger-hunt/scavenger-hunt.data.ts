@@ -1062,17 +1062,12 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-8-finale',
     order: 8,
     chapterIcon: '✨',
+    chapterImage: 'scavenger-hunt/photos/couple.png',
     isFinale: true,
     title: { en: 'The First Page', es: 'La Primera Página' },
     narrative: {
       en: 'This is where the whole story actually began. Every other chapter came after this one.',
       es: 'Aquí es donde realmente comenzó toda la historia. Cada otro capítulo vino después de este.',
-    },
-    location: {
-      lat: 40.0008, // PLACEHOLDER — replace before the real day
-      lng: -3.0008, // PLACEHOLDER — replace before the real day
-      radiusMeters: 40,
-      label: { en: 'Where we first met', es: 'Donde nos conocimos' },
     },
   },
 ];

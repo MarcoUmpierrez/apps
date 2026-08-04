@@ -24,7 +24,6 @@ export type UiStringKey =
   | 'stampCollected'
   | 'notebookCallout'
   | 'downloadMemory'
-  | 'skipVideo'
   | 'proposalQuestion'
   | 'yesButton'
   | 'sheSaidYes'
@@ -34,7 +33,9 @@ export type UiStringKey =
   | 'jumpToStop'
   | 'diaryClosing'
   | 'giveUp'
-  | 'simulateShake';
+  | 'simulateShake'
+  | 'finaleCongrats'
+  | 'oneLastQuestion';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -61,7 +62,6 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     stampCollected: 'Stamp collected!',
     notebookCallout: 'Write this in your notebook',
     downloadMemory: 'Download memory',
-    skipVideo: 'Skip',
     proposalQuestion: 'Will you be my girlfriend?',
     yesButton: 'Yes!',
     sheSaidYes: 'She said YES!',
@@ -72,6 +72,8 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     diaryClosing: 'More on the next page...',
     giveUp: 'I give up',
     simulateShake: 'Shake! (tap again if needed)',
+    finaleCongrats: "Congratulations! You've completed every challenge!",
+    oneLastQuestion: 'Just one last question remains...',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -97,7 +99,6 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     stampCollected: '¡Sello coleccionado!',
     notebookCallout: 'Escribe esto en tu cuaderno',
     downloadMemory: 'Descargar recuerdo',
-    skipVideo: 'Omitir',
     proposalQuestion: '¿Quieres ser mi novia?',
     yesButton: '¡Sí!',
     sheSaidYes: '¡Ella dijo SÍ!',
@@ -108,6 +109,8 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     diaryClosing: 'Más en la siguiente página...',
     giveUp: 'Me rindo',
     simulateShake: '¡Agita! (toca de nuevo si hace falta)',
+    finaleCongrats: '¡Enhorabuena! ¡Has completado todos los desafíos!',
+    oneLastQuestion: 'Solo queda una última pregunta...',
   },
 };
 

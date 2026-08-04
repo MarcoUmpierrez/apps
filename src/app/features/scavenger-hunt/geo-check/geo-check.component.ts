@@ -24,12 +24,15 @@ export class GeoCheckComponent implements OnDestroy {
 
   readonly stop = computed(() => HUNT_STOPS[this.store.progress().currentStopIndex]);
   readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
+  // stop-intro only ever routes here for stops that declare a location (the
+  // finale has none and skips this phase entirely), so this is safe.
+  readonly location = computed(() => this.stop().location!);
 
-  readonly distanceMeters = computed(() => this.geo.distanceToMeters(this.stop().location));
-  readonly bearingDegrees = computed(() => this.geo.bearingToDegrees(this.stop().location));
+  readonly distanceMeters = computed(() => this.geo.distanceToMeters(this.location()));
+  readonly bearingDegrees = computed(() => this.geo.bearingToDegrees(this.location()));
   readonly isWithinRadius = computed(() => {
     const distance = this.distanceMeters();
-    return distance !== null && distance <= this.stop().location.radiusMeters;
+    return distance !== null && distance <= this.location().radiusMeters;
   });
 
   constructor() {

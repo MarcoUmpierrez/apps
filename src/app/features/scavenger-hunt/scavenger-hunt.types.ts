@@ -146,7 +146,8 @@ export interface Stop {
   narrativeRich?: NarrativeParagraph[];
   /** Gates the stop-intro Continue button behind a riddle answer, when present. */
   narrativeRiddle?: NarrativeRiddle;
-  location: StopLocation;
+  /** Omitted on the finale stop — the journey already ended at the last regular stop, so there's nowhere new to travel to and the geo-check phase is skipped entirely. */
+  location?: StopLocation;
   /** Omitted on the finale stop. */
   minigame?: MinigameConfig;
   photoCheckpoint?: { prompt: BilingualText };

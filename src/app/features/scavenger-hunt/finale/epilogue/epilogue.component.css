@@ -1,0 +1,73 @@
+/* Each particle starts at its burst's center and flies outward along its own
+   fixed --angle, fading as it goes. Bursts are staggered via animation-delay
+   (set per-burst in the template) so several are always mid-explosion. */
+@keyframes firework-particle {
+  0% {
+    transform: rotate(var(--angle)) translateX(0) scale(1);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(3.75rem) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.firework-particle {
+  animation: firework-particle 1.4s ease-out infinite;
+  box-shadow: 0 0 4px currentColor;
+}
+
+/* A rocket climbing from the bottom of the screen to --rise-bottom, then
+   fading right as it "arrives" — timed against firework-rise-particle below
+   so the burst fires the instant the trail disappears. Both share the same
+   2.1s duration/delay per launch so they stay in lockstep every loop. */
+@keyframes firework-trail {
+  0% {
+    bottom: 0%;
+    opacity: 1;
+  }
+  33% {
+    bottom: var(--rise-bottom);
+    opacity: 1;
+  }
+  38% {
+    opacity: 0;
+  }
+  100% {
+    bottom: var(--rise-bottom);
+    opacity: 0;
+  }
+}
+
+.firework-trail {
+  animation: firework-trail 2.1s ease-out infinite;
+  box-shadow: 0 8px 10px -2px currentColor;
+}
+
+/* Invisible while the matching trail climbs, then bursts outward once it arrives. */
+@keyframes firework-rise-particle {
+  0%,
+  32% {
+    transform: rotate(var(--angle)) translateX(0) scale(0);
+    opacity: 0;
+  }
+  38% {
+    transform: rotate(var(--angle)) translateX(0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(3.75rem) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.firework-rise-particle {
+  animation: firework-rise-particle 2.1s ease-out infinite;
+  box-shadow: 0 0 4px currentColor;
+}

@@ -1,28 +1,48 @@
-<div class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-slate-950 p-6 text-center">
+<div
+  class="relative flex min-h-dvh flex-col items-center justify-between overflow-hidden bg-slate-950 text-center"
+>
   @if (!videoErrored()) {
     <video
       [src]="videoAsset"
       autoplay
       playsinline
-      class="max-h-[70dvh] w-full max-w-sm rounded-2xl"
+      loop
+      class="absolute inset-0 h-full w-full object-cover"
       (ended)="onContinue()"
       (error)="onVideoError()"
     ></video>
-  } @else {
-    <div class="animate-pulse text-7xl">💛</div>
-    <p class="font-['Caveat',_cursive] text-4xl font-bold text-amber-100">
-      {{
-        lang() === 'es'
-          ? 'Cada capítulo de esta historia... valió la pena.'
-          : 'Every chapter of this story... was worth it.'
-      }}
-    </p>
   }
-  <button
-    type="button"
-    (click)="onContinue()"
-    class="text-sm font-semibold text-amber-200 underline underline-offset-2"
+
+  <div
+    class="relative z-10 w-full bg-linear-to-b from-black/60 to-transparent p-6 pt-[calc(env(safe-area-inset-top)+1.5rem)]"
   >
-    {{ t('skipVideo') }}
-  </button>
+    <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-100 drop-shadow-lg">
+      {{ t('finaleCongrats') }}
+    </p>
+  </div>
+
+  @if (videoErrored()) {
+    <div class="relative z-10 flex flex-col items-center gap-4 p-6">
+      <div class="animate-pulse text-7xl">💛</div>
+      <p class="font-['Caveat',_cursive] text-4xl font-bold text-amber-100">
+        {{
+          lang() === 'es'
+            ? 'Cada capítulo de esta historia... valió la pena.'
+            : 'Every chapter of this story... was worth it.'
+        }}
+      </p>
+    </div>
+  }
+
+  <div
+    class="relative z-10 w-full bg-linear-to-t from-black/70 to-transparent p-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)]"
+  >
+    <button
+      type="button"
+      (click)="onContinue()"
+      class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+    >
+      {{ t('oneLastQuestion') }}
+    </button>
+  </div>
 </div>

@@ -14,7 +14,7 @@ export class FinaleVideoComponent {
 
   readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
   readonly videoErrored = signal(false);
-  readonly videoAsset = 'scavenger-hunt/finale-video.mp4';
+  readonly videoAsset = 'scavenger-hunt/video/fireworks.mp4';
 
   t(key: UiStringKey): string {
     return translateUi(this.lang(), key);

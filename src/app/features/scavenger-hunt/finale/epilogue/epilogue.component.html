@@ -1,5 +1,5 @@
 <div
-  class="relative flex min-h-dvh flex-col items-center justify-center gap-6 overflow-hidden bg-linear-to-b from-rose-100/60 to-amber-100/60 p-6 text-center"
+  class="relative flex min-h-dvh flex-col items-center gap-6 bg-linear-to-b from-rose-100/60 to-amber-100/60 p-6 text-center"
 >
   <div class="pointer-events-none absolute inset-0">
     @for (piece of confettiPieces; track piece) {
@@ -12,12 +12,69 @@
     }
   </div>
 
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    @for (burst of fireworkBursts; track burst.id) {
+      <div class="absolute" [style.left.%]="burst.xPct" [style.top.%]="burst.yPct">
+        @for (angle of particleAngles; track angle) {
+          <span
+            class="firework-particle absolute block h-1.5 w-1.5 rounded-full"
+            [style.background-color]="burst.color"
+            [style.color]="burst.color"
+            [style.--angle]="angle + 'deg'"
+            [style.animation-delay]="burst.delay"
+          ></span>
+        }
+      </div>
+    }
+
+    @for (fw of risingFireworks; track fw.id) {
+      <span
+        class="firework-trail absolute block h-2.5 w-1.5 rounded-full"
+        [style.left.%]="fw.xPct"
+        [style.background-color]="fw.color"
+        [style.color]="fw.color"
+        [style.--rise-bottom]="fw.riseBottomPct + '%'"
+        [style.animation-delay]="fw.delay"
+      ></span>
+      <div class="absolute" [style.left.%]="fw.xPct" [style.top.%]="fw.burstYPct">
+        @for (angle of particleAngles; track angle) {
+          <span
+            class="firework-rise-particle absolute block h-1.5 w-1.5 rounded-full"
+            [style.background-color]="fw.color"
+            [style.color]="fw.color"
+            [style.--angle]="angle + 'deg'"
+            [style.animation-delay]="fw.delay"
+          ></span>
+        }
+      </div>
+    }
+  </div>
+
   <div class="text-7xl">🎉</div>
   <h2 class="font-['Caveat',_cursive] text-5xl font-bold text-rose-900">{{ t('sheSaidYes') }}</h2>
 
-  <div class="flex flex-wrap justify-center gap-2">
+  <div class="grid grid-cols-2 place-items-center gap-x-6 gap-y-5 pb-6">
     @for (stop of stops; track stop.id) {
-      <span class="text-3xl">{{ stop.chapterIcon }}</span>
+      <div class="relative">
+        @if (stop.chapterImage; as image) {
+          <img
+            [src]="image"
+            alt=""
+            class="h-28 w-28 rounded-full border-2 border-white object-cover shadow-md shadow-rose-900/30"
+          />
+        } @else {
+          <div
+            class="flex h-28 w-28 items-center justify-center rounded-full border-2 border-white bg-white text-5xl shadow-md shadow-rose-900/30"
+          >
+            {{ stop.chapterIcon }}
+          </div>
+        }
+        <img
+          src="scavenger-hunt/photos/seal.png"
+          alt=""
+          class="absolute -bottom-2 -right-2 h-14 w-14 -rotate-12 object-contain drop-shadow"
+        />
+      </div>
     }
   </div>
 </div>
