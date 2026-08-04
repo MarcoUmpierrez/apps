@@ -191,13 +191,20 @@ export interface LaserReflectorLetterMinigame extends LetterMinigameBase {
   mirrors: LaserMirrorCell[];
 }
 
+/** Simon-Says style: watch a random color sequence play, then tap it back — one round per length in `roundLengths`, each one longer than the last. */
+export interface ColorSequenceLetterMinigame extends LetterMinigameBase {
+  kind: 'color-sequence';
+  roundLengths: number[];
+}
+
 export type LetterMinigameConfig =
   | WallBreakLetterMinigame
   | DirtWipeLetterMinigame
   | TowerOfHanoiLetterMinigame
   | BurgerBuildLetterMinigame
   | MazeLetterMinigame
-  | LaserReflectorLetterMinigame;
+  | LaserReflectorLetterMinigame
+  | ColorSequenceLetterMinigame;
 
 export interface Stop {
   id: string;

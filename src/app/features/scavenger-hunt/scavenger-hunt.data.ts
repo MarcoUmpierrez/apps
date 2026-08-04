@@ -1071,6 +1071,11 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Romance.', es: 'Romance.' },
       ],
     },
+    letterMinigame: {
+      kind: 'color-sequence',
+      letter: 'E',
+      roundLengths: [3, 4, 5, 6, 7],
+    },
   },
   {
     id: 'stop-8-finale',
@@ -1079,8 +1084,8 @@ export const HUNT_STOPS: Stop[] = [
     isFinale: true,
     title: { en: 'The First Page', es: 'La Primera Página' },
     narrative: {
-      en: 'This is where the whole story actually began. Every other chapter came after this one.',
-      es: 'Aquí es donde realmente comenzó toda la historia. Cada otro capítulo vino después de este.',
+      en: "These are the pages that remain to be written. What they will hold, only time will tell — for now there's just one thing left to resolve, a mystery that's been waiting a long time to be solved, the last unknown of this challenge...",
+      es: 'Estas son las páginas que quedan por escribir. Lo que contengan solo el tiempo lo dirá, por ahora solo queda un tema que resolver, un miesterio que lleva tiempo esperando ser resuelto, la última incógnita de este desafio...',
     },
   },
 ];

@@ -3,6 +3,7 @@ import { HUNT_STOPS } from '../scavenger-hunt.data';
 import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
 import { BurgerBuildGameComponent } from './burger-build-game/burger-build-game.component';
+import { ColorSequenceGameComponent } from './color-sequence-game/color-sequence-game.component';
 import { DirtWipeGameComponent } from './dirt-wipe-game/dirt-wipe-game.component';
 import { LaserReflectorGameComponent } from './laser-reflector-game/laser-reflector-game.component';
 import { MazeGameComponent } from './maze-game/maze-game.component';
@@ -18,6 +19,7 @@ import { WallBreakGameComponent } from './wall-break-game/wall-break-game.compon
     BurgerBuildGameComponent,
     MazeGameComponent,
     LaserReflectorGameComponent,
+    ColorSequenceGameComponent,
   ],
   templateUrl: './letter-minigame-phase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

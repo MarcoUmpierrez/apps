@@ -41,7 +41,7 @@ describe('HuntStoreService', () => {
     service.beginHunt('en');
     TestBed.flushEffects();
 
-    const raw = localStorage.getItem('gretasJourneyProgress');
+    const raw = localStorage.getItem('ourJourneyProgress');
     expect(raw).not.toBeNull();
     expect(JSON.parse(raw!).language).toBe('en');
   });

@@ -64,7 +64,7 @@ export class PhotoMontageComponent implements OnInit, OnDestroy {
 
   onDownload(): void {
     const dataUrl = this.collageDataUrl();
-    if (dataUrl) downloadDataUrl(dataUrl, 'gretas-journey.jpg');
+    if (dataUrl) downloadDataUrl(dataUrl, 'our-journey.jpg');
   }
 
   onContinue(): void {

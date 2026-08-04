@@ -69,4 +69,13 @@
       </div>
     }
   </div>
+
+  <button
+    type="button"
+    (click)="onDownload()"
+    [disabled]="!collageDataUrl()"
+    class="min-h-11 touch-manipulation rounded-xl border-2 border-rose-700 px-5 py-2 font-semibold text-rose-800 disabled:opacity-40"
+  >
+    {{ isBuildingCollage() ? '…' : t('downloadMemory') }}
+  </button>
 </div>

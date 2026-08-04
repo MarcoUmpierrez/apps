@@ -22,6 +22,9 @@
       @case ('laser-reflector') {
         <app-laser-reflector-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
       }
+      @case ('color-sequence') {
+        <app-color-sequence-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
     }
   }
 </div>

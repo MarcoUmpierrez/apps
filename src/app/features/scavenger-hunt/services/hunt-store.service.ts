@@ -8,7 +8,7 @@ import {
 } from '../phase-flow.util';
 import { HuntPhase, HuntProgress, Language, StopProgress } from '../scavenger-hunt.types';
 
-const STORAGE_KEY = 'gretasJourneyProgress';
+const STORAGE_KEY = 'ourJourneyProgress';
 
 function defaultStopProgress(): StopProgress {
   return {

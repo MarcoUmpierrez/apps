@@ -45,7 +45,10 @@ export type UiStringKey =
   | 'hanoiPrompt'
   | 'burgerBuildPrompt'
   | 'mazePrompt'
-  | 'laserReflectorPrompt';
+  | 'laserReflectorPrompt'
+  | 'colorSequencePrompt'
+  | 'watchSequence'
+  | 'yourTurn';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -94,6 +97,9 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     burgerBuildPrompt: 'Stack the burger in the right order, from the bottom up!',
     mazePrompt: 'Guide the dot through the maze to the flag!',
     laserReflectorPrompt: 'Tap the mirrors to rotate them and guide the laser onto the target!',
+    colorSequencePrompt: 'Watch the sequence, then tap it back in the same order!',
+    watchSequence: 'Watch closely...',
+    yourTurn: 'Your turn!',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -142,6 +148,9 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     burgerBuildPrompt: '¡Apila la hamburguesa en el orden correcto, de abajo hacia arriba!',
     mazePrompt: '¡Guía el punto por el laberinto hasta la bandera!',
     laserReflectorPrompt: '¡Toca los espejos para girarlos y guía el láser hasta el objetivo!',
+    colorSequencePrompt: '¡Observa la secuencia y luego repítela tocando en el mismo orden!',
+    watchSequence: 'Observa con atención...',
+    yourTurn: '¡Tu turno!',
   },
 };
 

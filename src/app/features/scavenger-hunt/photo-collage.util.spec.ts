@@ -17,7 +17,7 @@ describe('downloadDataUrl', () => {
       return el;
     });
 
-    downloadDataUrl('data:image/jpeg;base64,abc', 'gretas-journey.jpg');
+    downloadDataUrl('data:image/jpeg;base64,abc', 'our-journey.jpg');
 
     expect(clickSpy).toHaveBeenCalledOnce();
     createElementSpy.mockRestore();
