@@ -33,7 +33,8 @@ export type UiStringKey =
   | 'skipDev'
   | 'jumpToStop'
   | 'diaryClosing'
-  | 'giveUp';
+  | 'giveUp'
+  | 'simulateShake';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -70,6 +71,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     jumpToStop: 'Jump to stop',
     diaryClosing: 'More on the next page...',
     giveUp: 'I give up',
+    simulateShake: 'Shake! (tap again if needed)',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -105,6 +107,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     jumpToStop: 'Ir a parada',
     diaryClosing: 'Más en la siguiente página...',
     giveUp: 'Me rindo',
+    simulateShake: '¡Agita! (toca de nuevo si hace falta)',
   },
 };
 

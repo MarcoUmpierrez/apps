@@ -25,7 +25,12 @@
         />
       }
       @case ('shake-to-reveal') {
-        <app-shake-to-reveal [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+        <app-shake-to-reveal
+          [config]="minigame"
+          [lang]="lang()"
+          [chapterImage]="stop().chapterImage"
+          (solved)="onSolved()"
+        />
       }
       @case ('jigsaw-puzzle') {
         <app-jigsaw-puzzle [config]="minigame" [lang]="lang()" (solved)="onSolved()" />

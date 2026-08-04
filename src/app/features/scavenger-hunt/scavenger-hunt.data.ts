@@ -792,55 +792,126 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-6-beach',
     order: 6,
     chapterIcon: '🏖️',
+    chapterImage: 'scavenger-hunt/photos/ramen.png',
+    pageNumber: 2,
     isFinale: false,
     title: { en: 'The Beach Day That Ran Too Long', es: 'El Día de Playa que se Alargó Demasiado' },
     narrative: {
-      en: "We stayed until well past sunburn o'clock and neither of us wanted to leave.",
-      es: 'Nos quedamos hasta bien pasada la hora de quemarnos con el sol y ninguno quería irse.',
+      en: "It was the next day. We'd agreed to meet in front of the Japanese restaurant in the morning. She was wearing a white coat and a checkered scarf in white, black, and gray. At first she didn't recognize me; that was normal, we'd only seen each other for five minutes the day before at the bus stop. Still, she greeted me happily when she saw me. At the restaurant we ordered one of the place's signature dishes, ramen, plus some starters, gyozas. She started her introduction in a pretty unusual way, but always with a big smile on her face. I found her lovely from the very first moment I saw her; her warmth quickly wrapped around me and made me want to know more about her. So much so that we spent almost seven hours together that day. Also, the food at that place was really good but I've forgotten the name of that dish... I think it was something like the answer to this riddle.",
+      es: 'Era el día siguiente. Habíamos acordado vernos delante del restaurante japonés por la mañana. Ella llevaba abrigo blanco y un pañuelo a cuadros con colores blanco, negro y gris. De primeras no me reconoció; era normal, solo nos habíamos visto cinco minutos el día anterior en la marquesina. Sin embargo me saludó con alegría al verme. En el restaurante pedimos uno de los platos característicos del local, ramen, además de unos entrantes, gyozas. Ella empezó su presentación de una forma bastante inusual, pero siempre con una gran sonrisa en la cara. Me pareció muy linda desde el primer momento en que la vi; su calidez pronto me envolvió y me hizo querer saber más de ella. Tanto fue así que pasamos casi siete horas juntos ese día. Además, la comida de ese sitio estaba muy buena pero se me ha olvidado el nombre de ese plato... creo que era algo como la solución de este acertijo.',
+    },
+    narrativeRich: [
+      [
+        {
+          text: {
+            en: "It was the next day. We'd agreed to meet in front of the ",
+            es: 'Era el día siguiente. Habíamos acordado vernos delante del ',
+          },
+        },
+        { text: { en: 'Japanese restaurant', es: 'restaurante japonés' }, style: 'empty' },
+        {
+          text: {
+            en: ' in the morning. She was wearing ',
+            es: ' por la mañana. Ella llevaba ',
+          },
+        },
+        {
+          text: {
+            en: 'an unflattering furry jacket',
+            es: 'una chaqueta de pelos poco agraciada',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " a white coat and a checkered scarf in white, black, and gray. At first she didn't recognize me; that was normal, we'd only seen each other for five minutes the day before at the ",
+            es: ' abrigo blanco y un pañuelo a cuadros con colores blanco, negro y gris. De primeras no me reconoció; era normal, solo nos habíamos visto cinco minutos el día anterior en la ',
+          },
+        },
+        { text: { en: 'bus stop', es: 'marquesina' }, style: 'empty' },
+        {
+          text: {
+            en: '. Still, she greeted me happily when she saw me.',
+            es: '. Sin embargo me saludó con alegría al verme.',
+          },
+        },
+      ],
+      [
+        {
+          text: {
+            en: "At the restaurant we ordered one of the place's signature dishes, ",
+            es: 'En el restaurante pedimos uno de los platos característicos del local, ',
+          },
+        },
+        { text: { en: 'ramen', es: 'ramen' }, style: 'empty' },
+        { text: { en: ' plus some starters, ', es: ' además de unos entrantes, ' } },
+        { text: { en: 'gyozas', es: 'gyozas' }, style: 'empty' },
+        { text: { en: '. She started her introduction ', es: '. Ella empezó su presentación ' } },
+        {
+          text: { en: 'talking to me about drugs', es: 'hablándome de drogas' },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " in a pretty unusual way, but always with a big smile on her face. I found her lovely from the very first moment I saw her; her warmth quickly wrapped around me and made me want to know more about her. So much so that we spent almost seven hours together that day. Also, the food at that place was really good but I've forgotten the name of that dish... I think it was something like the answer to this riddle:",
+            es: ' de una forma bastante inusual, pero siempre con una gran sonrisa en la cara. Me pareció muy linda desde el primer momento en que la vi; su calidez pronto me envolvió y me hizo querer saber más de ella. Tanto fue así que pasamos casi siete horas juntos ese día. Además, la comida de ese sitio estaba muy buena pero se me ha olvidado el nombre de ese plato... creo que era algo como la solución de este acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: "I'm not soup, though I carry broth.\nI'm not pasta, though I have noodles.\nI tend to travel by chopsticks,\nand I like to arrive piping hot.\nWhat am I?",
+        es: 'No soy sopa, aunque llevo caldo.\nNo soy pasta, aunque tengo fideos.\nCon palillos suelo viajar,\ny bien caliente me gusta llegar.\n¿Qué soy?',
+      },
+      acceptedAnswers: [{ en: 'ramen', es: 'ramen' }],
+      hints: [
+        {
+          en: "It's a Japanese dish, served piping hot in a bowl.",
+          es: 'Es un plato japonés, servido bien caliente en un tazón.',
+        },
+        {
+          en: 'Noodles in broth, often topped with egg and pork.',
+          es: 'Fideos en caldo, a menudo con huevo y cerdo encima.',
+        },
+        { en: 'Ramen.', es: 'Ramen.' },
+      ],
     },
     location: {
-      lat: 40.0006, // PLACEHOLDER — replace before the real day
-      lng: -3.0006, // PLACEHOLDER — replace before the real day
+      lat: 28.140048,
+      lng: -15.4379313,
       radiusMeters: 40,
-      label: { en: 'The beach', es: 'La playa' },
+      label: { en: 'Japanese restaurant', es: 'Restaurante japonés' },
     },
     minigame: {
       kind: 'shake-to-reveal',
       prompt: {
-        en: 'Shake the sand off to see what we found that day.',
-        es: 'Sacude la arena para ver qué encontramos ese día.',
+        en: 'Shake the sand off to see what we ate that day.',
+        es: 'Sacude la arena para ver qué comimos ese día.',
       },
-      revealedWord: { en: 'STARFISH', es: 'ESTRELLA DE MAR' },
-      hints: [
-        {
-          en: 'It lives in the ocean and has five arms.',
-          es: 'Vive en el océano y tiene cinco brazos.',
-        },
-        {
-          en: "It's shaped like the night sky's most famous shape.",
-          es: 'Tiene la forma más famosa del cielo nocturno.',
-        },
-        { en: 'A starfish.', es: 'Una estrella de mar.' },
-      ],
+      revealedWord: { en: 'RAMEN', es: 'RAMEN' },
     },
     photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
     personalQuestion: {
       kind: 'multiple-choice',
-      question: { en: 'What did we bury in the sand?', es: '¿Qué enterramos en la arena?' },
+      question: {
+        en: 'What special place did we watch the sunset from on our fourth date?',
+        es: '¿En qué lugar especial vimos la puesta de sol en la cuarta cita?',
+      },
       options: [
-        { en: 'My phone (by accident)', es: 'Mi teléfono (por accidente)' },
-        { en: 'A time capsule note', es: 'Una nota de cápsula del tiempo' },
-        { en: 'Our shoes', es: 'Nuestros zapatos' },
-        { en: 'Snacks', es: 'Snacks' },
+        { en: 'The beach', es: 'La playa' },
+        { en: 'A lighthouse', es: 'Un faro' },
+        { en: 'A very tall rooftop', es: 'Una azotea muy alta' },
+        { en: 'The mountain', es: 'La montaña' },
       ],
       correctIndex: 1,
       hints: [
-        { en: 'We wrote something down first.', es: 'Primero escribimos algo.' },
+        { en: "It wasn't at ground level.", es: 'No estaba a nivel del suelo.' },
         {
-          en: 'We meant to come back for it someday.',
-          es: 'Teníamos la intención de volver por ello algún día.',
+          en: 'It has a light that guides ships at night.',
+          es: 'Tiene una luz que guía a los barcos por la noche.',
         },
-        { en: 'A time capsule note.', es: 'Una nota de cápsula del tiempo.' },
+        { en: 'A lighthouse.', es: 'Un faro.' },
       ],
     },
     notebookInstruction: {

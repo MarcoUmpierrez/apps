@@ -76,8 +76,10 @@ export interface SlidingTilePuzzleMinigame extends MinigameBase {
   gridSize: 3 | 4;
 }
 
-export interface ShakeToRevealMinigame extends MinigameBase {
+/** No hints — the sand-dot reveal is its own hint system, always tappable to completion. */
+export interface ShakeToRevealMinigame {
   kind: 'shake-to-reveal';
+  prompt: BilingualText;
   revealedWord: BilingualText;
 }
 

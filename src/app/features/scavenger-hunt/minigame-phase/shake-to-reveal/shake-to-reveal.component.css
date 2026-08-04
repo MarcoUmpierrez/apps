@@ -1,0 +1,16 @@
+/* Each sand dot sits over the chapter photo until it "falls" away — see
+   shake-to-reveal.component.ts, which sets --fall-x/--fall-y/--fall-rot per
+   dot and toggles .fallen on a batch of dots per shake (or manual tap). */
+.sand-dot {
+  transform: translate(0, 0) rotate(0deg);
+  opacity: 1;
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1),
+    opacity 0.5s ease-in;
+}
+
+.sand-dot.fallen {
+  transform: translate(var(--fall-x), var(--fall-y)) rotate(var(--fall-rot));
+  opacity: 0;
+  pointer-events: none;
+}
