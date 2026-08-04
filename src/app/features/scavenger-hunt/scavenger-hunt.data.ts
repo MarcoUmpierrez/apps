@@ -337,9 +337,10 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Milanesa.', es: 'Milanesa.' },
       ],
     },
-    notebookInstruction: {
-      en: "Write the letter O in your notebook — you'll need it later.",
-      es: 'Escribe la letra O en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'dirt-wipe',
+      letter: 'O',
+      clearThresholdPercent: 90,
     },
   },
   {

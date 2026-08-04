@@ -40,7 +40,8 @@ export type UiStringKey =
   | 'wallBreakPrompt'
   | 'chargeIt'
   | 'hitIt'
-  | 'writeLetterDown';
+  | 'writeLetterDown'
+  | 'dirtWipePrompt';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -84,6 +85,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     chargeIt: 'Charge!',
     hitIt: 'Hit it!',
     writeLetterDown: "Write the letter {letter} in your notebook — you'll need it later.",
+    dirtWipePrompt: 'Dirt is hiding a letter. Swipe to wipe it clean!',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -126,6 +128,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     chargeIt: '¡Cargar!',
     hitIt: '¡Golpear!',
     writeLetterDown: 'Escribe la letra {letter} en tu cuaderno — la necesitarás más tarde.',
+    dirtWipePrompt: 'La tierra esconde una letra. ¡Desliza el dedo para limpiarla!',
   },
 };
 

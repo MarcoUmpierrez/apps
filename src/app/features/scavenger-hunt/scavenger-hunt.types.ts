@@ -144,7 +144,13 @@ export interface WallBreakLetterMinigame extends LetterMinigameBase {
   hitsRequired: number;
 }
 
-export type LetterMinigameConfig = WallBreakLetterMinigame;
+/** Swipe/drag to physically erase a dirt texture off a canvas until enough of the letter beneath is uncovered. */
+export interface DirtWipeLetterMinigame extends LetterMinigameBase {
+  kind: 'dirt-wipe';
+  clearThresholdPercent: number;
+}
+
+export type LetterMinigameConfig = WallBreakLetterMinigame | DirtWipeLetterMinigame;
 
 export interface Stop {
   id: string;

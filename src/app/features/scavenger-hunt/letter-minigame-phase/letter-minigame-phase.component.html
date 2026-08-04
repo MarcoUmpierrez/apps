@@ -7,6 +7,9 @@
       @case ('wall-break') {
         <app-wall-break-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
       }
+      @case ('dirt-wipe') {
+        <app-dirt-wipe-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
     }
   }
 </div>
