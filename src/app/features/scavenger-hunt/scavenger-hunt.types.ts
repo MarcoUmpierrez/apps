@@ -73,7 +73,6 @@ export interface SequenceReorderMinigame extends MinigameBase {
 
 export interface SlidingTilePuzzleMinigame extends MinigameBase {
   kind: 'sliding-tile-puzzle';
-  imageAsset: string;
   gridSize: 3 | 4;
 }
 

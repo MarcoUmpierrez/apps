@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, input, output, signal } from '@angular/core';
 import { HintPanelComponent } from '../../hint-panel/hint-panel.component';
 import { Language, SlidingTilePuzzleMinigame } from '../../scavenger-hunt.types';
+import { UiStringKey, translateUi } from '../../ui-strings.data';
 
 function createSolvedTiles(gridSize: number): number[] {
   const tiles = Array.from({ length: gridSize * gridSize - 1 }, (_, i) => i + 1);
@@ -35,18 +36,20 @@ function shuffleTiles(gridSize: number): number[] {
   return tiles;
 }
 
+/**
+ * Each numbered tile keeps a fixed "home" slot (its value, 1-indexed) for the
+ * whole game — that's what makes solving == sorting. When a chapterImage is
+ * available, that same home slot picks a background-position crop out of the
+ * full photo (sliced via a gridSize-by-gridSize sprite grid), so the puzzle
+ * reconstructs the actual chapter photo instead of just counting up. Stops
+ * without a chapterImage fall back to plain numbered tiles.
+ */
 @Component({
   selector: 'app-sliding-tile-puzzle',
   imports: [HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
       <p class="mb-3 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
-      <img
-        [src]="config().imageAsset"
-        alt=""
-        class="mb-3 h-24 w-full rounded-lg object-cover"
-        (error)="onPreviewError($event)"
-      />
       <div
         class="grid gap-1 rounded-xl border-2 border-amber-300 bg-amber-100 p-1"
         [style.grid-template-columns]="'repeat(' + config().gridSize + ', 1fr)'"
@@ -56,13 +59,35 @@ function shuffleTiles(gridSize: number): number[] {
             type="button"
             (click)="onTileClick(i)"
             [class.invisible]="value === 0"
-            class="flex aspect-square min-h-11 touch-manipulation items-center justify-center rounded-lg bg-white text-lg font-bold text-amber-900 shadow"
+            [style.background-image]="chapterImage() ? 'url(' + chapterImage() + ')' : null"
+            [style.background-size]="chapterImage() ? gridSize() * 100 + '% ' + gridSize() * 100 + '%' : null"
+            [style.background-position]="chapterImage() ? tileBackgroundPosition(value) : null"
+            class="flex aspect-square min-h-11 touch-manipulation items-center justify-center rounded-lg bg-white bg-cover text-lg font-bold text-amber-900 shadow"
           >
-            {{ value }}
+            @if (!chapterImage()) {
+              {{ value }}
+            }
           </button>
         }
       </div>
-      <app-hint-panel [hints]="config().hints" [lang]="lang()" (revealed)="solved.emit()" />
+      @if (!solvedLocally()) {
+        <button
+          type="button"
+          (click)="revealSolution()"
+          class="mt-3 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
+        >
+          {{ t('giveUp') }}
+        </button>
+        <app-hint-panel [hints]="config().hints" [lang]="lang()" (revealed)="revealSolution()" />
+      } @else {
+        <button
+          type="button"
+          (click)="solved.emit()"
+          class="mt-3 min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+        >
+          {{ t('continueLabel') }}
+        </button>
+      }
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,16 +95,36 @@ function shuffleTiles(gridSize: number): number[] {
 export class SlidingTilePuzzleComponent implements OnInit {
   readonly config = input.required<SlidingTilePuzzleMinigame>();
   readonly lang = input.required<Language>();
+  readonly chapterImage = input<string | undefined>(undefined);
   readonly solved = output<void>();
 
   readonly tiles = signal<number[]>([]);
+  readonly solvedLocally = signal(false);
 
   ngOnInit(): void {
     this.tiles.set(shuffleTiles(this.config().gridSize));
   }
 
-  onPreviewError(event: Event): void {
-    (event.target as HTMLImageElement).style.display = 'none';
+  t(key: UiStringKey): string {
+    return translateUi(this.lang(), key);
+  }
+
+  revealSolution(): void {
+    this.tiles.set(createSolvedTiles(this.config().gridSize));
+    this.solvedLocally.set(true);
+  }
+
+  gridSize(): number {
+    return this.config().gridSize;
+  }
+
+  tileBackgroundPosition(value: number): string {
+    const gridSize = this.config().gridSize;
+    const homeIndex = value - 1;
+    const homeRow = Math.floor(homeIndex / gridSize);
+    const homeCol = homeIndex % gridSize;
+    const step = gridSize > 1 ? 100 / (gridSize - 1) : 0;
+    return `${homeCol * step}% ${homeRow * step}%`;
   }
 
   onTileClick(index: number): void {
@@ -92,7 +137,7 @@ export class SlidingTilePuzzleComponent implements OnInit {
     this.tiles.set(next);
 
     if (this.isSolved(next)) {
-      this.solved.emit();
+      this.solvedLocally.set(true);
     }
   }
 

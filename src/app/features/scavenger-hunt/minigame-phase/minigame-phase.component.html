@@ -17,7 +17,12 @@
         <app-sequence-reorder [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
       }
       @case ('sliding-tile-puzzle') {
-        <app-sliding-tile-puzzle [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+        <app-sliding-tile-puzzle
+          [config]="minigame"
+          [lang]="lang()"
+          [chapterImage]="stop().chapterImage"
+          (solved)="onSolved()"
+        />
       }
       @case ('shake-to-reveal') {
         <app-shake-to-reveal [config]="minigame" [lang]="lang()" (solved)="onSolved()" />

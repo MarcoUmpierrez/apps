@@ -654,20 +654,101 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-5-concert',
     order: 5,
     chapterIcon: '🎵',
+    chapterImage: 'scavenger-hunt/photos/sandwich.png',
+    pageNumber: 4,
     isFinale: false,
     title: {
       en: 'The Concert With the Terrible Seats',
       es: 'El Concierto de los Asientos Terribles',
     },
     narrative: {
-      en: "We could barely see the stage, and it didn't matter one bit.",
-      es: 'Apenas podíamos ver el escenario, y no importó en lo absoluto.',
+      en: "We'd been talking for hours, getting to know each other. We decided to sit down on some stone steps, since we'd been walking for a good while. It was still very cold, and the salty sea air wasn't helping much either. She started to notice she was losing her voice, so we decided to go get something to soothe our throats and warm us up. At the café we ordered water, a coffee with milk, and a small chocolate-filled croissant that we shared between the two of us. She kept telling me about her adventures, like how she'd worked for the government and seen things she didn't like, how she'd wanted to change the system from within but found it was too complicated, and that her own needs made the situation harder. She sounded melancholic telling those stories, with a hint of frustration, as if wishing she could have done more to change things. It was starting to get dark when we decided to end the date. I walked her close to home before we parted ways so I could continue on mine — what was the name of that place where we ate? All that comes to mind is this riddle.",
+      es: 'Llevábamos varias horas hablando, conociéndonos el uno al otro. Decidimos sentarnos en unos escalones de piedra, ya que llevábamos un buen rato caminando. Todavía hacía mucho frío y el aire salado del mar tampoco ayudaba mucho. Ella empezó a notar que estaba perdiendo la voz así que decidimos ir a tomar algo para hidratar la garganta y que nos ayude a entrar en calor. En la cafetería pedimos agua, café con leche y un pequeño croissant relleno de chocolate que compartimos entre los dos. Ella me seguía contando sobre sus aventuras, como trabajó para el gobierno y vio cosas que no le gustaron, como quería cambiar el sistema desde dentro pero se encontró con que era demasiado complicado y que sus propias necesidades le complicaban la situación. Se la escuchaba melancólica narrando esas historias, con un deje de frustración, como deseando haber podido hacer más para cambiar la situación. Ya empezaba a hacerse de noche cuando decidimos terminar la cita. La acompañé hasta cerca de su casa antes de separarnos para continuar mi camino ¿cuál era el nombre de ese sitio en el que comimos? solo me viene a la mente este acertijo.',
+    },
+    narrativeRich: [
+      [
+        {
+          text: {
+            en: 'She had been talking to me for hours',
+            es: 'Ella llevaba varias horas hablándome',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: " We'd been talking for hours, getting to know each other. We decided to sit down on some ",
+            es: ' Llevábamos varias horas hablando, conociéndonos el uno al otro. Decidimos sentarnos en unos ',
+          },
+        },
+        { text: { en: 'stone steps', es: 'escalones de piedra' }, style: 'empty' },
+        {
+          text: {
+            en: ", since we'd been walking for a good while. It was still very cold, and the salty sea air wasn't helping much either. ",
+            es: ', ya que llevábamos un buen rato caminando. Todavía hacía mucho frío y el aire salado del mar tampoco ayudaba mucho. ',
+          },
+        },
+        {
+          text: {
+            en: 'She was starting to lose her voice',
+            es: 'Ella se estaba quedando afónica',
+          },
+          style: 'crossed',
+        },
+        {
+          text: {
+            en: ' She started to notice she was losing her voice, so we decided to go get something to soothe our throats and warm us up.',
+            es: ' Ella empezó a notar que estaba perdiendo la voz así que decidimos ir a tomar algo para hidratar la garganta y que nos ayude a entrar en calor.',
+          },
+        },
+      ],
+      [
+        { text: { en: 'At the ', es: 'En la ' } },
+        { text: { en: 'café', es: 'cafetería' }, style: 'empty' },
+        {
+          text: {
+            en: ' we ordered water, a coffee with milk, and a small chocolate-filled croissant that we shared between the two of us. She kept telling me about her ',
+            es: ' pedimos agua, café con leche y un pequeño croissant relleno de chocolate que compartimos entre los dos. Ella me seguía contando sobre sus ',
+          },
+        },
+        { text: { en: 'misadventures', es: 'desventuras' }, style: 'empty' },
+        {
+          text: {
+            en: " adventures, like how she'd worked for the government and seen things she didn't like, how she'd wanted to change the system from within but found it was too complicated, and that her own needs made the situation harder. She sounded melancholic telling those stories, with a hint of frustration, as if wishing she could have done more to change things. It was starting to get dark when we decided to end the ",
+            es: ' aventuras, como trabajó para el gobierno y vio cosas que no le gustaron, como quería cambiar el sistema desde dentro pero se encontró con que era demasiado complicado y que sus propias necesidades le complicaban la situación. Se la escuchaba melancólica narrando esas historias, con un deje de frustración, como deseando haber podido hacer más para cambiar la situación. Ya empezaba a hacerse de noche cuando decidimos terminar la ',
+          },
+        },
+        { text: { en: 'date', es: 'cita' }, style: 'empty' },
+        {
+          text: {
+            en: ". I walked her close to home before we parted ways so I could continue on mine — what was the name of that place where we ate? All that comes to mind is this riddle:",
+            es: '. La acompañé hasta cerca de su casa antes de separarnos para continuar mi camino ¿cuál era el nombre de ese sitio en el que comimos? solo me viene a la mente este acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: 'You\'ll find me as the day begins,\nwhen the aroma lets joy in.\nBread, sweets, and coffee fill the air,\nand many come to breakfast there.\nMy name ends just like "ier",\ndo you know what place I could be?',
+        es: 'Me encuentras al empezar el día,\ncuando el aroma abre la alegría.\nPan, dulces y café suelen estar,\ny muchos vienen aquí a desayunar.\nMi nombre termina con "ier",\n¿sabes qué lugar puede ser?',
+      },
+      acceptedAnswers: [{ en: 'Granier', es: 'Granier' }],
+      hints: [
+        {
+          en: "It's a bakery-café chain known for its fresh bread and pastries.",
+          es: 'Es una cadena de panadería-cafetería conocida por su pan y bollería recién hecha.',
+        },
+        {
+          en: "Its name sounds French, and it ends in '-ier'.",
+          es: "Su nombre suena francés, y termina en '-ier'.",
+        },
+        { en: 'Granier.', es: 'Granier.' },
+      ],
     },
     location: {
-      lat: 40.0005, // PLACEHOLDER — replace before the real day
-      lng: -3.0005, // PLACEHOLDER — replace before the real day
+      lat: 28.1319019,
+      lng: -15.4463558,
       radiusMeters: 40,
-      label: { en: 'The concert venue', es: 'El lugar del concierto' },
+      label: { en: 'Coffee shop Granier', es: 'Cafetería Granier' },
     },
     minigame: {
       kind: 'sliding-tile-puzzle',
@@ -675,7 +756,6 @@ export const HUNT_STOPS: Stop[] = [
         en: 'Slide the tiles to piece the memory back together.',
         es: 'Desliza las piezas para reconstruir el recuerdo.',
       },
-      imageAsset: 'scavenger-hunt/tiles/placeholder.jpg',
       gridSize: 3,
       hints: [
         { en: 'Start with the corners.', es: 'Empieza por las esquinas.' },
@@ -690,17 +770,17 @@ export const HUNT_STOPS: Stop[] = [
     personalQuestion: {
       kind: 'free-text',
       question: {
-        en: 'Whose idea was it to go, even with such bad seats?',
-        es: '¿De quién fue la idea de ir, incluso con esos asientos tan malos?',
+        en: 'Which famous person was the movie we went to see at the cinema about?',
+        es: '¿De qué personaje famoso era la película que fuimos a ver al cine?',
       },
-      acceptedAnswers: [
-        { en: 'yours', es: 'tuya' },
-        { en: 'you', es: 'tu' },
-      ],
+      acceptedAnswers: [{ en: 'Michael Jackson', es: 'Michael Jackson' }],
       hints: [
-        { en: "It wasn't mine.", es: 'No fue mía.' },
-        { en: 'Think about who bought the tickets.', es: 'Piensa en quién compró los boletos.' },
-        { en: 'It was yours.', es: 'Fue tuya.' },
+        {
+          en: "He was famous for his music, not for acting in this movie.",
+          es: 'Era famoso por su música, no por actuar en esta película.',
+        },
+        { en: "Known as the 'King of Pop'.", es: "Conocido como el 'Rey del Pop'." },
+        { en: 'Michael Jackson.', es: 'Michael Jackson.' },
       ],
     },
     notebookInstruction: {

@@ -32,7 +32,8 @@ export type UiStringKey =
   | 'devModeUnlockedToast'
   | 'skipDev'
   | 'jumpToStop'
-  | 'diaryClosing';
+  | 'diaryClosing'
+  | 'giveUp';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -68,6 +69,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     skipDev: 'Skip (dev)',
     jumpToStop: 'Jump to stop',
     diaryClosing: 'More on the next page...',
+    giveUp: 'I give up',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -102,6 +104,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     skipDev: 'Omitir (dev)',
     jumpToStop: 'Ir a parada',
     diaryClosing: 'Más en la siguiente página...',
+    giveUp: 'Me rindo',
   },
 };
 
