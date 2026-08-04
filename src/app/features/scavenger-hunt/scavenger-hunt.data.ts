@@ -914,9 +914,24 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'A lighthouse.', es: 'Un faro.' },
       ],
     },
-    notebookInstruction: {
-      en: "Write the letter C in your notebook — you'll need it later.",
-      es: 'Escribe la letra C en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'laser-reflector',
+      letter: 'C',
+      cols: 9,
+      rows: 9,
+      emitter: { row: 0, col: 0, direction: 'east' },
+      target: { row: 8, col: 7 },
+      mirrors: [
+        { row: 0, col: 2, orientation: 45 },
+        { row: 2, col: 2, orientation: 45 },
+        { row: 2, col: 4, orientation: 45 },
+        { row: 4, col: 4, orientation: 135 },
+        { row: 4, col: 2, orientation: 135 },
+        { row: 6, col: 2, orientation: 45 },
+        { row: 6, col: 5, orientation: 135 },
+        { row: 4, col: 5, orientation: 135 },
+        { row: 4, col: 7, orientation: 45 },
+      ],
     },
   },
   {

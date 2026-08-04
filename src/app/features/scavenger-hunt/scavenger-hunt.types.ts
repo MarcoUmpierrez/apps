@@ -171,12 +171,33 @@ export interface MazeLetterMinigame extends LetterMinigameBase {
   rows: number;
 }
 
+export type MirrorOrientation = 0 | 45 | 90 | 135;
+export type LaserDirection = 'north' | 'south' | 'east' | 'west';
+
+export interface LaserMirrorCell {
+  row: number;
+  col: number;
+  /** The rotation (as a CSS `rotate()` angle on a horizontal bar) that solves the puzzle for this mirror. */
+  orientation: MirrorOrientation;
+}
+
+/** Tap mirrors to rotate them 45° at a time, redirecting a laser beam from the emitter onto the target. */
+export interface LaserReflectorLetterMinigame extends LetterMinigameBase {
+  kind: 'laser-reflector';
+  cols: number;
+  rows: number;
+  emitter: { row: number; col: number; direction: LaserDirection };
+  target: { row: number; col: number };
+  mirrors: LaserMirrorCell[];
+}
+
 export type LetterMinigameConfig =
   | WallBreakLetterMinigame
   | DirtWipeLetterMinigame
   | TowerOfHanoiLetterMinigame
   | BurgerBuildLetterMinigame
-  | MazeLetterMinigame;
+  | MazeLetterMinigame
+  | LaserReflectorLetterMinigame;
 
 export interface Stop {
   id: string;

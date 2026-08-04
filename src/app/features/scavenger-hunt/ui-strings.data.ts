@@ -44,7 +44,8 @@ export type UiStringKey =
   | 'dirtWipePrompt'
   | 'hanoiPrompt'
   | 'burgerBuildPrompt'
-  | 'mazePrompt';
+  | 'mazePrompt'
+  | 'laserReflectorPrompt';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -92,6 +93,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     hanoiPrompt: 'Move every disc to the last pole. Never place a bigger disc on a smaller one!',
     burgerBuildPrompt: 'Stack the burger in the right order, from the bottom up!',
     mazePrompt: 'Guide the dot through the maze to the flag!',
+    laserReflectorPrompt: 'Tap the mirrors to rotate them and guide the laser onto the target!',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -139,6 +141,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
       'Mueve todos los discos a la última torre. ¡Nunca pongas un disco grande sobre uno más pequeño!',
     burgerBuildPrompt: '¡Apila la hamburguesa en el orden correcto, de abajo hacia arriba!',
     mazePrompt: '¡Guía el punto por el laberinto hasta la bandera!',
+    laserReflectorPrompt: '¡Toca los espejos para girarlos y guía el láser hasta el objetivo!',
   },
 };
 

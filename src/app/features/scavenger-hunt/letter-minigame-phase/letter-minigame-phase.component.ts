@@ -4,6 +4,7 @@ import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
 import { BurgerBuildGameComponent } from './burger-build-game/burger-build-game.component';
 import { DirtWipeGameComponent } from './dirt-wipe-game/dirt-wipe-game.component';
+import { LaserReflectorGameComponent } from './laser-reflector-game/laser-reflector-game.component';
 import { MazeGameComponent } from './maze-game/maze-game.component';
 import { TowerOfHanoiGameComponent } from './tower-of-hanoi-game/tower-of-hanoi-game.component';
 import { WallBreakGameComponent } from './wall-break-game/wall-break-game.component';
@@ -16,6 +17,7 @@ import { WallBreakGameComponent } from './wall-break-game/wall-break-game.compon
     TowerOfHanoiGameComponent,
     BurgerBuildGameComponent,
     MazeGameComponent,
+    LaserReflectorGameComponent,
   ],
   templateUrl: './letter-minigame-phase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
