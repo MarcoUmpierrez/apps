@@ -8,13 +8,12 @@ import { Stop } from './scavenger-hunt.types';
  */
 export const HUNT_STOPS: Stop[] = [
   {
-    id: 'stop-1-rubi-shop',
+    id: 'stop-1-rubi-restaurant',
     order: 1,
-    chapterIcon: '♦️',
     chapterImage: 'scavenger-hunt/photos/rubi.png',
     pageNumber: 237,
     isFinale: false,
-    title: { en: 'Where It (Sort Of) Started', es: 'Donde (Casi) Empezó Todo' },
+    title: { en: 'The Restaurant with the Ruby Name', es: 'El Restaurante del Nombre de Rubí' },
     narrative: {
       en: "That day we had woken up late. We'd had a night of passion and were exhausted. Still, we couldn't relax because we had to deal with the dreaded taxes. We decided to work outside, hoping to clear our heads a little before facing such a task. We stepped out into a stifling heat, typical of summer, unusual for this time of year, with all the rain and cold weather we'd had. We were looking for somewhere to sit down, eat, and work on the taxes but we felt too lazy, we didn't feel like going far, so we decided to sit down at one of the restaurants nearby. What stood out most about this restaurant was the symbol decorating it, I could describe it certainly with some unique features, that reminded me of this riddle.",
       es: 'Aquél día nos habíamos levantado tarde. Habíamos tenido una noche de pasión y estábamos muy cansados. Sin embargo, no nos podíamos relajar porque teníamos que rellenar los dichosos impuestos. Decidimos trabajar al aire libre, intentando refrescar un poco nuestras ideas antes de enfrentarnos a semejante tarea. Salimos y nos topamos con un calor sofocante, propio del verano inusual este año, con tantas lluvias y tiempo frío. Buscábamos un lugar donde sentarnos a comer y trabajar en los impuestos pero no nos apetecía ir muy lejos, así que decidimos sentarnos en uno de los restaurantes de la zona. Lo más que identificaba este restaurante era el símbolo que lo decoraba, ciertamente con unas características únicas, que me hicieron recordar este acertijo.',
@@ -173,13 +172,12 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-2-park-bench',
+    id: 'stop-2-hippo-pizzeria',
     order: 2,
-    chapterIcon: '🌇',
     chapterImage: 'scavenger-hunt/photos/hippo.png',
     pageNumber: 158,
     isFinale: false,
-    title: { en: 'The Bench We Kept Coming Back To', es: 'La Banca a la que Siempre Volvimos' },
+    title: { en: 'The Pizzeria with the Hungry Hippo', es: 'La Pizzería del Hipopótamo Hambriento' },
     narrative: {
       en: "We were hungry again, as usual, and wanted to try somewhere new. We remembered that Roberth had recommended a rather peculiar place. The entrance felt like a sauna, the heat was overwhelming. We ordered some chicken wings and a four-cheese pizza. That's when she told me about her friends from the lawyers' gossip group, and each one's family problems. The food was so good that we went back for seconds three more times, the last one ordering a tasty pizza because we realized we were turning into pigs, we needed to focus on eating well and not overdoing it. This other restaurant has a very distinctive name, maybe because of how you end up after eating, because it's something the owners really like; every time I see it, I think of that riddle.",
       es: 'Volvíamos a tener hambre como de costumbre y queríamos probar un sitio nuevo. Recordamos que Roberth nos recomendó un lugar un tanto particular. La entrada parecía una sauna, el calor era agobiante. Nos pedimos unas alitas de pollo y una pizza 4 quesos. Ahí me contó sobre sus amigas del grupo de los chismes de abogadas, los problemas familiares de cada una. La comida estuvo muy buena, tanto que repetimos hasta tres veces más, la última pidiendo una pizza sabrosa porque vimos que nos estábamos poniendo como cochinos, debíamos centrarnos en cuidar nuestra alimentación y no abusar. Este otro restaurante tiene un nombre muy característico, quizás por como acabas después de comer, porque es algo que le gusta mucho a los dueños; cada vez que lo veo, pienso en aquél acertijo.',
@@ -344,15 +342,14 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-3-bookstore',
+    id: 'stop-3-kraus-statue',
     order: 3,
-    chapterIcon: '📚',
     chapterImage: 'scavenger-hunt/photos/krauss.png',
     pageNumber: 23,
     isFinale: false,
     title: {
-      en: 'The Bookstore Neither of Us Left Empty-Handed',
-      es: 'La Librería de la que Ninguno Salió con las Manos Vacías',
+      en: 'The Statue Where I Waited for Her',
+      es: 'La Estatua Donde la Esperé',
     },
     narrative: {
       en: "I was waiting for her, she had told me she'd made plans with some friends and would be back soon, so I sat down to wait for her in the shade of the statue. She wanted to surprise me, and when she got close she gave a little jump trying to scare me. Instead, what it got out of me was a big smile, from how adorable it was. That day, like many others, we decided to walk along the beach. We walked side by side, while I listened to her tell her incredible stories. She told me about her experiences, what she'd learned from them, how much she's grown since then... I listened patiently, unknowingly being pulled into that huge world hidden inside that small creature. Walking along the beach had become a habit, since it let us hear the murmur of the waves and watch the sunset. One day, we even kept walking, further than our usual stopping point, until we reached a hidden lookout point where very few people go. The statue where I waited for her belongs to a famous person with a particular surname, one that could be expressed as a riddle.",
@@ -525,15 +522,14 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-4-road-trip',
+    id: 'stop-4-gym',
     order: 4,
-    chapterIcon: '🚗',
     chapterImage: 'scavenger-hunt/photos/girl.png',
     pageNumber: 56,
     isFinale: false,
     title: {
-      en: 'The Trip We Definitely Under-Planned',
-      es: 'El Viaje que Definitivamente No Planeamos Bien',
+      en: 'The Message That Brought Us Back Together',
+      es: 'El Mensaje que Nos Volvió a Unir',
     },
     narrative: {
       en: "We had argued and things weren't looking good. That day I got a message from her, asking me to come see her. She gave me her location with just a photo, expecting me to guess where she was. I found her lying on the towel, asleep, with her fisherman hat covering her face. I knelt down on the sand and leaned over her to kiss her. She woke up immediately, half surprised and half smiling. We sat together enjoying the evening by the sea, until night fell. Other things happened that I'll leave to the reader's imagination. What I do remember is that a few meters further on, there was a gym where a lot of people go every day, some without wanting to but forced to. If I had to describe it, I'd use the following riddle.",
@@ -651,15 +647,14 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-5-concert',
+    id: 'stop-5-granier-cafe',
     order: 5,
-    chapterIcon: '🎵',
     chapterImage: 'scavenger-hunt/photos/sandwich.png',
     pageNumber: 4,
     isFinale: false,
     title: {
-      en: 'The Concert With the Terrible Seats',
-      es: 'El Concierto de los Asientos Terribles',
+      en: 'The Café Where She Told Me Everything',
+      es: 'La Cafetería Donde Ella Me Lo Contó Todo',
     },
     narrative: {
       en: "We'd been talking for hours, getting to know each other. We decided to sit down on some stone steps, since we'd been walking for a good while. It was still very cold, and the salty sea air wasn't helping much either. She started to notice she was losing her voice, so we decided to go get something to soothe our throats and warm us up. At the café we ordered water, a coffee with milk, and a small chocolate-filled croissant that we shared between the two of us. She kept telling me about her adventures, like how she'd worked for the government and seen things she didn't like, how she'd wanted to change the system from within but found it was too complicated, and that her own needs made the situation harder. She sounded melancholic telling those stories, with a hint of frustration, as if wishing she could have done more to change things. It was starting to get dark when we decided to end the date. I walked her close to home before we parted ways so I could continue on mine — what was the name of that place where we ate? All that comes to mind is this riddle.",
@@ -789,13 +784,12 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-6-beach',
+    id: 'stop-6-ramen-restaurant',
     order: 6,
-    chapterIcon: '🏖️',
     chapterImage: 'scavenger-hunt/photos/ramen.png',
     pageNumber: 2,
     isFinale: false,
-    title: { en: 'The Beach Day That Ran Too Long', es: 'El Día de Playa que se Alargó Demasiado' },
+    title: { en: 'The Ramen Place That Turned Into Seven Hours', es: 'El Sitio de Ramen que se Convirtió en Siete Horas' },
     narrative: {
       en: "It was the next day. We'd agreed to meet in front of the Japanese restaurant in the morning. She was wearing a white coat and a checkered scarf in white, black, and gray. At first she didn't recognize me; that was normal, we'd only seen each other for five minutes the day before at the bus stop. Still, she greeted me happily when she saw me. At the restaurant we ordered one of the place's signature dishes, ramen, plus some starters, gyozas. She started her introduction in a pretty unusual way, but always with a big smile on her face. I found her lovely from the very first moment I saw her; her warmth quickly wrapped around me and made me want to know more about her. So much so that we spent almost seven hours together that day. Also, the food at that place was really good but I've forgotten the name of that dish... I think it was something like the answer to this riddle.",
       es: 'Era el día siguiente. Habíamos acordado vernos delante del restaurante japonés por la mañana. Ella llevaba abrigo blanco y un pañuelo a cuadros con colores blanco, negro y gris. De primeras no me reconoció; era normal, solo nos habíamos visto cinco minutos el día anterior en la marquesina. Sin embargo me saludó con alegría al verme. En el restaurante pedimos uno de los platos característicos del local, ramen, además de unos entrantes, gyozas. Ella empezó su presentación de una forma bastante inusual, pero siempre con una gran sonrisa en la cara. Me pareció muy linda desde el primer momento en que la vi; su calidez pronto me envolvió y me hizo querer saber más de ella. Tanto fue así que pasamos casi siete horas juntos ese día. Además, la comida de ese sitio estaba muy buena pero se me ha olvidado el nombre de ese plato... creo que era algo como la solución de este acertijo.',
@@ -920,15 +914,14 @@ export const HUNT_STOPS: Stop[] = [
     },
   },
   {
-    id: 'stop-7-family-dinner',
+    id: 'stop-7-bachata-dance',
     order: 7,
-    chapterIcon: '🍽️',
     chapterImage: 'scavenger-hunt/photos/dance.png',
     pageNumber: 1,
     isFinale: false,
     title: {
-      en: 'The Dinner Where You Met Everyone at Once',
-      es: 'La Cena Donde Conociste a Todos a la Vez',
+      en: 'The Night We Met Dancing Bachata',
+      es: 'La Noche que Nos Conocimos Bailando Bachata',
     },
     narrative: {
       en: "I had gone out as usual to practice some bachata. It was a Friday like any other, and my dance friends asked me to go out with them. There were quite a few people, as usual at that place, all happy to be able to practice something they're passionate about, that relaxes and entertains them. There, among all of them, was her. A small girl, with long black hair and big curious eyes full of life. In one of the workshops she was my dance partner, and that's where I asked her name. She told me a completely unexpected name; one more of the many things that drew me to her. I asked if she was new to the place and she said sort of, and that she wanted to learn to dance bachata. I mentioned I was at a dance school and that I could pass along the contact. We exchanged phone numbers and went our separate ways. That night we didn't run into each other again for the rest of the social. Later that night, on my way home, I texted her to send the info I'd promised and told her we could meet up sometime. Not only did she agree, but she also suggested meeting the very next day. And without even knowing it, that night our paths decided to intertwine, like a passionate embrace, joining not just our bodies but our hearts. A brief encounter that lasted barely a few minutes but unleashed a flood of emotions over weeks and even months, one that let us get to know each other deeply, that gave us the chance to become important to one another and fill our hearts with warmth. That moment happened while we were practicing something we have in common, something I can now only describe with this riddle.",
@@ -1061,7 +1054,6 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-8-finale',
     order: 8,
-    chapterIcon: '✨',
     chapterImage: 'scavenger-hunt/photos/couple.png',
     isFinale: true,
     title: { en: 'The First Page', es: 'La Primera Página' },

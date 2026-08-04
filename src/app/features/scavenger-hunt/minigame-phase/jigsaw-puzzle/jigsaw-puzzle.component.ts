@@ -73,6 +73,13 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
           }
         </div>
 
+        <button
+          type="button"
+          (click)="revealSolution()"
+          class="mt-3 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
+        >
+          {{ t('giveUp') }}
+        </button>
         <app-hint-panel [hints]="config().hints" [lang]="lang()" (revealed)="revealSolution()" />
       } @else {
         <button

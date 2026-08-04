@@ -134,9 +134,7 @@ export type PersonalQuestionConfig =
 export interface Stop {
   id: string;
   order: number;
-  chapterIcon: string;
-  /** Optional photo shown instead of chapterIcon on the stop-intro screen. */
-  chapterImage?: string;
+  chapterImage: string;
   /** Overrides the page number printed at the bottom of the stop-intro journal page. Defaults to `order`. */
   pageNumber?: number;
   isFinale: boolean;

@@ -56,19 +56,11 @@
   <div class="grid grid-cols-2 place-items-center gap-x-6 gap-y-5 pb-6">
     @for (stop of stops; track stop.id) {
       <div class="relative">
-        @if (stop.chapterImage; as image) {
-          <img
-            [src]="image"
-            alt=""
-            class="h-28 w-28 rounded-full border-2 border-white object-cover shadow-md shadow-rose-900/30"
-          />
-        } @else {
-          <div
-            class="flex h-28 w-28 items-center justify-center rounded-full border-2 border-white bg-white text-5xl shadow-md shadow-rose-900/30"
-          >
-            {{ stop.chapterIcon }}
-          </div>
-        }
+        <img
+          [src]="stop.chapterImage"
+          alt=""
+          class="h-28 w-28 rounded-full border-2 border-white object-cover shadow-md shadow-rose-900/30"
+        />
         <img
           src="scavenger-hunt/photos/seal.png"
           alt=""
