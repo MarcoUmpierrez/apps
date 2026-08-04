@@ -16,11 +16,11 @@ describe('HuntStoreService', () => {
     expect(service.progress().language).toBeNull();
   });
 
-  it('beginHunt sets the language and moves to stop-intro at stop 0', () => {
+  it('beginHunt sets the language and moves to diary-intro at stop 0', () => {
     service.beginHunt('es');
     expect(service.progress().language).toBe('es');
     expect(service.progress().currentStopIndex).toBe(0);
-    expect(service.progress().currentPhase).toBe('stop-intro');
+    expect(service.progress().currentPhase).toBe('diary-intro');
   });
 
   it('markArrived updates only the targeted stop', () => {

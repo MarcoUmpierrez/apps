@@ -70,7 +70,7 @@ export class HuntStoreService {
       ...p,
       language: lang,
       currentStopIndex: 0,
-      currentPhase: 'stop-intro',
+      currentPhase: 'diary-intro',
     }));
   }
 

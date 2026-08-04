@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CornerFlourishComponent } from './corner-flourish/corner-flourish.component';
 import { DebugPanelComponent } from './debug-panel/debug-panel.component';
+import { DiaryIntroComponent } from './diary-intro/diary-intro.component';
 import { EpilogueComponent } from './finale/epilogue/epilogue.component';
 import { FinaleVideoComponent } from './finale/finale-video/finale-video.component';
 import { PhotoMontageComponent } from './finale/photo-montage/photo-montage.component';
@@ -26,6 +27,7 @@ import { StopStampComponent } from './stop-stamp/stop-stamp.component';
   imports: [
     CornerFlourishComponent,
     CoverScreenComponent,
+    DiaryIntroComponent,
     StopIntroComponent,
     GeoCheckComponent,
     MinigamePhaseComponent,

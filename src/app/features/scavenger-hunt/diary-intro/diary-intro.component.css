@@ -1,0 +1,74 @@
+/* Same aged-paper/torn-page/tape treatment as stop-intro's journal page —
+   duplicated here since component styles are view-encapsulated per component. */
+.journal-page {
+  background-color: #fbf3e1;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      rgba(146, 108, 63, 0.16) 28px
+    ),
+    radial-gradient(ellipse 220px 160px at 8% 12%, rgba(146, 108, 63, 0.1), transparent 60%),
+    radial-gradient(ellipse 180px 140px at 92% 88%, rgba(146, 108, 63, 0.12), transparent 60%),
+    radial-gradient(
+      ellipse 95% 88% at 50% 50%,
+      transparent 60%,
+      rgba(107, 68, 30, 0.3) 88%,
+      rgba(46, 25, 10, 0.6) 100%
+    ),
+    radial-gradient(ellipse 110px 85px at 2% 3%, rgba(41, 22, 8, 0.55), transparent 65%),
+    radial-gradient(ellipse 140px 95px at 98% 97%, rgba(41, 22, 8, 0.5), transparent 65%),
+    radial-gradient(ellipse 70px 120px at 99% 20%, rgba(41, 22, 8, 0.4), transparent 70%),
+    radial-gradient(ellipse 90px 60px at 3% 85%, rgba(41, 22, 8, 0.35), transparent 65%);
+  clip-path: polygon(
+    0% 2%,
+    12% 0%,
+    25% 1.5%,
+    37% 0%,
+    50% 1%,
+    62% 0%,
+    75% 1.5%,
+    88% 0%,
+    100% 2%,
+    99% 15%,
+    100% 28%,
+    98% 41%,
+    100% 54%,
+    99% 67%,
+    100% 80%,
+    98% 92%,
+    100% 98%,
+    88% 100%,
+    75% 98.5%,
+    62% 100%,
+    50% 99%,
+    37% 100%,
+    25% 98.5%,
+    12% 100%,
+    0% 98%,
+    1% 85%,
+    0% 72%,
+    2% 59%,
+    0% 46%,
+    1% 33%,
+    0% 20%,
+    2% 8%
+  );
+  box-shadow:
+    inset 0 0 22px 6px rgba(74, 46, 16, 0.35),
+    inset 0 0 0 1px rgba(59, 33, 10, 0.4);
+  filter: drop-shadow(0 16px 20px rgba(76, 46, 16, 0.35));
+}
+
+.journal-tape {
+  background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.35)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(146, 108, 63, 0.12) 0,
+      rgba(146, 108, 63, 0.12) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  box-shadow: 0 2px 4px rgba(76, 46, 16, 0.2);
+}

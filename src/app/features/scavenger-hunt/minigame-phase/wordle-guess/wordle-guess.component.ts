@@ -41,7 +41,8 @@ function computeFeedback(guess: string, target: string): LetterFeedback[] {
   imports: [FormsModule],
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-4 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-2 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-4 text-sm text-amber-700">{{ lengthHint() }}</p>
 
       <div class="mb-4 flex flex-col items-center gap-2">
         @for (guess of guesses(); track $index) {
@@ -94,6 +95,9 @@ export class WordleGuessComponent {
 
   readonly targetLength = computed(
     () => this.config().targetWord[this.lang()].replace(/\s+/g, '').length,
+  );
+  readonly lengthHint = computed(() =>
+    translateUi(this.lang(), 'wordleLengthHint', { length: this.targetLength() }),
   );
 
   t(key: UiStringKey): string {

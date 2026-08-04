@@ -1,0 +1,43 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+>
+  <div class="relative w-full max-w-sm -rotate-1">
+    <div class="journal-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="journal-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+
+    <div class="journal-page px-6 py-8 text-left">
+      <p class="font-['Caveat',cursive] text-2xl font-bold text-amber-800">
+        @if (lang() === 'es') {
+          En un arcón antiguo encuentras las páginas de un diario viejo. Están sueltas,
+          desordenadas, llenas de tachones y garabatos. Parece que cuentan una historia que te
+          suena familiar. Decides tratar de seguir los pasos que cada página cuenta, para ver si
+          puedes descifrar lo que ocurrió por aquél entonces.
+        } @else {
+          In an old chest you find the pages of an old diary. They're loose, out of order, full of
+          crossed-out words and scribbles. It seems to tell a story that feels strangely familiar.
+          You decide to try to follow the steps each page describes, to see if you can piece
+          together what happened back then.
+        }
+      </p>
+      <p class="font-['Caveat',cursive] text-2xl font-bold text-amber-800">
+        @if (lang() === 'es') {
+          ¡Una aventura misteriosa y llena de desafíos te espera! ¿Estás lista para continuar?
+        } @else {
+          A mysterious adventure full of challenges awaits! Are you ready to continue?
+        }
+      </p>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    (click)="onContinue()"
+    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+  >
+    @if (lang() === 'es') {
+      ¡Sí, estoy lista!
+    } @else {
+      Yes, I'm ready!
+    }
+  </button>
+</div>

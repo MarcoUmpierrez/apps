@@ -7,6 +7,7 @@ export interface BilingualText {
 
 export type HuntPhase =
   | 'cover'
+  | 'diary-intro'
   | 'stop-intro'
   | 'geo-check'
   | 'minigame'

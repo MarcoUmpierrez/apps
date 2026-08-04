@@ -35,7 +35,8 @@ export type UiStringKey =
   | 'giveUp'
   | 'simulateShake'
   | 'finaleCongrats'
-  | 'oneLastQuestion';
+  | 'oneLastQuestion'
+  | 'wordleLengthHint';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -74,6 +75,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     simulateShake: 'Shake! (tap again if needed)',
     finaleCongrats: "Congratulations! You've completed every challenge!",
     oneLastQuestion: 'Just one last question remains...',
+    wordleLengthHint: 'The word is {length} letters long — write them all on every guess.',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -111,6 +113,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     simulateShake: '¡Agita! (toca de nuevo si hace falta)',
     finaleCongrats: '¡Enhorabuena! ¡Has completado todos los desafíos!',
     oneLastQuestion: 'Solo queda una última pregunta...',
+    wordleLengthHint: 'La palabra tiene {length} letras — escríbelas todas en cada intento.',
   },
 };
 
