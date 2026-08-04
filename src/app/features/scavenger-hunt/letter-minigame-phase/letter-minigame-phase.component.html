@@ -10,6 +10,9 @@
       @case ('dirt-wipe') {
         <app-dirt-wipe-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
       }
+      @case ('tower-of-hanoi') {
+        <app-tower-of-hanoi-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
     }
   }
 </div>

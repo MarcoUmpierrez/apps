@@ -41,7 +41,8 @@ export type UiStringKey =
   | 'chargeIt'
   | 'hitIt'
   | 'writeLetterDown'
-  | 'dirtWipePrompt';
+  | 'dirtWipePrompt'
+  | 'hanoiPrompt';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -86,6 +87,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     hitIt: 'Hit it!',
     writeLetterDown: "Write the letter {letter} in your notebook — you'll need it later.",
     dirtWipePrompt: 'Dirt is hiding a letter. Swipe to wipe it clean!',
+    hanoiPrompt: 'Move every disc to the last pole. Never place a bigger disc on a smaller one!',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -129,6 +131,8 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     hitIt: '¡Golpear!',
     writeLetterDown: 'Escribe la letra {letter} en tu cuaderno — la necesitarás más tarde.',
     dirtWipePrompt: 'La tierra esconde una letra. ¡Desliza el dedo para limpiarla!',
+    hanoiPrompt:
+      'Mueve todos los discos a la última torre. ¡Nunca pongas un disco grande sobre uno más pequeño!',
   },
 };
 

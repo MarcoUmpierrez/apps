@@ -150,7 +150,16 @@ export interface DirtWipeLetterMinigame extends LetterMinigameBase {
   clearThresholdPercent: number;
 }
 
-export type LetterMinigameConfig = WallBreakLetterMinigame | DirtWipeLetterMinigame;
+/** Classic Tower of Hanoi: move every disc from the first peg to the last, never placing a bigger disc on a smaller one. */
+export interface TowerOfHanoiLetterMinigame extends LetterMinigameBase {
+  kind: 'tower-of-hanoi';
+  discCount: number;
+}
+
+export type LetterMinigameConfig =
+  | WallBreakLetterMinigame
+  | DirtWipeLetterMinigame
+  | TowerOfHanoiLetterMinigame;
 
 export interface Stop {
   id: string;

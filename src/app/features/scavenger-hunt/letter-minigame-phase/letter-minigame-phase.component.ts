@@ -3,11 +3,12 @@ import { HUNT_STOPS } from '../scavenger-hunt.data';
 import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
 import { DirtWipeGameComponent } from './dirt-wipe-game/dirt-wipe-game.component';
+import { TowerOfHanoiGameComponent } from './tower-of-hanoi-game/tower-of-hanoi-game.component';
 import { WallBreakGameComponent } from './wall-break-game/wall-break-game.component';
 
 @Component({
   selector: 'app-letter-minigame-phase',
-  imports: [WallBreakGameComponent, DirtWipeGameComponent],
+  imports: [WallBreakGameComponent, DirtWipeGameComponent, TowerOfHanoiGameComponent],
   templateUrl: './letter-minigame-phase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

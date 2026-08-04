@@ -518,9 +518,10 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'A frog holding a phone.', es: 'Una rana con un teléfono.' },
       ],
     },
-    notebookInstruction: {
-      en: "Write the letter M in your notebook — you'll need it later.",
-      es: 'Escribe la letra M en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'tower-of-hanoi',
+      letter: 'M',
+      discCount: 5,
     },
   },
   {
