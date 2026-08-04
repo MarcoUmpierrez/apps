@@ -923,28 +923,106 @@ export const HUNT_STOPS: Stop[] = [
     id: 'stop-7-family-dinner',
     order: 7,
     chapterIcon: '🍽️',
+    chapterImage: 'scavenger-hunt/photos/dance.png',
+    pageNumber: 1,
     isFinale: false,
     title: {
       en: 'The Dinner Where You Met Everyone at Once',
       es: 'La Cena Donde Conociste a Todos a la Vez',
     },
     narrative: {
-      en: 'You were more nervous than I was, and by the end of the night everyone already loved you.',
-      es: 'Estabas más nervioso de lo que yo estaba, y para el final de la noche todos ya te querían.',
+      en: "I had gone out as usual to practice some bachata. It was a Friday like any other, and my dance friends asked me to go out with them. There were quite a few people, as usual at that place, all happy to be able to practice something they're passionate about, that relaxes and entertains them. There, among all of them, was her. A small girl, with long black hair and big curious eyes full of life. In one of the workshops she was my dance partner, and that's where I asked her name. She told me a completely unexpected name; one more of the many things that drew me to her. I asked if she was new to the place and she said sort of, and that she wanted to learn to dance bachata. I mentioned I was at a dance school and that I could pass along the contact. We exchanged phone numbers and went our separate ways. That night we didn't run into each other again for the rest of the social. Later that night, on my way home, I texted her to send the info I'd promised and told her we could meet up sometime. Not only did she agree, but she also suggested meeting the very next day. And without even knowing it, that night our paths decided to intertwine, like a passionate embrace, joining not just our bodies but our hearts. A brief encounter that lasted barely a few minutes but unleashed a flood of emotions over weeks and even months, one that let us get to know each other deeply, that gave us the chance to become important to one another and fill our hearts with warmth. That moment happened while we were practicing something we have in common, something I can now only describe with this riddle.",
+      es: 'Había salido como de costumbre a practicar algo de bachata. Era un viernes como otro cualquiera y los compañeros de baile me dijeron de salir con ellos. Había bastante gente como es habitual en ese lugar, todos contentos de poder practicar algo que les apasiona, relaja y divierte. Allí, entre todos ellos estaba ella. Una chica pequeña, con una larga melena negra y grandes ojos curiosos y llenos de vida. En uno de los talleres fue mi pareja de baile y ahí fue donde le pregunté su nombre. Ella me dijo un nombre totalmente inesperado; otra de las tantas cosas que me atrajo de ella. Le pregunté que si era nueva en el lugar y me dijo que más o menos y que quería aprender a bailar bachata. Le comenté que yo estaba en una academia y que le podía pasar el contacto. Intercambiamos nuestros números de teléfono y nos separamos. Esa noche no nos encontramos más en todo el tiempo que duró el social. Entrada la noche, al volver a casa, le escribí para mandarle los datos que le había prometido y le dije que podíamos quedar algún día. Ella no solo estuvo de acuerdo, sino que además me dijo de quedar al día siguiente. Y sin siquiera saberlo, esa noche nuestros destinos decidieron entrelazarse, como un abrazo apasionado, uniendo no solo nuestros cuerpos sino nuestros corazones. Un pequeño encuentro que duró apenas unos minutos y que desató un aluvión de emociones a lo largo de semanas e incluso meses, que nos permitió conocernos el uno al otro con mucha profundidad, que nos ofreció la oportunidad de ser alguien importante para el otro y llenar de calidez nuestros corazones. Ese momento ocurrió mientras practicábamos algo que tenemos en común, que ahora solo puedo describir con este acertijo.',
+    },
+    narrativeRich: [
+      [
+        {
+          text: {
+            en: 'I had gone out as usual to practice some ',
+            es: 'Había salido como de costumbre a practicar algo de ',
+          },
+        },
+        { text: { en: 'bachata', es: 'bachata' }, style: 'empty' },
+        {
+          text: {
+            en: '. It was a Friday like any other, and my ',
+            es: '. Era un viernes como otro cualquiera y los compañeros ',
+          },
+        },
+        { text: { en: 'dance', es: 'de baile' }, style: 'empty' },
+        {
+          text: {
+            en: " friends asked me to go out with them. There were quite a few people, as usual at that place, all happy to be able to practice something they're passionate about, that relaxes and entertains them. There, among all of them, was her. A small girl, ",
+            es: ' me dijeron de salir con ellos. Había bastante gente como es habitual en ese lugar, todos contentos de poder practicar algo que les apasiona, relaja y divierte. Allí, entre todos ellos estaba ella. Una chica pequeña, ',
+          },
+        },
+        { text: { en: 'with wild hair', es: 'con pelo alocado' }, style: 'crossed' },
+        {
+          text: {
+            en: ' with long black hair and big curious eyes full of life. In one of the ',
+            es: ' con una larga melena negra y grandes ojos curiosos y llenos de vida. En uno de los ',
+          },
+        },
+        { text: { en: 'workshops', es: 'talleres' }, style: 'empty' },
+        { text: { en: ' she was my dance ', es: ' fue mi pareja de ' } },
+        { text: { en: 'partner', es: 'baile' }, style: 'empty' },
+        {
+          text: {
+            en: ", and that's where I asked her name. She told me a completely unexpected name; one more of the many things that drew me to her. I asked if she was new to the place and she said sort of, and that she wanted to learn to dance ",
+            es: ' y ahí fue donde le pregunté su nombre. Ella me dijo un nombre totalmente inesperado; otra de las tantas cosas que me atrajo de ella. Le pregunté que si era nueva en el lugar y me dijo que más o menos y que quería aprender a bailar ',
+          },
+        },
+        { text: { en: 'bachata', es: 'bachata' }, style: 'empty' },
+        { text: { en: '. I mentioned I was at ', es: '. Le comenté que yo estaba en ' } },
+        { text: { en: 'a dance school', es: 'una academia' }, style: 'empty' },
+        {
+          text: {
+            en: ' and that I could pass along the contact. We exchanged phone numbers and went our separate ways. That night we didn’t run into each other again for the rest of ',
+            es: ' y que le podía pasar el contacto. Intercambiamos nuestros números de teléfono y nos separamos. Esa noche no nos encontramos más en todo el tiempo que duró ',
+          },
+        },
+        { text: { en: 'the social', es: 'el social' }, style: 'empty' },
+        { text: { en: '.', es: '.' } },
+      ],
+      [
+        {
+          text: {
+            en: "Later that night, on my way home, I texted her to send the info I'd promised and told her we could meet up sometime. Not only did she agree, but she also suggested meeting the very next day. And without even knowing it, that night our paths decided to intertwine, like a passionate embrace, joining not just our bodies but our hearts. A brief encounter that lasted barely a few minutes but unleashed a flood of emotions over weeks and even months, one that let us get to know each other deeply, that gave us the chance to become important to one another and fill our hearts with warmth. That moment happened while we were practicing something we have in common, something I can now only describe with this riddle:",
+            es: 'Entrada la noche, al volver a casa, le escribí para mandarle los datos que le había prometido y le dije que podíamos quedar algún día. Ella no solo estuvo de acuerdo, sino que además me dijo de quedar al día siguiente. Y sin siquiera saberlo, esa noche nuestros destinos decidieron entrelazarse, como un abrazo apasionado, uniendo no solo nuestros cuerpos sino nuestros corazones. Un pequeño encuentro que duró apenas unos minutos y que desató un aluvión de emociones a lo largo de semanas e incluso meses, que nos permitió conocernos el uno al otro con mucha profundidad, que nos ofreció la oportunidad de ser alguien importante para el otro y llenar de calidez nuestros corazones. Ese momento ocurrió mientras practicábamos algo que tenemos en común, que ahora solo puedo describir con este acertijo:',
+          },
+        },
+      ],
+    ],
+    narrativeRiddle: {
+      poem: {
+        en: 'I was born on a Caribbean isle,\nand my rhythm invites a smile.\nDanced in pairs, held close and tight,\nwith soft steps and turns so light.\nWhat am I?',
+        es: 'Nací en una isla del Caribe,\ny mi ritmo invita a sonreír.\nSe baila en pareja, muy pegaditos,\ncon pasos suaves y giros bonitos.\n¿Qué soy?',
+      },
+      acceptedAnswers: [{ en: 'bachata', es: 'bachata' }],
+      hints: [
+        {
+          en: "It's a genre of Latin music and dance from the Caribbean.",
+          es: 'Es un género de música y baile latino del Caribe.',
+        },
+        {
+          en: "It's danced very close together, originally from the Dominican Republic.",
+          es: 'Se baila muy pegados, originario de República Dominicana.',
+        },
+        { en: 'Bachata.', es: 'Bachata.' },
+      ],
     },
     location: {
-      lat: 40.0007, // PLACEHOLDER — replace before the real day
-      lng: -3.0007, // PLACEHOLDER — replace before the real day
+      lat: 28.1398567,
+      lng: -15.4302486,
       radiusMeters: 40,
-      label: { en: 'Where dinner happened', es: 'Donde fue la cena' },
+      label: { en: 'The Marquesina', es: 'La Marquesina' },
     },
     minigame: {
       kind: 'jigsaw-puzzle',
       prompt: {
-        en: 'Piece together a photo from that night.',
-        es: 'Arma una foto de esa noche.',
+        en: 'Piece together the picture.',
+        es: 'Arma la imagen.',
       },
-      imageAsset: 'scavenger-hunt/jigsaw/placeholder.jpg',
       pieceCount: 9,
       hints: [
         { en: 'Start with the edge pieces.', es: 'Empieza por las piezas de borde.' },

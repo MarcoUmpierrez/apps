@@ -33,7 +33,12 @@
         />
       }
       @case ('jigsaw-puzzle') {
-        <app-jigsaw-puzzle [config]="minigame" [lang]="lang()" (solved)="onSolved()" />
+        <app-jigsaw-puzzle
+          [config]="minigame"
+          [lang]="lang()"
+          [chapterImage]="stop().chapterImage"
+          (solved)="onSolved()"
+        />
       }
       @case ('memory-match') {
         <app-memory-match [config]="minigame" [lang]="lang()" (solved)="onSolved()" />

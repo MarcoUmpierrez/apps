@@ -85,7 +85,6 @@ export interface ShakeToRevealMinigame {
 
 export interface JigsawPuzzleMinigame extends MinigameBase {
   kind: 'jigsaw-puzzle';
-  imageAsset: string;
   pieceCount: 9 | 12;
 }
 
