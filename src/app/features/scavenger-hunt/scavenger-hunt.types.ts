@@ -164,11 +164,19 @@ export interface BurgerBuildLetterMinigame extends LetterMinigameBase {
   ingredientsInOrder: BurgerIngredientKind[];
 }
 
+/** Navigate a procedurally-generated maze from top-left to bottom-right using directional buttons. */
+export interface MazeLetterMinigame extends LetterMinigameBase {
+  kind: 'maze';
+  cols: number;
+  rows: number;
+}
+
 export type LetterMinigameConfig =
   | WallBreakLetterMinigame
   | DirtWipeLetterMinigame
   | TowerOfHanoiLetterMinigame
-  | BurgerBuildLetterMinigame;
+  | BurgerBuildLetterMinigame
+  | MazeLetterMinigame;
 
 export interface Stop {
   id: string;

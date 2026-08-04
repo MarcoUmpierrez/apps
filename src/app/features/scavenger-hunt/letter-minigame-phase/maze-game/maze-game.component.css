@@ -1,0 +1,19 @@
+.dpad-btn {
+  display: flex;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  touch-action: manipulation;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  border-color: #fcd34d;
+  background-color: #92400e;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease-out;
+}
+
+.dpad-btn:active {
+  transform: scale(0.95);
+}

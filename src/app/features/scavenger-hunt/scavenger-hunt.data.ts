@@ -782,9 +782,11 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Michael Jackson.', es: 'Michael Jackson.' },
       ],
     },
-    notebookInstruction: {
-      en: "Write the letter N in your notebook — you'll need it later.",
-      es: 'Escribe la letra N en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'maze',
+      letter: 'N',
+      cols: 12,
+      rows: 15,
     },
   },
   {

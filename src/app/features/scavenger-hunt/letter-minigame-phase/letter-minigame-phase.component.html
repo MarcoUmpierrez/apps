@@ -16,6 +16,9 @@
       @case ('burger-build') {
         <app-burger-build-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
       }
+      @case ('maze') {
+        <app-maze-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
     }
   }
 </div>
