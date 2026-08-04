@@ -166,9 +166,10 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Fill out the taxes.', es: 'Cumplimentar los impuestos.' },
       ],
     },
-    notebookInstruction: {
-      en: "Write the letter R in your notebook — you'll need it later.",
-      es: 'Escribe la letra R en tu cuaderno — la necesitarás más tarde.',
+    letterMinigame: {
+      kind: 'wall-break',
+      letter: 'R',
+      hitsRequired: 3,
     },
   },
   {

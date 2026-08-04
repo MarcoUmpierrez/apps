@@ -1,0 +1,22 @@
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { HUNT_STOPS } from '../scavenger-hunt.data';
+import { HuntStoreService } from '../services/hunt-store.service';
+import { Language } from '../scavenger-hunt.types';
+import { WallBreakGameComponent } from './wall-break-game/wall-break-game.component';
+
+@Component({
+  selector: 'app-letter-minigame-phase',
+  imports: [WallBreakGameComponent],
+  templateUrl: './letter-minigame-phase.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LetterMinigamePhaseComponent {
+  private readonly store = inject(HuntStoreService);
+
+  readonly stop = computed(() => HUNT_STOPS[this.store.progress().currentStopIndex]);
+  readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
+
+  onSolved(): void {
+    this.store.setPhase('stop-stamp');
+  }
+}

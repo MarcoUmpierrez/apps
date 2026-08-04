@@ -149,7 +149,10 @@ export class HuntStoreService {
         break;
       case 'personal-question':
         this.markPersonalQuestionSolved(stop.id);
-        this.setPhase(phaseAfterPersonalQuestion());
+        this.setPhase(phaseAfterPersonalQuestion(stop));
+        break;
+      case 'letter-minigame':
+        this.setPhase('stop-stamp');
         break;
       default:
         break;

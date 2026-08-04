@@ -10,20 +10,24 @@ export function phaseAfterArrival(stop: Stop): HuntPhase {
   if (stop.minigame) return 'minigame';
   if (stop.photoCheckpoint) return 'photo-checkpoint';
   if (stop.personalQuestion) return 'personal-question';
+  if (stop.letterMinigame) return 'letter-minigame';
   return 'stop-stamp';
 }
 
 export function phaseAfterMinigame(stop: Stop): HuntPhase {
   if (stop.photoCheckpoint) return 'photo-checkpoint';
   if (stop.personalQuestion) return 'personal-question';
+  if (stop.letterMinigame) return 'letter-minigame';
   return 'stop-stamp';
 }
 
 export function phaseAfterPhoto(stop: Stop): HuntPhase {
   if (stop.personalQuestion) return 'personal-question';
+  if (stop.letterMinigame) return 'letter-minigame';
   return 'stop-stamp';
 }
 
-export function phaseAfterPersonalQuestion(): HuntPhase {
+export function phaseAfterPersonalQuestion(stop: Stop): HuntPhase {
+  if (stop.letterMinigame) return 'letter-minigame';
   return 'stop-stamp';
 }

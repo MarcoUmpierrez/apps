@@ -36,7 +36,11 @@ export type UiStringKey =
   | 'simulateShake'
   | 'finaleCongrats'
   | 'oneLastQuestion'
-  | 'wordleLengthHint';
+  | 'wordleLengthHint'
+  | 'wallBreakPrompt'
+  | 'chargeIt'
+  | 'hitIt'
+  | 'writeLetterDown';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -76,6 +80,10 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     finaleCongrats: "Congratulations! You've completed every challenge!",
     oneLastQuestion: 'Just one last question remains...',
     wordleLengthHint: 'The word is {length} letters long — write them all on every guess.',
+    wallBreakPrompt: 'A wall is hiding a letter. Charge up, then hit it!',
+    chargeIt: 'Charge!',
+    hitIt: 'Hit it!',
+    writeLetterDown: "Write the letter {letter} in your notebook — you'll need it later.",
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -114,6 +122,10 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     finaleCongrats: '¡Enhorabuena! ¡Has completado todos los desafíos!',
     oneLastQuestion: 'Solo queda una última pregunta...',
     wordleLengthHint: 'La palabra tiene {length} letras — escríbelas todas en cada intento.',
+    wallBreakPrompt: 'Un muro esconde una letra. ¡Carga y golpéalo!',
+    chargeIt: '¡Cargar!',
+    hitIt: '¡Golpear!',
+    writeLetterDown: 'Escribe la letra {letter} en tu cuaderno — la necesitarás más tarde.',
   },
 };
 

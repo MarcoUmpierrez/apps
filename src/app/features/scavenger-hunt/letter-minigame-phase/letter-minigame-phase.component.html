@@ -1,0 +1,12 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center gap-4 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6"
+>
+  @let letterMinigame = stop().letterMinigame;
+  @if (letterMinigame) {
+    @switch (letterMinigame.kind) {
+      @case ('wall-break') {
+        <app-wall-break-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+      }
+    }
+  }
+</div>

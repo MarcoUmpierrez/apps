@@ -1,0 +1,42 @@
+@keyframes wall-shake {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-6px) rotate(-2deg);
+  }
+  40% {
+    transform: translateX(5px) rotate(2deg);
+  }
+  60% {
+    transform: translateX(-4px) rotate(-1deg);
+  }
+  80% {
+    transform: translateX(3px) rotate(1deg);
+  }
+}
+
+.wall-shake {
+  animation: wall-shake 0.5s ease-in-out;
+}
+
+/* Stays permanently opaque — only .wall-crack-overlay's own opacity grows per
+   hit, so the letter behind the wall is never exposed before it's broken. */
+.wall-face {
+  background-color: #8c8378;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0 2px, transparent 2px 18px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 34px);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.4);
+}
+
+/* mix-blend-mode: multiply drops the texture's light/white background out,
+   leaving just the dark crack linework visible on top of the wall. */
+.wall-crack-overlay {
+  background-image: url('/scavenger-hunt/textures/wall-crack.jpg');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+  transition: opacity 0.3s ease-out;
+}

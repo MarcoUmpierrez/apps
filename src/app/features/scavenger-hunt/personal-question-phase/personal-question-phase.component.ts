@@ -26,6 +26,6 @@ export class PersonalQuestionPhaseComponent {
   onSolved(): void {
     const stop = this.stop();
     this.store.markPersonalQuestionSolved(stop.id);
-    this.store.setPhase(phaseAfterPersonalQuestion());
+    this.store.setPhase(phaseAfterPersonalQuestion(stop));
   }
 }

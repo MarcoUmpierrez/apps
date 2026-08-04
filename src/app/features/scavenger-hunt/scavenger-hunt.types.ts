@@ -13,6 +13,7 @@ export type HuntPhase =
   | 'minigame'
   | 'photo-checkpoint'
   | 'personal-question'
+  | 'letter-minigame'
   | 'stop-stamp'
   | 'finale-montage'
   | 'finale-video'
@@ -132,6 +133,19 @@ export type PersonalQuestionConfig =
   | FreeTextQuestion
   | NotebookCodeQuestion;
 
+interface LetterMinigameBase {
+  /** The notebook letter this minigame reveals, e.g. 'R'. */
+  letter: string;
+}
+
+/** Charge a meter via rapid taps (it decays if tapped too slowly), then hit — repeat until the wall breaks and the letter is revealed. */
+export interface WallBreakLetterMinigame extends LetterMinigameBase {
+  kind: 'wall-break';
+  hitsRequired: number;
+}
+
+export type LetterMinigameConfig = WallBreakLetterMinigame;
+
 export interface Stop {
   id: string;
   order: number;
@@ -152,6 +166,8 @@ export interface Stop {
   photoCheckpoint?: { prompt: BilingualText };
   /** Omitted on the finale stop. */
   personalQuestion?: PersonalQuestionConfig;
+  /** Shown as its own screen right before stop-stamp when present, revealing the notebook letter through play instead of a static callout. */
+  letterMinigame?: LetterMinigameConfig;
   notebookInstruction?: BilingualText;
 }
 

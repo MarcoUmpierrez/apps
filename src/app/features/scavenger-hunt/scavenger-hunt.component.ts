@@ -8,6 +8,7 @@ import { PhotoMontageComponent } from './finale/photo-montage/photo-montage.comp
 import { ProposalQuestionComponent } from './finale/proposal-question/proposal-question.component';
 import { CoverScreenComponent } from './cover-screen/cover-screen.component';
 import { GeoCheckComponent } from './geo-check/geo-check.component';
+import { LetterMinigamePhaseComponent } from './letter-minigame-phase/letter-minigame-phase.component';
 import { MinigamePhaseComponent } from './minigame-phase/minigame-phase.component';
 import { PersonalQuestionPhaseComponent } from './personal-question-phase/personal-question-phase.component';
 import { PhotoCheckpointComponent } from './photo-checkpoint/photo-checkpoint.component';
@@ -33,6 +34,7 @@ import { StopStampComponent } from './stop-stamp/stop-stamp.component';
     MinigamePhaseComponent,
     PhotoCheckpointComponent,
     PersonalQuestionPhaseComponent,
+    LetterMinigamePhaseComponent,
     StopStampComponent,
     DebugPanelComponent,
     PhotoMontageComponent,
