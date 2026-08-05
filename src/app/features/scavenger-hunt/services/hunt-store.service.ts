@@ -119,9 +119,10 @@ export class HuntStoreService {
     this.progress.update((p) => ({ ...p, devModeUnlocked: true }));
   }
 
-  skipToStop(stopIndex: number): void {
+  /** Jumps straight to a specific screen within a given stop. */
+  skipToStopPhase(stopIndex: number, phase: HuntPhase): void {
     const clamped = Math.max(0, Math.min(stopIndex, HUNT_STOPS.length - 1));
-    this.progress.update((p) => ({ ...p, currentStopIndex: clamped, currentPhase: 'stop-intro' }));
+    this.progress.update((p) => ({ ...p, currentStopIndex: clamped, currentPhase: phase }));
   }
 
   /**

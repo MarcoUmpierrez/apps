@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
-import { buildCollage, downloadDataUrl } from '../../photo-collage.util';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { HUNT_STOPS } from '../../scavenger-hunt.data';
 import { HuntStoreService } from '../../services/hunt-store.service';
 import { Language } from '../../scavenger-hunt.types';
@@ -69,7 +68,7 @@ function createRisingFireworks(): RisingFirework[] {
   styleUrl: './epilogue.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EpilogueComponent implements OnInit {
+export class EpilogueComponent {
   private readonly store = inject(HuntStoreService);
 
   readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
@@ -78,16 +77,6 @@ export class EpilogueComponent implements OnInit {
   readonly fireworkBursts = createFireworkBursts();
   readonly risingFireworks = createRisingFireworks();
   readonly particleAngles = Array.from({ length: 12 }, (_, i) => (360 / 12) * i);
-
-  readonly collageDataUrl = signal<string | null>(null);
-  readonly isBuildingCollage = signal(false);
-
-  async ngOnInit(): Promise<void> {
-    this.isBuildingCollage.set(true);
-    const title = this.lang() === 'es' ? 'Nuestro viaje' : 'Our journey';
-    this.collageDataUrl.set(await buildCollage(this.stops.map((stop) => stop.chapterImage), title));
-    this.isBuildingCollage.set(false);
-  }
 
   t(key: UiStringKey): string {
     return translateUi(this.lang(), key);
@@ -98,8 +87,7 @@ export class EpilogueComponent implements OnInit {
     return colors[piece % colors.length];
   }
 
-  onDownload(): void {
-    const dataUrl = this.collageDataUrl();
-    if (dataUrl) downloadDataUrl(dataUrl, 'our-journey.jpg');
+  onContinue(): void {
+    this.store.setPhase('finale-montage');
   }
 }

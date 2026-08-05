@@ -21,22 +21,38 @@
   animation: wall-shake 0.5s ease-in-out;
 }
 
-/* Stays permanently opaque — only .wall-crack-overlay's own opacity grows per
-   hit, so the letter behind the wall is never exposed before it's broken. */
-.wall-face {
-  background-color: #8c8378;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0 2px, transparent 2px 18px),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 34px);
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.4);
+/* overflow: visible (SVG defaults to hidden) so falling bricks can tumble past
+   the frame onto the surrounding page instead of vanishing at its edge. */
+.brick-wall {
+  overflow: visible;
 }
 
-/* mix-blend-mode: multiply drops the texture's light/white background out,
-   leaving just the dark crack linework visible on top of the wall. */
-.wall-crack-overlay {
-  background-image: url('/scavenger-hunt/textures/wall-crack.jpg');
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: multiply;
-  transition: opacity 0.3s ease-out;
+.brick-fallen {
+  animation: brick-fall 0.8s ease-in forwards;
+}
+
+@keyframes brick-fall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(var(--brick-rotate, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--brick-drift, 0px), 160px) rotate(calc(var(--brick-rotate, 0deg) + 90deg));
+  }
+}
+
+@keyframes letter-pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.letter-reveal {
+  animation: letter-pop 0.35s ease-out;
 }

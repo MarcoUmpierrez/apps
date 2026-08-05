@@ -1,47 +1,94 @@
-<div class="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
-  @if (expanded()) {
-    <div
-      class="max-h-64 w-56 overflow-y-auto rounded-xl border border-slate-700 bg-slate-900/95 p-2 text-sm text-white shadow-xl"
-    >
-      <button
-        type="button"
-        (click)="onSkip()"
-        class="mb-2 min-h-11 w-full touch-manipulation rounded-lg bg-emerald-700 py-2 font-bold"
-      >
-        {{ t('skipDev') }}
-      </button>
-      <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">{{ t('jumpToStop') }}</p>
-      <div class="mb-3 flex flex-col gap-1">
-        @for (stop of stops; track stop.id; let i = $index) {
-          <button
-            type="button"
-            (click)="onJumpToStop(i)"
-            class="min-h-11 touch-manipulation rounded-lg bg-slate-800 px-2 py-1 text-left"
-          >
-            {{ stop.order }}. {{ stop.title[lang()] }}
-          </button>
-        }
-      </div>
+<button
+  type="button"
+  (click)="toggleExpanded()"
+  class="fixed right-4 bottom-4 z-50 min-h-11 min-w-11 touch-manipulation rounded-full bg-red-700 px-3 py-2 text-xs font-bold text-white shadow-lg"
+>
+  DEV
+</button>
 
-      <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">Jump to screen</p>
+@if (expanded()) {
+  <div class="fixed inset-0 z-40 bg-black/50" (click)="toggleExpanded()"></div>
+}
+
+<aside
+  class="fixed inset-y-0 right-0 z-50 flex w-72 max-w-[85vw] transform flex-col border-l border-slate-700 bg-slate-900/95 text-sm text-white shadow-2xl transition-transform duration-300 ease-out"
+  [class.translate-x-0]="expanded()"
+  [class.translate-x-full]="!expanded()"
+>
+  <div class="flex items-center justify-between border-b border-slate-700 p-3">
+    <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Dev Menu</p>
+    <button
+      type="button"
+      (click)="toggleExpanded()"
+      class="flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg text-lg text-slate-400 hover:text-white"
+    >
+      ✕
+    </button>
+  </div>
+
+  <div
+    class="flex flex-1 flex-col gap-3 overflow-y-auto p-3 pb-[calc(1rem+env(safe-area-inset-bottom))]"
+  >
+    <button
+      type="button"
+      (click)="onSkip()"
+      class="min-h-11 w-full touch-manipulation rounded-lg bg-emerald-700 py-2 font-bold"
+    >
+      {{ t('skipDev') }}
+    </button>
+
+    <div>
+      <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">General</p>
       <div class="flex flex-col gap-1">
-        @for (phase of phases; track phase) {
+        @for (screen of generalScreens; track screen.phase) {
           <button
             type="button"
-            (click)="onJumpToPhase(phase)"
+            (click)="onJumpToPhase(screen.phase)"
             class="min-h-11 touch-manipulation rounded-lg bg-slate-800 px-2 py-1 text-left"
           >
-            {{ phase }}
+            {{ screen.label }}
           </button>
         }
       </div>
     </div>
-  }
-  <button
-    type="button"
-    (click)="toggleExpanded()"
-    class="min-h-11 min-w-11 touch-manipulation rounded-full bg-red-700 px-3 py-2 text-xs font-bold text-white shadow-lg"
-  >
-    DEV
-  </button>
-</div>
+
+    <div>
+      <p class="mb-1 text-xs uppercase tracking-widest text-slate-400">{{ t('jumpToStop') }}</p>
+      <div class="flex flex-col gap-1">
+        @for (stop of stops; track stop.id; let i = $index) {
+          <div class="overflow-hidden rounded-lg bg-slate-800">
+            <button
+              type="button"
+              (click)="toggleStop(stop.id)"
+              class="flex min-h-11 w-full touch-manipulation items-center gap-2 px-2 py-1 text-left"
+            >
+              <span
+                class="inline-block text-slate-400 transition-transform duration-200"
+                [class.rotate-90]="isStopExpanded(stop.id)"
+              >
+                ▸
+              </span>
+              <span class="flex-1">{{ stop.order }}. {{ stop.title[lang()] }}</span>
+            </button>
+
+            @if (isStopExpanded(stop.id)) {
+              <div class="flex flex-col gap-1 bg-slate-900/60 py-1 pr-2 pl-7">
+                @for (screen of screensFor(stop); track screen.phase) {
+                  <button
+                    type="button"
+                    (click)="onJumpToStopScreen(i, screen.phase)"
+                    class="min-h-9 touch-manipulation rounded-md px-2 py-1 text-left text-slate-300 hover:bg-slate-800 hover:text-white"
+                    [class.bg-emerald-800]="isCurrentScreen(i, screen.phase)"
+                    [class.text-white]="isCurrentScreen(i, screen.phase)"
+                  >
+                    {{ screen.label }}
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</aside>
