@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { phaseAfterLetterMinigame } from '../phase-flow.util';
 import { HUNT_STOPS } from '../scavenger-hunt.data';
 import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
@@ -31,6 +32,6 @@ export class LetterMinigamePhaseComponent {
   readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
 
   onSolved(): void {
-    this.store.setPhase('stop-stamp');
+    this.store.setPhase(phaseAfterLetterMinigame(this.stop()));
   }
 }

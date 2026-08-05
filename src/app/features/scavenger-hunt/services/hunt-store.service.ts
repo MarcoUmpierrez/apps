@@ -2,6 +2,7 @@ import { Injectable, effect, signal } from '@angular/core';
 import { HUNT_STOPS } from '../scavenger-hunt.data';
 import {
   phaseAfterArrival,
+  phaseAfterLetterMinigame,
   phaseAfterMinigame,
   phaseAfterPersonalQuestion,
   phaseAfterPhoto,
@@ -153,7 +154,7 @@ export class HuntStoreService {
         this.setPhase(phaseAfterPersonalQuestion(stop));
         break;
       case 'letter-minigame':
-        this.setPhase('stop-stamp');
+        this.setPhase(phaseAfterLetterMinigame(stop));
         break;
       default:
         break;

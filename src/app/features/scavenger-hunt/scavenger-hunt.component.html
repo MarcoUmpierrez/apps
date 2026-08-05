@@ -1,5 +1,5 @@
 <div
-  class="parchment-vignette touch-manipulation overscroll-none bg-cover bg-center pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"
+  class="parchment-vignette relative touch-manipulation overscroll-none bg-cover bg-center pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]"
   [style.background-image]="'url(scavenger-hunt/textures/parchment-page.jpg)'"
 >
   @switch (phase()) {
@@ -48,7 +48,7 @@
     <app-debug-panel />
   }
 
-  <div class="pointer-events-none fixed inset-0 z-40 text-amber-800/80">
+  <div class="pointer-events-none absolute inset-0 z-40 text-amber-800/80">
     <div class="absolute inset-2 border-4 border-amber-800/70"></div>
     <div class="absolute inset-4 border border-amber-700/40"></div>
 

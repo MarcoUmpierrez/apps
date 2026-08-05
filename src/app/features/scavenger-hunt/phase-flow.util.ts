@@ -1,49 +1,64 @@
 import { HuntPhase, Stop } from './scavenger-hunt.types';
 
 /**
- * Centralizes "what comes next" so every phase automatically skips whichever
- * sub-phases a given Stop doesn't configure (the finale has no minigame,
- * photo checkpoint, or personal question at all).
+ * A notebook-code personal question answered using a letter this same stop's
+ * own letterMinigame reveals can't run before that minigame — the player
+ * would be asked for a letter they haven't unlocked yet. Everywhere else,
+ * personal-question runs before letter-minigame.
  */
-export function phaseAfterArrival(stop: Stop): HuntPhase {
-  if (stop.isFinale) return 'finale-video';
-  if (stop.minigame) return 'minigame';
-  if (stop.photoCheckpoint) return 'photo-checkpoint';
-  if (stop.personalQuestion) return 'personal-question';
-  if (stop.letterMinigame) return 'letter-minigame';
-  return 'stop-stamp';
+function personalQuestionAfterLetterMinigame(stop: Stop): boolean {
+  return stop.personalQuestion?.kind === 'notebook-code' && !!stop.letterMinigame;
 }
 
-export function phaseAfterMinigame(stop: Stop): HuntPhase {
-  if (stop.photoCheckpoint) return 'photo-checkpoint';
-  if (stop.personalQuestion) return 'personal-question';
-  if (stop.letterMinigame) return 'letter-minigame';
-  return 'stop-stamp';
-}
-
-export function phaseAfterPhoto(stop: Stop): HuntPhase {
-  if (stop.personalQuestion) return 'personal-question';
-  if (stop.letterMinigame) return 'letter-minigame';
-  return 'stop-stamp';
-}
-
-export function phaseAfterPersonalQuestion(stop: Stop): HuntPhase {
-  if (stop.letterMinigame) return 'letter-minigame';
-  return 'stop-stamp';
-}
-
-/** Every screen a given Stop can reach, in flow order — drives the debug panel's per-stop screen tree. */
+/**
+ * Every screen a given Stop can reach, in flow order. The single source of
+ * truth for "what comes next" — every phaseAfter* helper below just looks up
+ * the next entry in this list, so every phase automatically skips whichever
+ * sub-phases a given Stop doesn't configure (the finale has no minigame,
+ * photo checkpoint, or personal question at all). Also drives the debug
+ * panel's per-stop screen tree.
+ */
 export function screensForStop(stop: Stop): HuntPhase[] {
   const screens: HuntPhase[] = ['stop-intro'];
   if (stop.location) screens.push('geo-check');
   if (stop.minigame) screens.push('minigame');
   if (stop.photoCheckpoint) screens.push('photo-checkpoint');
-  if (stop.personalQuestion) screens.push('personal-question');
+
+  const deferPersonalQuestion = personalQuestionAfterLetterMinigame(stop);
+  if (stop.personalQuestion && !deferPersonalQuestion) screens.push('personal-question');
   if (stop.letterMinigame) screens.push('letter-minigame');
+  if (stop.personalQuestion && deferPersonalQuestion) screens.push('personal-question');
+
   if (stop.isFinale) {
     screens.push('finale-video', 'proposal-question', 'epilogue', 'finale-montage');
   } else {
     screens.push('stop-stamp');
   }
   return screens;
+}
+
+function nextScreen(stop: Stop, current: HuntPhase): HuntPhase {
+  const screens = screensForStop(stop);
+  const index = screens.indexOf(current);
+  return screens[index + 1] ?? 'stop-stamp';
+}
+
+export function phaseAfterArrival(stop: Stop): HuntPhase {
+  return nextScreen(stop, stop.location ? 'geo-check' : 'stop-intro');
+}
+
+export function phaseAfterMinigame(stop: Stop): HuntPhase {
+  return nextScreen(stop, 'minigame');
+}
+
+export function phaseAfterPhoto(stop: Stop): HuntPhase {
+  return nextScreen(stop, 'photo-checkpoint');
+}
+
+export function phaseAfterPersonalQuestion(stop: Stop): HuntPhase {
+  return nextScreen(stop, 'personal-question');
+}
+
+export function phaseAfterLetterMinigame(stop: Stop): HuntPhase {
+  return nextScreen(stop, 'letter-minigame');
 }
