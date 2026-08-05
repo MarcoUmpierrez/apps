@@ -10,7 +10,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-1-rubi-restaurant',
     order: 1,
-    chapterImage: 'scavenger-hunt/photos/rubi.png',
+    chapterImage: 'scavenger-hunt/photos/rubi.webp',
     pageNumber: 237,
     isFinale: false,
     title: { en: 'The Restaurant with the Ruby Name', es: 'El Restaurante del Nombre de Rubí' },
@@ -175,7 +175,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-2-hippo-pizzeria',
     order: 2,
-    chapterImage: 'scavenger-hunt/photos/hippo.png',
+    chapterImage: 'scavenger-hunt/photos/hippo.webp',
     pageNumber: 158,
     isFinale: false,
     title: { en: 'The Pizzeria with the Hungry Hippo', es: 'La Pizzería del Hipopótamo Hambriento' },
@@ -346,7 +346,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-3-kraus-statue',
     order: 3,
-    chapterImage: 'scavenger-hunt/photos/krauss.png',
+    chapterImage: 'scavenger-hunt/photos/krauss.webp',
     pageNumber: 23,
     isFinale: false,
     title: {
@@ -527,7 +527,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-4-gym',
     order: 4,
-    chapterImage: 'scavenger-hunt/photos/girl.png',
+    chapterImage: 'scavenger-hunt/photos/girl.webp',
     pageNumber: 56,
     isFinale: false,
     title: {
@@ -653,7 +653,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-5-granier-cafe',
     order: 5,
-    chapterImage: 'scavenger-hunt/photos/sandwich.png',
+    chapterImage: 'scavenger-hunt/photos/sandwich.webp',
     pageNumber: 4,
     isFinale: false,
     title: {
@@ -792,7 +792,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-6-ramen-restaurant',
     order: 6,
-    chapterImage: 'scavenger-hunt/photos/ramen.png',
+    chapterImage: 'scavenger-hunt/photos/ramen.webp',
     pageNumber: 2,
     isFinale: false,
     title: { en: 'The Ramen Place That Turned Into Seven Hours', es: 'El Sitio de Ramen que se Convirtió en Siete Horas' },
@@ -937,7 +937,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-7-bachata-dance',
     order: 7,
-    chapterImage: 'scavenger-hunt/photos/dance.png',
+    chapterImage: 'scavenger-hunt/photos/dance.webp',
     pageNumber: 1,
     isFinale: false,
     title: {
@@ -1080,7 +1080,7 @@ export const HUNT_STOPS: Stop[] = [
   {
     id: 'stop-8-finale',
     order: 8,
-    chapterImage: 'scavenger-hunt/photos/couple.png',
+    chapterImage: 'scavenger-hunt/photos/couple.webp',
     isFinale: true,
     title: { en: 'The First Page', es: 'La Primera Página' },
     narrative: {

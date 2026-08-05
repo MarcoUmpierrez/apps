@@ -61,7 +61,8 @@ function buildBricks(): Brick[] {
   for (const [rowIndex, row] of rows.entries()) {
     const y = rowIndex * ROW_HEIGHT;
     for (const [x, width] of row) {
-      bricks.push({ id, x, y, width, height: ROW_HEIGHT, color: BRICK_COLORS[id % BRICK_COLORS.length] });
+      const color = BRICK_COLORS[id % BRICK_COLORS.length];
+      bricks.push({ id, x, y, width, height: ROW_HEIGHT, color });
       id++;
     }
   }
@@ -189,7 +190,8 @@ export class WallBreakGameComponent implements OnDestroy {
   readonly taskComplete = computed(() => this.hitsLanded() >= this.config().hitsRequired);
   readonly bricks = BRICKS;
 
-  /** Bricks that have fallen so far, each with its own randomized tumble — the letter behind the wall shows through wherever a brick is missing. */
+  /** Bricks that have fallen so far, each with its own randomized tumble —
+   * the letter behind the wall shows through wherever a brick is missing. */
   readonly fallenBricks = signal<ReadonlyMap<number, BrickFall>>(new Map());
 
   /** Stays disabled for a beat after the wall breaks so a furious last tap can't skip the reveal. */
@@ -275,7 +277,8 @@ export class WallBreakGameComponent implements OnDestroy {
     } else {
       const avg = remainingIds.length / (stagesLeftAfterThis + 1);
       const min = Math.max(1, Math.floor(avg * 0.5));
-      const max = Math.max(min, Math.min(remainingIds.length - stagesLeftAfterThis, Math.ceil(avg * 1.5)));
+      const maxLeavingEnoughForLaterStages = remainingIds.length - stagesLeftAfterThis;
+      const max = Math.max(min, Math.min(maxLeavingEnoughForLaterStages, Math.ceil(avg * 1.5)));
       count = min + Math.floor(Math.random() * (max - min + 1));
     }
 
