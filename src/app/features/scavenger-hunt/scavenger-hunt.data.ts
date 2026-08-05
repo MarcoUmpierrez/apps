@@ -1080,7 +1080,7 @@ export const HUNT_STOPS: Stop[] = [
         en: "Combine the letters from your notebook — you're missing just the very last one. What word is it?",
         es: 'Combina las letras de tu cuaderno — solo te falta la última. ¿Qué palabra es?',
       },
-      referencedStopOrders: [1, 2, 3, 4, 5, 6],
+      referencedStopOrders: [1, 2, 3, 4, 5, 6, 7],
       acceptedAnswers: [{ en: 'ROMANCE', es: 'ROMANCE' }],
       hints: [
         {
@@ -1102,7 +1102,7 @@ export const HUNT_STOPS: Stop[] = [
   },
   {
     id: 'stop-8-finale',
-    order: 8,
+    order: 999,
     chapterImage: 'scavenger-hunt/photos/couple.webp',
     isFinale: true,
     title: { en: 'The First Page', es: 'La Primera Página' },
