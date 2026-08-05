@@ -73,7 +73,10 @@
               type="text"
               [(ngModel)]="riddleInput"
               (keyup.enter)="onSubmitRiddle()"
-              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl border-2 border-amber-300 bg-white/70 px-4 py-3 text-center text-lg font-medium text-amber-900"
+              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl border-2 bg-white/70 px-4 py-3 text-center text-lg font-medium text-amber-900"
+              [class.border-amber-300]="!riddleWrongFlash()"
+              [class.border-red-600]="riddleWrongFlash()"
+              [class.riddle-input-shake]="riddleWrongFlash()"
             />
             <button
               type="button"

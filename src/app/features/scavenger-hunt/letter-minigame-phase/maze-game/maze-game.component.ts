@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, input, output, signal } from '@angular/core';
 import { Language, MazeLetterMinigame } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 const CELL_SIZE_PX = 30;
 
@@ -168,7 +169,8 @@ function generateMaze(cols: number, rows: number): MazeCell[][] {
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
@@ -191,6 +193,7 @@ export class MazeGameComponent implements OnInit {
   readonly taskComplete = computed(
     () => this.playerX() === this.config().cols - 1 && this.playerY() === this.config().rows - 1,
   );
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   ngOnInit(): void {
     this.maze = generateMaze(this.config().cols, this.config().rows);

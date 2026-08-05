@@ -3,22 +3,18 @@ import {
   Component,
   OnDestroy,
   computed,
-  effect,
   input,
   output,
   signal,
 } from '@angular/core';
 import { Language, WallBreakLetterMinigame } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 const CHARGE_PER_TAP = 12;
 const DECAY_PER_TICK = 2;
 const DECAY_INTERVAL_MS = 100;
 const SHAKE_DURATION_MS = 500;
-/** Players are usually tapping furiously right up until the wall breaks — without this,
- * the next reflexive tap lands on the Continue button the instant it appears and skips
- * the reveal before anyone reads it. */
-const CONTINUE_READY_DELAY_MS = 700;
 
 interface Brick {
   id: number;
@@ -195,29 +191,17 @@ export class WallBreakGameComponent implements OnDestroy {
   readonly fallenBricks = signal<ReadonlyMap<number, BrickFall>>(new Map());
 
   /** Stays disabled for a beat after the wall breaks so a furious last tap can't skip the reveal. */
-  readonly continueReady = signal(false);
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   private readonly decayIntervalId = setInterval(() => {
     if (this.taskComplete()) return;
     this.charge.update((c) => Math.max(0, c - DECAY_PER_TICK));
   }, DECAY_INTERVAL_MS);
   private shakeTimeoutId: ReturnType<typeof setTimeout> | null = null;
-  private continueReadyTimeoutId: ReturnType<typeof setTimeout> | null = null;
-
-  constructor() {
-    effect(() => {
-      if (!this.taskComplete()) return;
-      this.continueReadyTimeoutId = setTimeout(
-        () => this.continueReady.set(true),
-        CONTINUE_READY_DELAY_MS,
-      );
-    });
-  }
 
   ngOnDestroy(): void {
     clearInterval(this.decayIntervalId);
     if (this.shakeTimeoutId) clearTimeout(this.shakeTimeoutId);
-    if (this.continueReadyTimeoutId) clearTimeout(this.continueReadyTimeoutId);
   }
 
   t(key: UiStringKey): string {

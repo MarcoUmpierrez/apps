@@ -18,6 +18,17 @@ function scrambleLetters(word: string): LetterTile[] {
   return chars.map((char, id) => ({ id, char }));
 }
 
+const MAX_TILES_PER_ROW = 6;
+
+/** Picks a column count that splits the tiles into evenly-sized rows instead of
+ * filling each row to MAX_TILES_PER_ROW and leaving a lonely tile on its own
+ * trailing line (e.g. 7 tiles as 6-then-1). */
+function balancedColumnCount(total: number): number {
+  if (total === 0) return 1;
+  const rows = Math.ceil(total / MAX_TILES_PER_ROW);
+  return Math.ceil(total / rows);
+}
+
 /**
  * Tap-to-place instead of typing: tapping a bank letter appends it to the
  * answer, tapping a placed letter returns it to the bank. The answer
@@ -31,7 +42,10 @@ function scrambleLetters(word: string): LetterTile[] {
     <div class="w-full max-w-sm">
       <p class="mb-4 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
 
-      <div class="mb-4 flex flex-wrap justify-center gap-2">
+      <div
+        class="mb-4 grid justify-center gap-2"
+        [style.grid-template-columns]="'repeat(' + columns() + ', 2.75rem)'"
+      >
         @for (slot of answerSlots(); track $index) {
           @if (slot) {
             <button
@@ -47,7 +61,10 @@ function scrambleLetters(word: string): LetterTile[] {
         }
       </div>
 
-      <div class="flex flex-wrap justify-center gap-2">
+      <div
+        class="grid justify-center gap-2"
+        [style.grid-template-columns]="'repeat(' + columns() + ', 2.75rem)'"
+      >
         @for (tile of bankTiles(); track tile.id) {
           <button
             type="button"
@@ -78,6 +95,7 @@ export class WordScrambleComponent {
   readonly solved = output<void>();
 
   readonly letterTiles = computed(() => scrambleLetters(this.config().answer[this.lang()]));
+  readonly columns = computed(() => balancedColumnCount(this.letterTiles().length));
   readonly answerOrder = signal<number[]>([]);
   readonly attemptCount = signal(0);
   readonly wrongFlash = signal(false);

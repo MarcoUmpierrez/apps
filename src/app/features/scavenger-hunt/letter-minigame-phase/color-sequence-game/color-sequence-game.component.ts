@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ColorSequenceLetterMinigame, Language } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 type TileColor = 'red' | 'blue' | 'green' | 'yellow';
 
@@ -88,7 +89,8 @@ const WRONG_FLASH_MS = 900;
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
@@ -112,6 +114,7 @@ export class ColorSequenceGameComponent implements OnInit, OnDestroy {
   readonly wrongFlash = signal(false);
 
   readonly taskComplete = computed(() => this.roundIndex() >= this.config().roundLengths.length);
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   private readonly timeoutIds: ReturnType<typeof setTimeout>[] = [];
 

@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { DirtWipeLetterMinigame, Language } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 const CANVAS_SIZE = 320;
 const BRUSH_RADIUS = 22;
@@ -77,7 +78,8 @@ const DIRT_IMAGE_SRC = 'scavenger-hunt/textures/dirt.jpg';
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
@@ -98,6 +100,7 @@ export class DirtWipeGameComponent implements AfterViewInit {
   readonly taskComplete = computed(
     () => this.clearedPercent() >= this.config().clearThresholdPercent,
   );
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   private ctx: CanvasRenderingContext2D | null = null;
   private isDragging = false;

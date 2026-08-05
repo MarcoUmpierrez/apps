@@ -17,6 +17,7 @@ import {
   MirrorOrientation,
 } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 const CELL_SIZE_PX = 38;
 
@@ -201,7 +202,8 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
@@ -226,6 +228,7 @@ export class LaserReflectorGameComponent implements OnInit {
   readonly beam = computed(() => traceBeam(this.config(), this.orientations()));
   readonly taskComplete = computed(() => this.beam().hitTarget);
   readonly beamColor = computed(() => (this.beam().hitTarget ? '#16a34a' : '#dc2626'));
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   constructor() {
     /** Every re-trace "draws" the beam in from the emitter via a

@@ -21,6 +21,11 @@ export async function compressPhotoToDataUrl(
     const ctx = canvas.getContext('2d');
     if (!ctx) return null;
 
+    // JPEG has no alpha channel — without this, transparent source pixels
+    // (e.g. a gallery-picked PNG instead of a live camera shot) would encode
+    // as black instead of compositing onto a neutral background.
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
     ctx.drawImage(bitmap, 0, 0, width, height);
     if ('close' in bitmap) bitmap.close();
 

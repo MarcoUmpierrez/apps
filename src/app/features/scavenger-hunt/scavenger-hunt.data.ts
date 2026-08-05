@@ -122,7 +122,7 @@ export const HUNT_STOPS: Stop[] = [
         es: '¿Qué comimos ese día?',
       },
       options: [
-        { en: 'fried eggs over potatoes', es: 'Huevos rotos' },
+        { en: 'Fried eggs over potatoes', es: 'Huevos rotos' },
         { en: 'Fried marinated pork', es: 'Cerdo frito en adobo' },
         { en: 'Canarian wrinkly potatoes', es: 'Papas arrugadas' },
         { en: 'Russian potato salad', es: 'Ensaladilla rusa' },
@@ -140,7 +140,12 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Huevos rotos.', es: 'Huevos rotos.' },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: {
+        en: 'Take a photo in front of the ruby restaurant',
+        es: 'Toma una foto frente al restaurante rubí',
+      },
+    },
     personalQuestion: {
       kind: 'multiple-choice',
       question: {
@@ -317,7 +322,12 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Sangria.', es: 'Sangría.' },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: {
+        en: 'Take a photo with the hungry hippo',
+        es: 'Toma una foto con el hipopótamo hambriento',
+      },
+    },
     personalQuestion: {
       kind: 'free-text',
       question: {
@@ -492,7 +502,12 @@ export const HUNT_STOPS: Stop[] = [
         { en: 'Cheddar.', es: 'Cheddar.' },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: {
+        en: "Take a photo by Alfredo Kraus's statue",
+        es: 'Toma una foto junto a la estatua de Alfredo Kraus',
+      },
+    },
     personalQuestion: {
       kind: 'multiple-choice',
       question: {
@@ -643,7 +658,9 @@ export const HUNT_STOPS: Stop[] = [
         },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: { en: 'Take a photo at the gym', es: 'Toma una foto en el gimnasio' },
+    },
     letterMinigame: {
       kind: 'burger-build',
       letter: 'A',
@@ -765,7 +782,9 @@ export const HUNT_STOPS: Stop[] = [
         },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: { en: 'Take a photo at the café', es: 'Toma una foto en la cafetería' },
+    },
     personalQuestion: {
       kind: 'free-text',
       question: {
@@ -891,7 +910,9 @@ export const HUNT_STOPS: Stop[] = [
       },
       revealedWord: { en: 'RAMEN', es: 'RAMEN' },
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: { en: 'Take a photo at the ramen place', es: 'Toma una foto en el sitio de ramen' },
+    },
     personalQuestion: {
       kind: 'multiple-choice',
       question: {
@@ -1050,7 +1071,9 @@ export const HUNT_STOPS: Stop[] = [
         },
       ],
     },
-    photoCheckpoint: { prompt: { en: 'Take a photo here', es: 'Toma una foto aquí' } },
+    photoCheckpoint: {
+      prompt: { en: 'Take a photo at the Marquesina', es: 'Toma una foto en la Marquesina' },
+    },
     personalQuestion: {
       kind: 'notebook-code',
       question: {

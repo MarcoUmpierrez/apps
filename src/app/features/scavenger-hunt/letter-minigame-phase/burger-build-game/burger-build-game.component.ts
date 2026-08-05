@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, computed, input, output, si
 import { BurgerBuildLetterMinigame, BurgerIngredientKind, Language } from '../../scavenger-hunt.types';
 import { shuffleArray } from '../../shuffle.util';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { createContinueReadySignal } from '../continue-ready.util';
 
 const WRONG_FLASH_MS = 900;
 
@@ -74,7 +75,8 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
@@ -95,6 +97,7 @@ export class BurgerBuildGameComponent implements OnInit {
   readonly taskComplete = computed(
     () => this.stack().length === this.config().ingredientsInOrder.length,
   );
+  readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   ngOnInit(): void {
     this.tray.set(shuffleArray([...this.config().ingredientsInOrder]));
