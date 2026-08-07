@@ -13,6 +13,8 @@ export type UiStringKey =
   | 'needHint'
   | 'hintComingSoon'
   | 'gotIt'
+  | 'showCrossedOut'
+  | 'hideCrossedOut'
   | 'submit'
   | 'wrongTryAgain'
   | 'takePhoto'
@@ -64,6 +66,8 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     needHint: 'Need a hint?',
     hintComingSoon: 'Keep trying — a hint unlocks soon!',
     gotIt: 'Got it!',
+    showCrossedOut: 'Reveal crossed-out words',
+    hideCrossedOut: 'Hide crossed-out words',
     submit: 'Submit',
     wrongTryAgain: 'Not quite — try again!',
     takePhoto: 'Take a photo of you and your partner in front of the secret spot',
@@ -114,6 +118,8 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     needHint: '¿Necesitas una pista?',
     hintComingSoon: '¡Sigue intentando — pronto se desbloquea una pista!',
     gotIt: '¡Lo tengo!',
+    showCrossedOut: 'Revelar palabras tachadas',
+    hideCrossedOut: 'Ocultar palabras tachadas',
     submit: 'Enviar',
     wrongTryAgain: 'No es correcto — ¡inténtalo de nuevo!',
     takePhoto: 'Tomar una foto de tu compañero y tú en frente del lugar secreto',

@@ -46,9 +46,13 @@
               @for (run of paragraph; track $index) {
                 @switch (run.style) {
                   @case ('crossed') {
-                    <span class="text-amber-900/40 line-through decoration-2 decoration-wavy">{{
-                      run.text[lang()]
-                    }}</span>
+                    @if (showCrossedOut()) {
+                      <span class="text-amber-900">{{ run.text[lang()] }}</span>
+                    } @else {
+                      <span class="text-amber-900/40 line-through decoration-2 decoration-wavy">{{
+                        run.text[lang()]
+                      }}</span>
+                    }
                   }
                   @case ('empty') {
                     <span class="narrative-empty">{{ run.text[lang()] }}</span>
@@ -90,12 +94,23 @@
                 {{ t('wrongTryAgain') }}
               </p>
             }
-            <app-hint-panel
-              [hints]="riddle.hints"
-              [lang]="lang()"
-              [attemptCount]="riddleAttemptCount()"
-              (revealed)="onContinue()"
-            />
+            <div class="flex flex-wrap items-start gap-x-4">
+              <app-hint-panel
+                [hints]="riddle.hints"
+                [lang]="lang()"
+                [attemptCount]="riddleAttemptCount()"
+                (revealed)="onContinue()"
+              />
+              @if (stop().narrativeRich) {
+                <button
+                  type="button"
+                  (click)="showCrossedOut.set(!showCrossedOut())"
+                  class="mt-4 text-sm font-semibold text-amber-800 underline underline-offset-2 touch-manipulation"
+                >
+                  {{ showCrossedOut() ? t('hideCrossedOut') : t('showCrossedOut') }}
+                </button>
+              }
+            </div>
           </div>
         } @else {
           <p class="font-['Caveat',cursive] text-lg italic text-amber-700/70">

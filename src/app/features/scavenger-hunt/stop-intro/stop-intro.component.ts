@@ -23,6 +23,7 @@ export class StopIntroComponent {
 
   readonly riddleWrongFlash = signal(false);
   readonly riddleAttemptCount = signal(0);
+  readonly showCrossedOut = signal(false);
   riddleInput = '';
 
   t(key: UiStringKey): string {
