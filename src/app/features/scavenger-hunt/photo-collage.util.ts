@@ -57,7 +57,44 @@ export async function buildCollage(photoDataUrls: string[], title: string): Prom
   }
 }
 
+/**
+ * iOS Safari's `<a download>` is unreliable for data: URIs — tapping it
+ * often just previews the image instead of saving it. Where the Web Share
+ * API's file support is available (iOS Safari 15+), route through the
+ * native share sheet instead, which reliably offers "Save Image" to Photos.
+ * Falls back to the anchor-download path everywhere else (desktop browsers,
+ * older Safari), preserving today's behavior there.
+ */
 export function downloadDataUrl(dataUrl: string, filename: string): void {
+  if (canAttemptShare()) {
+    void shareDataUrl(dataUrl, filename).then((shared) => {
+      if (!shared) triggerAnchorDownload(dataUrl, filename);
+    });
+    return;
+  }
+  triggerAnchorDownload(dataUrl, filename);
+}
+
+function canAttemptShare(): boolean {
+  return typeof navigator.share === 'function' && typeof navigator.canShare === 'function';
+}
+
+async function shareDataUrl(dataUrl: string, filename: string): Promise<boolean> {
+  try {
+    const blob = await (await fetch(dataUrl)).blob();
+    const file = new File([blob], filename, { type: blob.type });
+    if (!navigator.canShare({ files: [file] })) return false;
+    await navigator.share({ files: [file] });
+    return true;
+  } catch {
+    // Covers a user-cancelled share sheet as well as any failure after the
+    // capability check passed — either way it's already been "handled", so
+    // the caller shouldn't also fall back to the anchor-download path.
+    return true;
+  }
+}
+
+function triggerAnchorDownload(dataUrl: string, filename: string): void {
   const anchor = document.createElement('a');
   anchor.href = dataUrl;
   anchor.download = filename;
