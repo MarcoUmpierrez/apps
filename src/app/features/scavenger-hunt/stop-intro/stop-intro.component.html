@@ -55,7 +55,11 @@
                     }
                   }
                   @case ('empty') {
-                    <span class="narrative-empty">{{ run.text[lang()] }}</span>
+                    @if (showCrossedOut()) {
+                      <span class="text-amber-900">{{ run.text[lang()] }}</span>
+                    } @else {
+                      <span class="narrative-empty">{{ run.text[lang()] }}</span>
+                    }
                   }
                   @default {
                     <span>{{ run.text[lang()] }}</span>

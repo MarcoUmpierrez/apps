@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  computed,
+  effect,
+  inject,
+} from '@angular/core';
 import { HUNT_STOPS } from '../scavenger-hunt.data';
 import { phaseAfterArrival } from '../phase-flow.util';
 import { GeolocationService } from '../services/geolocation.service';
@@ -16,6 +23,7 @@ import { CompassArrowComponent } from './compass-arrow/compass-arrow.component';
   selector: 'app-geo-check',
   imports: [CompassArrowComponent],
   templateUrl: './geo-check.component.html',
+  styleUrl: './geo-check.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeoCheckComponent implements OnDestroy {

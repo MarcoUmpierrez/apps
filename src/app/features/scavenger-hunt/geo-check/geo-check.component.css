@@ -1,0 +1,14 @@
+/* Draws the eye to the arrival state without relying on a subtle text swap. */
+@keyframes arrived-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(21, 128, 61, 0);
+  }
+}
+
+.arrived-pulse {
+  animation: arrived-glow 1.6s ease-out infinite;
+}
