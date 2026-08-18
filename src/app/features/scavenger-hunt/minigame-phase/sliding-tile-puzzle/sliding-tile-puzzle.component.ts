@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit, input, output, signal } from '@angular/core';
-import { HintPanelComponent } from '../../hint-panel/hint-panel.component';
 import { Language, SlidingTilePuzzleMinigame } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
+import { findHintMoveIndex } from './sliding-tile-solver.util';
 
-function createSolvedTiles(gridSize: number): number[] {
+export function createSolvedTiles(gridSize: number): number[] {
   const tiles = Array.from({ length: gridSize * gridSize - 1 }, (_, i) => i + 1);
   tiles.push(0);
   return tiles;
 }
 
-function adjacentIndices(index: number, gridSize: number): number[] {
+export function adjacentIndices(index: number, gridSize: number): number[] {
   const row = Math.floor(index / gridSize);
   const col = index % gridSize;
   const neighbors: number[] = [];
@@ -46,7 +46,6 @@ function shuffleTiles(gridSize: number): number[] {
  */
 @Component({
   selector: 'app-sliding-tile-puzzle',
-  imports: [HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
       <p class="mb-3 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
@@ -59,8 +58,13 @@ function shuffleTiles(gridSize: number): number[] {
             type="button"
             (click)="onTileClick(i)"
             [class.invisible]="value === 0"
+            [class.ring-4]="hintTileIndex() === i"
+            [class.ring-amber-500]="hintTileIndex() === i"
+            [class.animate-pulse]="hintTileIndex() === i"
             [style.background-image]="chapterImage() ? 'url(' + chapterImage() + ')' : null"
-            [style.background-size]="chapterImage() ? gridSize() * 100 + '% ' + gridSize() * 100 + '%' : null"
+            [style.background-size]="
+              chapterImage() ? gridSize() * 100 + '% ' + gridSize() * 100 + '%' : null
+            "
             [style.background-position]="chapterImage() ? tileBackgroundPosition(value) : null"
             class="flex aspect-square min-h-11 touch-manipulation items-center justify-center rounded-lg bg-white bg-cover text-lg font-bold text-amber-900 shadow"
           >
@@ -73,12 +77,18 @@ function shuffleTiles(gridSize: number): number[] {
       @if (!solvedLocally()) {
         <button
           type="button"
-          (click)="revealSolution()"
+          (click)="onNeedHint()"
           class="mt-3 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
+        >
+          {{ t('needHint') }}
+        </button>
+        <button
+          type="button"
+          (click)="revealSolution()"
+          class="mt-2 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
         >
           {{ t('giveUp') }}
         </button>
-        <app-hint-panel [hints]="config().hints" [lang]="lang()" (revealed)="revealSolution()" />
       } @else {
         <button
           type="button"
@@ -100,6 +110,8 @@ export class SlidingTilePuzzleComponent implements OnInit {
 
   readonly tiles = signal<number[]>([]);
   readonly solvedLocally = signal(false);
+  /** Board index of the tile to nudge the player toward next; cleared on every move. */
+  readonly hintTileIndex = signal<number | null>(null);
 
   ngOnInit(): void {
     this.tiles.set(shuffleTiles(this.config().gridSize));
@@ -109,9 +121,14 @@ export class SlidingTilePuzzleComponent implements OnInit {
     return translateUi(this.lang(), key);
   }
 
+  onNeedHint(): void {
+    this.hintTileIndex.set(findHintMoveIndex(this.tiles(), this.config().gridSize));
+  }
+
   revealSolution(): void {
     this.tiles.set(createSolvedTiles(this.config().gridSize));
     this.solvedLocally.set(true);
+    this.hintTileIndex.set(null);
   }
 
   gridSize(): number {
@@ -135,6 +152,7 @@ export class SlidingTilePuzzleComponent implements OnInit {
     const next = [...this.tiles()];
     [next[blankIndex], next[index]] = [next[index], next[blankIndex]];
     this.tiles.set(next);
+    this.hintTileIndex.set(null);
 
     if (this.isSolved(next)) {
       this.solvedLocally.set(true);
