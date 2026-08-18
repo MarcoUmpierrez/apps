@@ -307,7 +307,7 @@ export const HUNT_STOPS: Stop[] = [
       kind: 'word-scramble',
       prompt: {
         en: 'Unscramble the drink you had with our chicken wings.',
-        es: 'Desordena las letras de la bebida que tomaste con las alitas de pollo.',
+        es: 'Ordena las letras de la bebida que tomaste con las alitas de pollo.',
       },
       answer: { en: 'SANGRIA', es: 'SANGRÍA' },
       hints: [

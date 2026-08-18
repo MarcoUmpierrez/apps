@@ -52,7 +52,8 @@ export type UiStringKey =
   | 'laserReflectorPrompt'
   | 'colorSequencePrompt'
   | 'watchSequence'
-  | 'yourTurn';
+  | 'yourTurn'
+  | 'wellDone';
 
 export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
   en: {
@@ -108,6 +109,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     colorSequencePrompt: 'Watch the sequence, then tap it back in the same order!',
     watchSequence: 'Watch closely...',
     yourTurn: 'Your turn!',
+    wellDone: 'Well done!',
   },
   es: {
     begin: 'Comenzar la Aventura',
@@ -163,6 +165,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     colorSequencePrompt: '¡Observa la secuencia y luego repítela tocando en el mismo orden!',
     watchSequence: 'Observa con atención...',
     yourTurn: '¡Tu turno!',
+    wellDone: '¡Muy bien!',
   },
 };
 
