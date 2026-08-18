@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   computed,
   input,
@@ -27,6 +28,62 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
   'bun-top': { emoji: '🍞', color: '#f2c185' },
 };
 
+/** Matches the stack container's fixed h-60 w-32 Tailwind size in px. */
+const BOARD_WIDTH = 128;
+const BOARD_HEIGHT = 240;
+const BITE_RADIUS = 30;
+const BITE_ARC_STEPS = 8;
+const BITE_SHAKE_MS = 500;
+const BITE_PAUSE_MS = 350;
+
+type BiteCorner = 'tl' | 'tr' | 'bl';
+
+/** Corners get bitten one at a time, in this order, as biteCount climbs from 0 to 3. */
+const BITE_ORDER: BiteCorner[] = ['tl', 'tr', 'bl'];
+
+/** A quarter-circle notch of `radius` traced at a rectangle corner, ordered so
+ * it starts on the edge the clockwise TL→TR→BR→BL polygon traversal arrives
+ * on and ends on the edge it continues along. */
+function biteArcPoints(corner: BiteCorner, radius: number): [number, number][] {
+  const points: [number, number][] = [];
+  for (let i = 0; i <= BITE_ARC_STEPS; i++) {
+    // TL arrives via the left edge (closing the loop) so it sweeps 90°→0°;
+    // TR and BL arrive via the top/bottom edge so they sweep 0°→90°.
+    const sweep = corner === 'tl' ? 1 - i / BITE_ARC_STEPS : i / BITE_ARC_STEPS;
+    const theta = (Math.PI / 2) * sweep;
+    const dx = radius * Math.cos(theta);
+    const dy = radius * Math.sin(theta);
+    switch (corner) {
+      case 'tl':
+        points.push([dx, dy]);
+        break;
+      case 'tr':
+        points.push([BOARD_WIDTH - dx, dy]);
+        break;
+      case 'bl':
+        points.push([dx, BOARD_HEIGHT - dy]);
+        break;
+    }
+  }
+  return points;
+}
+
+function buildBurgerClipPath(bittenCorners: readonly BiteCorner[]): string {
+  const bitten = new Set(bittenCorners);
+  const points: [number, number][] = [
+    ...(bitten.has('tl') ? biteArcPoints('tl', BITE_RADIUS) : [[0, 0] as [number, number]]),
+    ...(bitten.has('tr')
+      ? biteArcPoints('tr', BITE_RADIUS)
+      : [[BOARD_WIDTH, 0] as [number, number]]),
+    [BOARD_WIDTH, BOARD_HEIGHT],
+    ...(bitten.has('bl')
+      ? biteArcPoints('bl', BITE_RADIUS)
+      : [[0, BOARD_HEIGHT] as [number, number]]),
+  ];
+
+  return `polygon(${points.map(([x, y]) => `${x}px ${y}px`).join(', ')})`;
+}
+
 /**
  * Tap tray ingredients in the correct bottom-to-top order to stack the
  * burger — tapping the wrong next ingredient just flashes and leaves the
@@ -34,24 +91,29 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
  */
 @Component({
   selector: 'app-burger-build-game',
+  styleUrl: './burger-build-game.component.css',
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('burgerBuildPrompt') }}</p>
       }
 
-      <div
-        class="flex h-60 w-32 flex-col-reverse items-center justify-start gap-1 rounded-2xl border-2 border-amber-300 bg-amber-100/40 p-2"
-      >
-        @for (ingredient of stack(); track $index) {
-          <div
-            class="flex h-7 w-full shrink-0 items-center justify-center rounded-full text-lg shadow"
-            [style.background-color]="info(ingredient).color"
-          >
-            {{ info(ingredient).emoji }}
-          </div>
-        }
-      </div>
+      @if (!letterRevealed()) {
+        <div
+          class="flex h-60 w-32 flex-col-reverse items-center justify-start gap-1 rounded-2xl border-2 border-amber-300 bg-amber-100/40 p-2"
+          [class.burger-shake]="isShaking()"
+          [style.clip-path]="burgerClipPath()"
+        >
+          @for (ingredient of stack(); track $index) {
+            <div
+              class="flex h-7 w-full shrink-0 items-center justify-center rounded-full text-lg shadow"
+              [style.background-color]="info(ingredient).color"
+            >
+              {{ info(ingredient).emoji }}
+            </div>
+          }
+        </div>
+      }
 
       @if (!taskComplete()) {
         <div class="flex flex-wrap justify-center gap-2">
@@ -84,8 +146,8 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
         </p>
         <button
           type="button"
-          (click)="letterRevealed.set(true)"
-          [disabled]="!continueReady()"
+          (click)="onTakeBites()"
+          [disabled]="!continueReady() || isBiting()"
           class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
@@ -110,7 +172,7 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BurgerBuildGameComponent implements OnInit {
+export class BurgerBuildGameComponent implements OnInit, OnDestroy {
   readonly config = input.required<BurgerBuildLetterMinigame>();
   readonly lang = input.required<Language>();
   readonly solved = output<void>();
@@ -120,13 +182,27 @@ export class BurgerBuildGameComponent implements OnInit {
   readonly wrongFlash = signal(false);
   readonly letterRevealed = signal(false);
 
+  /** How many corners have been bitten off so far, 0 through BITE_ORDER.length. */
+  readonly biteCount = signal(0);
+  readonly isShaking = signal(false);
+  readonly isBiting = signal(false);
+  readonly burgerClipPath = computed(() =>
+    buildBurgerClipPath(BITE_ORDER.slice(0, this.biteCount())),
+  );
+
   readonly taskComplete = computed(
     () => this.stack().length === this.config().ingredientsInOrder.length,
   );
   readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
+  private readonly biteTimeoutIds: ReturnType<typeof setTimeout>[] = [];
+
   ngOnInit(): void {
     this.tray.set(shuffleArray([...this.config().ingredientsInOrder]));
+  }
+
+  ngOnDestroy(): void {
+    this.biteTimeoutIds.forEach(clearTimeout);
   }
 
   t(key: UiStringKey): string {
@@ -158,5 +234,27 @@ export class BurgerBuildGameComponent implements OnInit {
   revealNow(): void {
     this.stack.set([...this.config().ingredientsInOrder]);
     this.tray.set([]);
+  }
+
+  onTakeBites(): void {
+    if (this.isBiting()) return;
+    this.isBiting.set(true);
+    this.biteNextCorner();
+  }
+
+  private biteNextCorner(): void {
+    if (this.biteCount() >= BITE_ORDER.length) {
+      this.letterRevealed.set(true);
+      return;
+    }
+
+    this.biteCount.update((n) => n + 1);
+    this.isShaking.set(true);
+    this.biteTimeoutIds.push(
+      setTimeout(() => {
+        this.isShaking.set(false);
+        this.biteTimeoutIds.push(setTimeout(() => this.biteNextCorner(), BITE_PAUSE_MS));
+      }, BITE_SHAKE_MS),
+    );
   }
 }
