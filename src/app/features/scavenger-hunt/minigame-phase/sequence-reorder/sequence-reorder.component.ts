@@ -32,7 +32,7 @@ function swap<T>(items: T[], i: number, j: number): T[] {
             <button
               type="button"
               (click)="moveUp(i)"
-              [disabled]="i === 0"
+              [disabled]="i === 0 || isSolved()"
               class="min-h-11 min-w-11 touch-manipulation rounded-lg bg-amber-100 font-bold text-amber-800 disabled:opacity-30"
             >
               ↑
@@ -40,7 +40,7 @@ function swap<T>(items: T[], i: number, j: number): T[] {
             <button
               type="button"
               (click)="moveDown(i)"
-              [disabled]="i === order().length - 1"
+              [disabled]="i === order().length - 1 || isSolved()"
               class="min-h-11 min-w-11 touch-manipulation rounded-lg bg-amber-100 font-bold text-amber-800 disabled:opacity-30"
             >
               ↓
@@ -48,22 +48,38 @@ function swap<T>(items: T[], i: number, j: number): T[] {
           </li>
         }
       </ol>
-      <button
-        type="button"
-        (click)="onSubmit()"
-        class="min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
-      >
-        {{ t('submit') }}
-      </button>
-      @if (wrongFlash()) {
-        <p class="mt-2 text-sm font-semibold text-red-700">{{ t('wrongTryAgain') }}</p>
+
+      @if (isSolved()) {
+        <div class="flex flex-col items-center gap-4 text-center">
+          <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
+            🎉 {{ t('wellDone') }}
+          </p>
+          <button
+            type="button"
+            (click)="solved.emit()"
+            class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          >
+            {{ t('continueLabel') }}
+          </button>
+        </div>
+      } @else {
+        <button
+          type="button"
+          (click)="onSubmit()"
+          class="min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+        >
+          {{ t('submit') }}
+        </button>
+        @if (wrongFlash()) {
+          <p class="mt-2 text-sm font-semibold text-red-700">{{ t('wrongTryAgain') }}</p>
+        }
+        <app-hint-panel
+          [hints]="config().hints"
+          [lang]="lang()"
+          [attemptCount]="attemptCount()"
+          (revealed)="isSolved.set(true)"
+        />
       }
-      <app-hint-panel
-        [hints]="config().hints"
-        [lang]="lang()"
-        [attemptCount]="attemptCount()"
-        (revealed)="solved.emit()"
-      />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,6 +92,7 @@ export class SequenceReorderComponent implements OnInit {
   readonly order = signal<BilingualText[]>([]);
   readonly attemptCount = signal(0);
   readonly wrongFlash = signal(false);
+  readonly isSolved = signal(false);
 
   ngOnInit(): void {
     this.order.set(shuffleArray(this.config().itemsInCorrectOrder));
@@ -99,7 +116,7 @@ export class SequenceReorderComponent implements OnInit {
     const correctOrder = this.config().itemsInCorrectOrder;
     const isCorrect = this.order().every((item, i) => item === correctOrder[i]);
     if (isCorrect) {
-      this.solved.emit();
+      this.isSolved.set(true);
       return;
     }
     this.attemptCount.update((n) => n + 1);
