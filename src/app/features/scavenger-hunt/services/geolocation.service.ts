@@ -37,6 +37,15 @@ export function initialBearingDegrees(
 }
 
 /**
+ * A GPS bearing is relative to true north, not to which way the phone is
+ * facing — subtracting the device's own compass heading turns it into "turn
+ * this many degrees from where you're currently pointed."
+ */
+export function relativeBearingDegrees(bearingDegrees: number, headingDegrees: number): number {
+  return (((bearingDegrees - headingDegrees) % 360) + 360) % 360;
+}
+
+/**
  * GPS proximity here is always advisory. Every consumer of this service
  * (GeoCheckComponent) must offer a manual "I'm here!" fallback regardless of
  * permissionState/lastError, since denial, indoor inaccuracy, or any other

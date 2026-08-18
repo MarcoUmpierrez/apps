@@ -1,4 +1,8 @@
-import { haversineDistanceMeters, initialBearingDegrees } from './geolocation.service';
+import {
+  haversineDistanceMeters,
+  initialBearingDegrees,
+  relativeBearingDegrees,
+} from './geolocation.service';
 
 describe('haversineDistanceMeters', () => {
   it('is zero for identical coordinates', () => {
@@ -39,5 +43,19 @@ describe('initialBearingDegrees', () => {
     const bearing = initialBearingDegrees(40.0001, -3.0001, 40.0008, -3.0009);
     expect(bearing).toBeGreaterThanOrEqual(0);
     expect(bearing).toBeLessThan(360);
+  });
+});
+
+describe('relativeBearingDegrees', () => {
+  it('is zero when the target bearing matches the device heading', () => {
+    expect(relativeBearingDegrees(90, 90)).toBe(0);
+  });
+
+  it('wraps negative differences into [0, 360)', () => {
+    expect(relativeBearingDegrees(10, 350)).toBe(20);
+  });
+
+  it('wraps positive differences past 360 back into [0, 360)', () => {
+    expect(relativeBearingDegrees(350, 10)).toBe(340);
   });
 });

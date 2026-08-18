@@ -5,7 +5,17 @@
     {{ location().label[lang()] }}
   </h3>
 
-  <app-compass-arrow [bearingDegrees]="bearingDegrees()" />
+  <app-compass-arrow [bearingDegrees]="compassRotationDegrees()" />
+
+  @if (heading.permissionState() === 'unknown' || heading.permissionState() === 'denied') {
+    <button
+      type="button"
+      (click)="onEnableCompass()"
+      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 text-sm font-semibold text-amber-800"
+    >
+      {{ t('enableCompass') }}
+    </button>
+  }
 
   @if (isWithinRadius()) {
     <div

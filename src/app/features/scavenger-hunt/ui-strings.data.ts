@@ -23,6 +23,7 @@ export type UiStringKey =
   | 'revealIt'
   | 'shakeToRevealPrompt'
   | 'enableMotion'
+  | 'enableCompass'
   | 'stampCollected'
   | 'notebookCallout'
   | 'downloadMemory'
@@ -76,6 +77,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     revealIt: 'Reveal it',
     shakeToRevealPrompt: 'Shake your phone to reveal it!',
     enableMotion: 'Enable motion',
+    enableCompass: 'Enable compass',
     stampCollected: 'Stamp collected!',
     notebookCallout: 'Write this in your notebook',
     downloadMemory: 'Download memory',
@@ -128,6 +130,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     revealIt: 'Revelarlo',
     shakeToRevealPrompt: '¡Agita tu teléfono para revelarlo!',
     enableMotion: 'Activar movimiento',
+    enableCompass: 'Activar brújula',
     stampCollected: '¡Sello coleccionado!',
     notebookCallout: 'Escribe esto en tu cuaderno',
     downloadMemory: 'Descargar recuerdo',
