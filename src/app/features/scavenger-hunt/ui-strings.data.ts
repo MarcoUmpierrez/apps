@@ -20,6 +20,7 @@ export type UiStringKey =
   | 'takePhoto'
   | 'skipPhoto'
   | 'photoTakenBadge'
+  | 'retakePhoto'
   | 'revealIt'
   | 'shakeToRevealPrompt'
   | 'enableMotion'
@@ -74,6 +75,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     takePhoto: 'Take a photo of you and your partner in front of the secret spot',
     skipPhoto: 'Skip this step',
     photoTakenBadge: 'Memory captured',
+    retakePhoto: 'Take another one',
     revealIt: 'Reveal it',
     shakeToRevealPrompt: 'Shake your phone to reveal it!',
     enableMotion: 'Enable motion',
@@ -127,6 +129,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     takePhoto: 'Tomar una foto de tu compañero y tú en frente del lugar secreto',
     skipPhoto: 'Omitir este paso',
     photoTakenBadge: 'Recuerdo capturado',
+    retakePhoto: 'Tomar otra',
     revealIt: 'Revelarlo',
     shakeToRevealPrompt: '¡Agita tu teléfono para revelarlo!',
     enableMotion: 'Activar movimiento',

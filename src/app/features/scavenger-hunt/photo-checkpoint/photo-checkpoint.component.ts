@@ -6,7 +6,11 @@ import { HuntStoreService } from '../services/hunt-store.service';
 import { Language } from '../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../ui-strings.data';
 
-/** Any photo is accepted, no validation, and skipping is always available. */
+/**
+ * Any photo is accepted, no validation, and skipping is always available
+ * before a photo is taken. Once taken, it's shown back for review with a
+ * chance to retake before advancing.
+ */
 @Component({
   selector: 'app-photo-checkpoint',
   templateUrl: './photo-checkpoint.component.html',
@@ -18,6 +22,7 @@ export class PhotoCheckpointComponent {
   readonly stop = computed(() => HUNT_STOPS[this.store.progress().currentStopIndex]);
   readonly lang = computed<Language>(() => this.store.progress().language ?? 'en');
   readonly isProcessing = signal(false);
+  readonly previewDataUrl = signal<string | null>(null);
 
   t(key: UiStringKey): string {
     return translateUi(this.lang(), key);
@@ -26,12 +31,21 @@ export class PhotoCheckpointComponent {
   async onFileSelected(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
+    input.value = '';
     if (!file) return;
 
     this.isProcessing.set(true);
     const dataUrl = await compressPhotoToDataUrl(file);
     this.isProcessing.set(false);
-    this.advance(dataUrl);
+    this.previewDataUrl.set(dataUrl);
+  }
+
+  onRetake(): void {
+    this.previewDataUrl.set(null);
+  }
+
+  onContinue(): void {
+    this.advance(this.previewDataUrl());
   }
 
   onSkip(): void {

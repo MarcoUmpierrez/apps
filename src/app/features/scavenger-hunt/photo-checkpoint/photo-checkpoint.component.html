@@ -1,30 +1,56 @@
 <div
   class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
 >
-  <div class="text-6xl">📸</div>
-  <p class="max-w-xs text-lg font-semibold text-amber-900">
-    {{ stop().photoCheckpoint?.prompt?.[lang()] }}
-  </p>
-
-  <label
-    class="min-h-14 w-full max-w-xs touch-manipulation cursor-pointer rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
-  >
-    {{ isProcessing() ? '…' : t('takePhoto') }}
-    <input
-      type="file"
-      accept="image/*"
-      capture="environment"
-      class="hidden"
-      [disabled]="isProcessing()"
-      (change)="onFileSelected($event)"
+  @if (previewDataUrl(); as photo) {
+    <p class="font-semibold text-amber-800">{{ t('photoTakenBadge') }}</p>
+    <img
+      [src]="photo"
+      alt=""
+      class="max-h-[50vh] w-full max-w-xs rounded-2xl object-contain shadow-lg shadow-amber-900/30"
     />
-  </label>
 
-  <button
-    type="button"
-    (click)="onSkip()"
-    class="text-sm font-semibold text-amber-700 underline underline-offset-2"
-  >
-    {{ t('skipPhoto') }}
-  </button>
+    <div class="flex w-full max-w-xs flex-col gap-3">
+      <button
+        type="button"
+        (click)="onContinue()"
+        class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+      >
+        {{ t('continueLabel') }}
+      </button>
+      <button
+        type="button"
+        (click)="onRetake()"
+        class="min-h-11 touch-manipulation rounded-2xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+      >
+        {{ t('retakePhoto') }}
+      </button>
+    </div>
+  } @else {
+    <div class="text-6xl">📸</div>
+    <p class="max-w-xs text-lg font-semibold text-amber-900">
+      {{ stop().photoCheckpoint?.prompt?.[lang()] }}
+    </p>
+
+    <label
+      class="min-h-14 w-full max-w-xs touch-manipulation cursor-pointer rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+    >
+      {{ isProcessing() ? '…' : t('takePhoto') }}
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        class="hidden"
+        [disabled]="isProcessing()"
+        (change)="onFileSelected($event)"
+      />
+    </label>
+
+    <button
+      type="button"
+      (click)="onSkip()"
+      class="text-sm font-semibold text-amber-700 underline underline-offset-2"
+    >
+      {{ t('skipPhoto') }}
+    </button>
+  }
 </div>
