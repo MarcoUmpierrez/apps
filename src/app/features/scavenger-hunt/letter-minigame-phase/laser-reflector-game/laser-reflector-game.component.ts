@@ -121,7 +121,9 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('laserReflectorPrompt') }}</p>
+      }
 
+      @if (!letterRevealed()) {
         <div
           class="relative rounded-xl border-2 border-amber-800 bg-amber-50"
           [style.width.px]="config().cols * cellSize"
@@ -140,7 +142,8 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
                   <button
                     type="button"
                     (click)="onMirrorTap(cell.mirrorIndex!)"
-                    class="flex h-full w-full touch-manipulation items-center justify-center"
+                    [disabled]="taskComplete()"
+                    class="flex h-full w-full touch-manipulation items-center justify-center disabled:opacity-60"
                   >
                     <div
                       class="h-1 w-7 rounded-full bg-sky-700"
@@ -183,13 +186,27 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
             />
           </svg>
         </div>
+      }
 
+      @if (!taskComplete()) {
         <button
           type="button"
           (click)="revealNow()"
           class="touch-manipulation text-sm font-semibold text-amber-700 underline underline-offset-2"
         >
           {{ t('giveUp') }}
+        </button>
+      } @else if (!letterRevealed()) {
+        <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
+          🎉 {{ t('wellDone') }}
+        </p>
+        <button
+          type="button"
+          (click)="letterRevealed.set(true)"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+        >
+          {{ t('continueLabel') }}
         </button>
       } @else {
         <div class="text-8xl font-black text-amber-900">{{ config().letter }}</div>
@@ -202,8 +219,7 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
         <button
           type="button"
           (click)="solved.emit()"
-          [disabled]="!continueReady()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
         >
           {{ t('continueLabel') }}
         </button>
@@ -224,6 +240,7 @@ export class LaserReflectorGameComponent implements OnInit {
   private readonly beamLine = viewChild<ElementRef<SVGPolylineElement>>('beamLine');
 
   readonly orientations = signal<MirrorOrientation[]>([]);
+  readonly letterRevealed = signal(false);
 
   readonly beam = computed(() => traceBeam(this.config(), this.orientations()));
   readonly taskComplete = computed(() => this.beam().hitTarget);
@@ -253,7 +270,10 @@ export class LaserReflectorGameComponent implements OnInit {
 
   beamPoints(): string {
     return this.beam()
-      .path.map((p) => `${p.col * this.cellSize + this.cellSize / 2},${p.row * this.cellSize + this.cellSize / 2}`)
+      .path.map(
+        (p) =>
+          `${p.col * this.cellSize + this.cellSize / 2},${p.row * this.cellSize + this.cellSize / 2}`,
+      )
       .join(' ');
   }
 
@@ -271,7 +291,7 @@ export class LaserReflectorGameComponent implements OnInit {
     this.emitterArrowDeg = DIR_ARROW_DEG[cfg.emitter.direction];
 
     this.orientations.set(
-      cfg.mirrors.map((m) => (((m.orientation + 90) % 180) as MirrorOrientation)),
+      cfg.mirrors.map((m) => ((m.orientation + 90) % 180) as MirrorOrientation),
     );
   }
 
@@ -287,7 +307,7 @@ export class LaserReflectorGameComponent implements OnInit {
     if (this.taskComplete()) return;
     this.orientations.update((orients) => {
       const next = [...orients];
-      next[index] = (((next[index] + 45) % 180) as MirrorOrientation);
+      next[index] = ((next[index] + 45) % 180) as MirrorOrientation;
       return next;
     });
   }
