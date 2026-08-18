@@ -1,5 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, input, output, signal } from '@angular/core';
-import { BurgerBuildLetterMinigame, BurgerIngredientKind, Language } from '../../scavenger-hunt.types';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import {
+  BurgerBuildLetterMinigame,
+  BurgerIngredientKind,
+  Language,
+} from '../../scavenger-hunt.types';
 import { shuffleArray } from '../../shuffle.util';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
 import { createContinueReadySignal } from '../continue-ready.util';
@@ -26,20 +38,22 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
         <p class="text-lg font-semibold text-amber-900">{{ t('burgerBuildPrompt') }}</p>
+      }
 
-        <div
-          class="flex h-60 w-32 flex-col-reverse items-center justify-start gap-1 rounded-2xl border-2 border-amber-300 bg-amber-100/40 p-2"
-        >
-          @for (ingredient of stack(); track $index) {
-            <div
-              class="flex h-7 w-full shrink-0 items-center justify-center rounded-full text-lg shadow"
-              [style.background-color]="info(ingredient).color"
-            >
-              {{ info(ingredient).emoji }}
-            </div>
-          }
-        </div>
+      <div
+        class="flex h-60 w-32 flex-col-reverse items-center justify-start gap-1 rounded-2xl border-2 border-amber-300 bg-amber-100/40 p-2"
+      >
+        @for (ingredient of stack(); track $index) {
+          <div
+            class="flex h-7 w-full shrink-0 items-center justify-center rounded-full text-lg shadow"
+            [style.background-color]="info(ingredient).color"
+          >
+            {{ info(ingredient).emoji }}
+          </div>
+        }
+      </div>
 
+      @if (!taskComplete()) {
         <div class="flex flex-wrap justify-center gap-2">
           @for (ingredient of tray(); track ingredient) {
             <button
@@ -64,6 +78,18 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
         >
           {{ t('giveUp') }}
         </button>
+      } @else if (!letterRevealed()) {
+        <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
+          🎉 {{ t('wellDone') }}
+        </p>
+        <button
+          type="button"
+          (click)="letterRevealed.set(true)"
+          [disabled]="!continueReady()"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+        >
+          {{ t('continueLabel') }}
+        </button>
       } @else {
         <div class="text-8xl font-black text-amber-900">{{ config().letter }}</div>
         <div class="max-w-xs rounded-xl border-2 border-dashed border-amber-400 bg-amber-50 p-4">
@@ -75,8 +101,7 @@ const INGREDIENT_INFO: Record<BurgerIngredientKind, { emoji: string; color: stri
         <button
           type="button"
           (click)="solved.emit()"
-          [disabled]="!continueReady()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
         >
           {{ t('continueLabel') }}
         </button>
@@ -93,6 +118,7 @@ export class BurgerBuildGameComponent implements OnInit {
   readonly stack = signal<BurgerIngredientKind[]>([]);
   readonly tray = signal<BurgerIngredientKind[]>([]);
   readonly wrongFlash = signal(false);
+  readonly letterRevealed = signal(false);
 
   readonly taskComplete = computed(
     () => this.stack().length === this.config().ingredientsInOrder.length,
