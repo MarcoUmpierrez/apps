@@ -61,7 +61,20 @@ function computeFeedback(guess: string, target: string): LetterFeedback[] {
         }
       </div>
 
-      @if (!solvedLocally()) {
+      @if (solvedLocally()) {
+        <div class="flex flex-col items-center gap-4 text-center">
+          <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
+            🎉 {{ t('wellDone') }}
+          </p>
+          <button
+            type="button"
+            (click)="solved.emit()"
+            class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          >
+            {{ t('continueLabel') }}
+          </button>
+        </div>
+      } @else {
         <input
           type="text"
           [(ngModel)]="currentGuess"
@@ -124,14 +137,12 @@ export class WordleGuessComponent {
     // free-text questions elsewhere.
     if (normalizeAnswer(guess) === normalizeAnswer(this.config().targetWord[this.lang()])) {
       this.solvedLocally.set(true);
-      this.solved.emit();
       return;
     }
 
     if (this.guesses().length >= this.config().maxGuesses) {
       this.guesses.update((g) => [...g, this.config().targetWord[this.lang()]]);
       this.solvedLocally.set(true);
-      this.solved.emit();
     }
   }
 }
