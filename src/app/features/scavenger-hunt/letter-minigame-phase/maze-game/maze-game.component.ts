@@ -278,6 +278,28 @@ export class MazeGameComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Tilt steering slides the ball all the way to the next wall rather than a
+   * single cell — that reads as a natural "roll until it hits something"
+   * motion instead of a step-by-step nudge, and matches how a real tilt maze
+   * behaves. The d-pad buttons keep single-cell moves via `move()`.
+   */
+  private slideToWall(direction: Direction): void {
+    if (this.taskComplete()) return;
+    let x = this.playerX();
+    let y = this.playerY();
+
+    while (!this.maze[y][x][direction]) {
+      if (direction === 'north') y -= 1;
+      if (direction === 'south') y += 1;
+      if (direction === 'west') x -= 1;
+      if (direction === 'east') x += 1;
+    }
+
+    this.playerX.set(x);
+    this.playerY.set(y);
+  }
+
+  /**
    * Same iOS-gate pattern as HeadingService/MotionService: DeviceOrientation
    * needs an explicit, user-gesture-triggered permission prompt on iOS 13+
    * that can be denied — arrow buttons stay the primary control, this is
@@ -331,14 +353,14 @@ export class MazeGameComponent implements OnInit, OnDestroy {
       const deltaGamma = event.gamma - this.baselineGamma;
 
       if (this.armedNorthSouth && Math.abs(deltaBeta) >= TILT_ENGAGE_THRESHOLD) {
-        this.move(deltaBeta < 0 ? 'north' : 'south');
+        this.slideToWall(deltaBeta < 0 ? 'north' : 'south');
         this.armedNorthSouth = false;
       } else if (!this.armedNorthSouth && Math.abs(deltaBeta) < TILT_DISENGAGE_THRESHOLD) {
         this.armedNorthSouth = true;
       }
 
       if (this.armedEastWest && Math.abs(deltaGamma) >= TILT_ENGAGE_THRESHOLD) {
-        this.move(deltaGamma < 0 ? 'west' : 'east');
+        this.slideToWall(deltaGamma < 0 ? 'west' : 'east');
         this.armedEastWest = false;
       } else if (!this.armedEastWest && Math.abs(deltaGamma) < TILT_DISENGAGE_THRESHOLD) {
         this.armedEastWest = true;
