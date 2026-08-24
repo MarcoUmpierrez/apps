@@ -29,9 +29,9 @@ const JITTER_AMPLITUDE_DEGREES = 9;
         fill="none"
         stroke="currentColor"
         stroke-width="3"
-        class="text-amber-300"
+        class="text-[#6b5636]"
       />
-      <polygon points="50,10 62,58 50,48 38,58" fill="currentColor" class="text-amber-800" />
+      <polygon points="50,10 62,58 50,48 38,58" fill="currentColor" class="text-[#e3d5b8]" />
     </svg>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

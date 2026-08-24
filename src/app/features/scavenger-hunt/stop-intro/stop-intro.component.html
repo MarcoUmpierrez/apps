@@ -1,13 +1,20 @@
 <div
-  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 p-6 text-center"
+  style="animation: diary-page-in 0.55s cubic-bezier(.2,.7,.3,1) both"
 >
   <div class="relative w-full max-w-md -rotate-1">
-    <div class="journal-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
-    <div class="journal-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
 
-    <div class="journal-page relative px-6 py-8">
+    <div class="hunt-page relative px-6 py-8 text-[#33261a]">
+      <img
+        src="scavenger-hunt/textures/coffee.webp"
+        alt=""
+        class="pointer-events-none absolute right-0 bottom-16 h-36 w-36 opacity-55 mix-blend-multiply"
+      />
+
       <svg
-        class="absolute right-4 top-14 h-8 w-8 rotate-12 text-amber-700/40"
+        class="absolute top-14 right-4 h-8 w-8 rotate-12 text-[#8a7550]/40"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -19,7 +26,7 @@
       </svg>
 
       <svg
-        class="absolute bottom-10 left-4 h-10 w-10 -rotate-6 text-amber-700/30"
+        class="absolute bottom-10 left-4 h-10 w-10 -rotate-6 text-[#8a7550]/30"
         viewBox="0 0 40 40"
         fill="none"
         stroke="currentColor"
@@ -29,12 +36,19 @@
         <path d="M6 20 Q6 8 18 8 Q30 8 30 18 Q30 26 22 26 Q16 26 16 20 Q16 16 20 16" />
       </svg>
 
+      <div
+        class="mb-4 flex items-baseline justify-between gap-3 border-b border-[#3a2c1c]/20 pb-2 font-['Spectral',serif] text-[10px] tracking-[.2em] text-[#8a7550] uppercase"
+      >
+        <span class="shrink-0">{{ stop().pageNumber ?? stop().order }}</span>
+        <span class="truncate text-right">{{ stop().title[lang()] }}</span>
+      </div>
+
       @if (stop().chapterImage; as chapterImage) {
         <div class="mb-4 flex justify-center">
           <img
             [src]="chapterImage"
             alt=""
-            class="h-28 w-28 -rotate-2 rounded-sm border-4 border-white object-cover shadow-md shadow-amber-900/30"
+            class="h-28 w-28 -rotate-2 rounded-sm border-4 border-[#e9dec0] object-cover shadow-md shadow-black/40"
           />
         </div>
       }
@@ -42,21 +56,21 @@
       <div class="space-y-3 text-left">
         @if (stop().narrativeRich; as paragraphs) {
           @for (paragraph of paragraphs; track $index) {
-            <p class="font-['Caveat',cursive] text-xl leading-relaxed text-amber-900/80">
+            <p class="font-['Spectral',serif] text-[15px] leading-relaxed">
               @for (run of paragraph; track $index) {
                 @switch (run.style) {
                   @case ('crossed') {
                     @if (showCrossedOut()) {
-                      <span class="text-amber-900">{{ run.text[lang()] }}</span>
+                      <span class="text-[#3a3f6b]">{{ run.text[lang()] }}</span>
                     } @else {
-                      <span class="text-amber-900/40 line-through decoration-2 decoration-wavy">{{
+                      <span class="text-[#33261a]/40 line-through decoration-2 decoration-wavy">{{
                         run.text[lang()]
                       }}</span>
                     }
                   }
                   @case ('empty') {
                     @if (showCrossedOut()) {
-                      <span class="text-amber-900">{{ run.text[lang()] }}</span>
+                      <span class="text-[#3a3f6b]">{{ run.text[lang()] }}</span>
                     } @else {
                       <span class="narrative-empty">{{ run.text[lang()] }}</span>
                     }
@@ -69,27 +83,28 @@
             </p>
           }
         } @else {
-          <p class="font-serif leading-relaxed text-amber-900">{{ stop().narrative[lang()] }}</p>
+          <p class="font-['Spectral',serif] leading-relaxed">{{ stop().narrative[lang()] }}</p>
         }
 
         @if (stop().narrativeRiddle; as riddle) {
-          <div class="riddle-card mt-4 rounded-lg border border-amber-800/25 bg-amber-100/40 px-4 py-4">
-            <p class="whitespace-pre-line text-center font-serif italic leading-relaxed text-amber-900">
+          <div class="riddle-card mt-4 rounded-sm border border-[#3a2c1c]/20 bg-[#3a2c1c]/5 px-4 py-4">
+            <p
+              class="border-l-2 border-[#3a3f6b]/35 pl-3 text-left font-['Spectral',serif] text-[17px] leading-relaxed text-[#3a3f6b] italic whitespace-pre-line"
+            >
               {{ riddle.poem[lang()] }}
             </p>
             <input
               type="text"
               [(ngModel)]="riddleInput"
               (keyup.enter)="onSubmitRiddle()"
-              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl border-2 bg-white/70 px-4 py-3 text-center text-lg font-medium text-amber-900"
-              [class.border-amber-300]="!riddleWrongFlash()"
-              [class.border-red-600]="riddleWrongFlash()"
-              [class.riddle-input-shake]="riddleWrongFlash()"
+              [placeholder]="t('writeItHere')"
+              class="mt-4 min-h-11 w-full touch-manipulation border-0 border-b bg-transparent px-1 py-3 text-center font-['Caveat',cursive] text-xl text-[#3a2c1c] outline-none"
+              [class]="riddleWrongFlash() ? 'border-red-600 riddle-input-shake' : 'border-[#3a2c1c]/40'"
             />
             <button
               type="button"
               (click)="onSubmitRiddle()"
-              class="mt-3 min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+              class="mt-3 min-h-11 w-full touch-manipulation border border-[#3a2c1c]/45 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#3a2c1c] uppercase transition-transform active:scale-95"
             >
               {{ t('submit') }}
             </button>
@@ -98,8 +113,10 @@
                 {{ t('wrongTryAgain') }}
               </p>
             }
-            <div class="flex flex-wrap items-start gap-x-4">
+            <div class="flex flex-nowrap items-start gap-3">
               <app-hint-panel
+                class="min-w-0 flex-1"
+                align="left"
                 [hints]="riddle.hints"
                 [lang]="lang()"
                 [attemptCount]="riddleAttemptCount()"
@@ -109,7 +126,7 @@
                 <button
                   type="button"
                   (click)="showCrossedOut.set(!showCrossedOut())"
-                  class="mt-4 text-sm font-semibold text-amber-800 underline underline-offset-2 touch-manipulation"
+                  class="mt-4 min-w-0 flex-1 touch-manipulation text-left font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
                 >
                   {{ showCrossedOut() ? t('hideCrossedOut') : t('showCrossedOut') }}
                 </button>
@@ -117,13 +134,13 @@
             </div>
           </div>
         } @else {
-          <p class="font-['Caveat',cursive] text-lg italic text-amber-700/70">
+          <p class="font-['Kalam',cursive] text-base text-[#8a7550] italic">
             {{ t('diaryClosing') }}
           </p>
         }
       </div>
 
-      <p class="mt-6 text-center font-['Caveat',cursive] text-lg text-amber-700/70">
+      <p class="mt-6 text-center font-['Caveat',cursive] text-lg text-[#8a7550]">
         — {{ stop().pageNumber ?? stop().order }} —
       </p>
     </div>
@@ -133,7 +150,7 @@
     <button
       type="button"
       (click)="onContinue()"
-      class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+      class="min-h-14 touch-manipulation rounded-sm border border-[#6b5636] bg-transparent px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e3d5b8] uppercase transition-colors active:bg-[#e3d5b8]/10"
     >
       {{ t('continueLabel') }}
     </button>

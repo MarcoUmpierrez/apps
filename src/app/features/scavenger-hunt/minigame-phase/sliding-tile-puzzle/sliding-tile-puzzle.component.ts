@@ -48,7 +48,7 @@ function shuffleTiles(gridSize: number): number[] {
   selector: 'app-sliding-tile-puzzle',
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-3 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-3 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ config().prompt[lang()] }}</p>
       <div
         class="grid gap-1 rounded-xl border-2 border-amber-300 bg-amber-100 p-1"
         [style.grid-template-columns]="'repeat(' + config().gridSize + ', 1fr)'"
@@ -75,25 +75,27 @@ function shuffleTiles(gridSize: number): number[] {
         }
       </div>
       @if (!solvedLocally()) {
-        <button
-          type="button"
-          (click)="onNeedHint()"
-          class="mt-3 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
-        >
-          {{ t('needHint') }}
-        </button>
-        <button
-          type="button"
-          (click)="revealSolution()"
-          class="mt-2 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
-        >
-          {{ t('giveUp') }}
-        </button>
+        <div class="mt-4 flex items-center justify-between px-6">
+          <button
+            type="button"
+            (click)="onNeedHint()"
+            class="touch-manipulation font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
+          >
+            {{ t('needHint') }}
+          </button>
+          <button
+            type="button"
+            (click)="revealSolution()"
+            class="touch-manipulation font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
+          >
+            {{ t('giveUp') }}
+          </button>
+        </div>
       } @else {
         <button
           type="button"
           (click)="solved.emit()"
-          class="mt-3 min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+          class="mt-4 min-h-11 w-full touch-manipulation border border-[#3a2c1c]/45 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
         >
           {{ t('continueLabel') }}
         </button>

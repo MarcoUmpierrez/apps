@@ -1,30 +1,35 @@
-<div
-  class="flex min-h-dvh flex-col items-center justify-center gap-4 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6"
->
-  @let letterMinigame = stop().letterMinigame;
-  @if (letterMinigame) {
-    @switch (letterMinigame.kind) {
-      @case ('wall-break') {
-        <app-wall-break-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+<div class="flex min-h-dvh flex-col items-center justify-center gap-4 p-6">
+  <div class="relative w-full max-w-md">
+    <div class="hunt-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+
+    <div class="hunt-page flex flex-col items-center px-4 py-8">
+      @let letterMinigame = stop().letterMinigame;
+      @if (letterMinigame) {
+        @switch (letterMinigame.kind) {
+          @case ('wall-break') {
+            <app-wall-break-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('dirt-wipe') {
+            <app-dirt-wipe-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('tower-of-hanoi') {
+            <app-tower-of-hanoi-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('burger-build') {
+            <app-burger-build-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('maze') {
+            <app-maze-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('laser-reflector') {
+            <app-laser-reflector-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('color-sequence') {
+            <app-color-sequence-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
+          }
+        }
       }
-      @case ('dirt-wipe') {
-        <app-dirt-wipe-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('tower-of-hanoi') {
-        <app-tower-of-hanoi-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('burger-build') {
-        <app-burger-build-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('maze') {
-        <app-maze-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('laser-reflector') {
-        <app-laser-reflector-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('color-sequence') {
-        <app-color-sequence-game [config]="letterMinigame" [lang]="lang()" (solved)="onSolved()" />
-      }
-    }
-  }
+    </div>
+  </div>
 </div>

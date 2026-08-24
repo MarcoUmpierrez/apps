@@ -17,6 +17,7 @@ export type UiStringKey =
   | 'hideCrossedOut'
   | 'submit'
   | 'wrongTryAgain'
+  | 'writeItHere'
   | 'takePhoto'
   | 'skipPhoto'
   | 'photoTakenBadge'
@@ -25,6 +26,7 @@ export type UiStringKey =
   | 'shakeToRevealPrompt'
   | 'enableMotion'
   | 'enableCompass'
+  | 'enableTilt'
   | 'stampCollected'
   | 'notebookCallout'
   | 'downloadMemory'
@@ -73,6 +75,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     hideCrossedOut: 'Hide hidden words',
     submit: 'Submit',
     wrongTryAgain: 'Not quite — try again!',
+    writeItHere: 'write it here',
     takePhoto: 'Take a photo of you and your partner in front of the secret spot',
     skipPhoto: 'Skip this step',
     photoTakenBadge: 'Memory captured',
@@ -81,13 +84,14 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     shakeToRevealPrompt: 'Shake your phone to reveal it!',
     enableMotion: 'Enable motion',
     enableCompass: 'Enable compass',
+    enableTilt: 'Tilt your phone to steer',
     stampCollected: 'Stamp collected!',
     notebookCallout: 'Write this in your notebook',
     downloadMemory: 'Download memory',
     proposalQuestion: 'Will you be my girlfriend?',
     yesButton: 'Yes!',
     sheSaidYes: 'She said YES!',
-    ourJourney: 'Our journey',
+    ourJourney: 'The Secret Journey',
     devModeUnlockedToast: 'Debug mode unlocked',
     skipDev: 'Skip (dev)',
     jumpToStop: 'Jump to stop',
@@ -128,6 +132,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     hideCrossedOut: 'Ocultar palabras ocultas',
     submit: 'Enviar',
     wrongTryAgain: 'No es correcto — ¡inténtalo de nuevo!',
+    writeItHere: 'escríbelo aquí',
     takePhoto: 'Tomar una foto de tu compañero y tú en frente del lugar secreto',
     skipPhoto: 'Omitir este paso',
     photoTakenBadge: 'Recuerdo capturado',
@@ -136,13 +141,14 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     shakeToRevealPrompt: '¡Agita tu teléfono para revelarlo!',
     enableMotion: 'Activar movimiento',
     enableCompass: 'Activar brújula',
+    enableTilt: 'Inclina tu teléfono para moverte',
     stampCollected: '¡Sello coleccionado!',
     notebookCallout: 'Escribe esto en tu cuaderno',
     downloadMemory: 'Descargar recuerdo',
     proposalQuestion: '¿Quieres ser mi novia?',
     yesButton: '¡Sí!',
     sheSaidYes: '¡Ella dijo SÍ!',
-    ourJourney: 'Nuestro viaje',
+    ourJourney: 'El Viaje Secreto',
     devModeUnlockedToast: 'Modo de depuración desbloqueado',
     skipDev: 'Omitir (dev)',
     jumpToStop: 'Ir a parada',

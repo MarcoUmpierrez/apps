@@ -51,7 +51,7 @@ export const routes: Routes = [
   },
   {
     path: 'scavenger-hunt',
-    title: "Our Journey",
+    title: 'The Secret Journey',
     loadComponent: () =>
       import('./features/scavenger-hunt/scavenger-hunt.component').then(
         (m) => m.ScavengerHuntComponent

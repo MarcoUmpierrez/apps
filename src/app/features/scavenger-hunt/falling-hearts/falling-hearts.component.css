@@ -1,0 +1,56 @@
+/* Ambient hearts drift straight down; leaves sway side to side on the way
+   down for a more natural falling-leaf feel. Both loop indefinitely. */
+@keyframes heart-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(115vh) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.heart-fall {
+  animation-name: heart-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(25vh) translateX(var(--leaf-drift)) rotate(80deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(0) rotate(160deg);
+  }
+  75% {
+    transform: translateY(75vh) translateX(calc(var(--leaf-drift) * -1)) rotate(240deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(115vh) translateX(0) rotate(320deg);
+    opacity: 0;
+  }
+}
+
+.leaf-fall {
+  animation-name: leaf-fall;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}

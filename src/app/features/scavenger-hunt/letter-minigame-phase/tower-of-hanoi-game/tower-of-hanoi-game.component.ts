@@ -24,7 +24,7 @@ const WRONG_FLASH_MS = 900;
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
-        <p class="text-lg font-semibold text-amber-900">{{ t('hanoiPrompt') }}</p>
+        <p class="font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ t('hanoiPrompt') }}</p>
 
         <div class="flex w-full items-end justify-around gap-2">
           @for (pole of poles(); track $index; let i = $index) {
@@ -61,18 +61,23 @@ const WRONG_FLASH_MS = 900;
           {{ t('giveUp') }}
         </button>
       } @else {
-        <div class="text-8xl font-black text-amber-900">{{ config().letter }}</div>
-        <div class="max-w-xs rounded-xl border-2 border-dashed border-amber-400 bg-amber-50 p-4">
-          <p class="mb-1 text-xs font-bold uppercase tracking-widest text-amber-600">
+        <div
+          class="flex h-28 w-28 items-center justify-center rounded-full border-2 border-[#3a2c1c]/30 font-['Spectral',serif] text-6xl text-[#3a3f6b] shadow-[0_10px_20px_rgba(0,0,0,0.15)]"
+          style="animation: stamp-in 0.5s ease-out both"
+        >
+          {{ config().letter }}
+        </div>
+        <div class="w-full max-w-xs border border-dashed border-[#3a2c1c]/30 bg-[#3a2c1c]/5 p-4">
+          <p class="mb-1 font-['Spectral',serif] text-[10px] tracking-[.22em] text-[#8a7550] uppercase">
             📓 {{ t('notebookCallout') }}
           </p>
-          <p class="text-amber-900">{{ notebookMessage() }}</p>
+          <p class="font-['Kalam',cursive] text-[15px] text-[#33261a]">{{ notebookMessage() }}</p>
         </div>
         <button
           type="button"
           (click)="solved.emit()"
           [disabled]="!continueReady()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+          class="min-h-14 w-full touch-manipulation border border-[#3a2c1c]/45 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#33261a] uppercase transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>

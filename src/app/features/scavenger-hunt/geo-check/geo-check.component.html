@@ -1,7 +1,9 @@
-<div
-  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
->
-  <h3 class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
+<div class="flex min-h-dvh flex-col items-center justify-center gap-6 p-6 text-center">
+  <div class="font-['Spectral',serif] text-[11px] tracking-[.28em] text-[#a3906c] uppercase">
+    {{ lang() === 'es' ? 'la brújula sabe el camino' : 'the compass knows the way' }}
+  </div>
+
+  <h3 class="font-['Caveat',cursive] text-3xl text-[#e3d5b8]">
     {{ location().label[lang()] }}
   </h3>
 
@@ -11,7 +13,7 @@
     <button
       type="button"
       (click)="onEnableCompass()"
-      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 text-sm font-semibold text-amber-800"
+      class="min-h-11 touch-manipulation rounded-sm border border-[#6b5636] px-5 py-2 font-['Spectral',serif] text-xs tracking-[.15em] text-[#e3d5b8] uppercase"
     >
       {{ t('enableCompass') }}
     </button>
@@ -19,36 +21,38 @@
 
   @if (isWithinRadius()) {
     <div
-      class="arrived-pulse flex flex-col items-center gap-1 rounded-2xl border-2 border-green-700 bg-green-50 px-6 py-3"
+      class="arrived-pulse flex flex-col items-center gap-1 rounded-sm border border-[#4a7a54] bg-[#1a2e1c]/60 px-6 py-3"
     >
       <span class="text-2xl">📍</span>
-      <p class="font-['Caveat',cursive] text-2xl font-bold text-green-800">
+      <p class="font-['Caveat',cursive] text-2xl text-[#9fd6a8]">
         {{ t('arrivedBadge') }}
       </p>
     </div>
   } @else if (distanceMeters() !== null) {
-    <p class="font-semibold text-amber-800">{{ distanceLabel() }}</p>
+    <p class="font-['Kalam',cursive] text-[#a3906c]">{{ distanceLabel() }}</p>
   } @else if (geo.permissionState() === 'denied' || geo.permissionState() === 'unsupported') {
-    <p class="max-w-xs text-sm text-amber-700">{{ t('locationUnavailable') }}</p>
+    <p class="max-w-xs font-['Kalam',cursive] text-sm text-[#a3906c]">
+      {{ t('locationUnavailable') }}
+    </p>
   }
 
   <div class="flex flex-col items-center gap-3">
     <button
       type="button"
       (click)="onArrived()"
-      class="min-h-14 touch-manipulation rounded-2xl px-8 py-4 text-lg font-bold text-white shadow-lg transition-transform active:scale-95"
-      [class.arrived-pulse]="isWithinRadius()"
-      [class.bg-green-700]="isWithinRadius()"
-      [class.shadow-green-900/30]="isWithinRadius()"
-      [class.bg-amber-800]="!isWithinRadius()"
-      [class.shadow-amber-900/30]="!isWithinRadius()"
+      class="min-h-14 touch-manipulation rounded-sm border px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] uppercase transition-transform active:scale-95"
+      [class]="
+        isWithinRadius()
+          ? 'arrived-pulse border-[#4a7a54] bg-[#2f5233] text-[#e9dec5]'
+          : 'border-[#6b5636] text-[#e3d5b8]'
+      "
     >
       {{ t('imHere') }}
     </button>
     <button
       type="button"
       (click)="onArrived()"
-      class="text-sm font-semibold text-amber-700 underline underline-offset-2"
+      class="touch-manipulation font-['Kalam',cursive] text-sm text-[#a3906c] underline underline-offset-2"
     >
       {{ t('skipGpsCheck') }}
     </button>

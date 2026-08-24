@@ -1,4 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
 @import 'tailwindcss';
+
+/* Shared "diary page" torn-paper card, reused by every scavenger-hunt screen
+   that shows a page of the journal. Kept global (rather than per-component,
+   like harmonica's cross-component keyframes) because Angular's emulated view
+   encapsulation scopes ordinary rules to their own component template, and
+   this exact card is needed by six-plus different feature components. */
+.hunt-page {
+  background-color: #e5d8ba;
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 27px, rgba(58, 44, 28, 0.1) 28px),
+    radial-gradient(ellipse 220px 160px at 8% 12%, rgba(90, 62, 26, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 180px 140px at 92% 88%, rgba(90, 62, 26, 0.18) 0%, transparent 60%),
+    radial-gradient(
+      ellipse 95% 88% at 50% 50%,
+      transparent 60%,
+      rgba(107, 68, 30, 0.28) 88%,
+      rgba(46, 25, 10, 0.55) 100%
+    ),
+    radial-gradient(ellipse 110px 85px at 2% 3%, rgba(41, 22, 8, 0.5), transparent 65%),
+    radial-gradient(ellipse 140px 95px at 98% 97%, rgba(41, 22, 8, 0.45), transparent 65%),
+    radial-gradient(ellipse 70px 120px at 99% 20%, rgba(41, 22, 8, 0.35), transparent 70%),
+    radial-gradient(ellipse 90px 60px at 3% 85%, rgba(41, 22, 8, 0.3), transparent 65%),
+    url('/scavenger-hunt/textures/paper.webp');
+  background-size:
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    140% auto;
+  background-position:
+    center,
+    8% 12%,
+    92% 88%,
+    center,
+    2% 3%,
+    98% 97%,
+    99% 20%,
+    3% 85%,
+    30% 40%;
+  background-blend-mode:
+    multiply,
+    multiply,
+    multiply,
+    multiply,
+    multiply,
+    multiply,
+    multiply,
+    multiply,
+    normal;
+  clip-path: polygon(
+    0% 2%,
+    12% 0%,
+    25% 1.5%,
+    37% 0%,
+    50% 1%,
+    62% 0%,
+    75% 1.5%,
+    88% 0%,
+    100% 2%,
+    99% 15%,
+    100% 28%,
+    98% 41%,
+    100% 54%,
+    99% 67%,
+    100% 80%,
+    98% 92%,
+    100% 98%,
+    88% 100%,
+    75% 98.5%,
+    62% 100%,
+    50% 99%,
+    37% 100%,
+    25% 98.5%,
+    12% 100%,
+    0% 98%,
+    1% 85%,
+    0% 72%,
+    2% 59%,
+    0% 46%,
+    1% 33%,
+    0% 20%,
+    2% 8%
+  );
+  box-shadow:
+    inset 0 0 22px 6px rgba(74, 46, 16, 0.35),
+    inset 0 0 0 1px rgba(59, 33, 10, 0.4);
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.45));
+  color: #33261a;
+}
+
+.hunt-tape {
+  /* Paints over the .hunt-page card beneath it (they're both positioned
+     siblings; without this the later-in-DOM card would win the default
+     stacking order and cover the tape at their overlap). */
+  z-index: 1;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.65)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(146, 108, 63, 0.12) 0,
+      rgba(146, 108, 63, 0.12) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}

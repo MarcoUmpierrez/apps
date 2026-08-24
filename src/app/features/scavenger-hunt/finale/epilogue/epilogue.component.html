@@ -1,70 +1,21 @@
-<div
-  class="relative flex min-h-dvh flex-col items-center gap-6 overflow-x-hidden bg-linear-to-b from-rose-100/60 to-amber-100/60 p-6 text-center"
->
-  <div class="pointer-events-none absolute inset-0">
-    @for (piece of confettiPieces; track piece) {
-      <span
-        class="absolute top-[-10%] block h-2 w-2 rounded-sm animate-[confetti-fall_2.8s_linear_infinite]"
-        [style.left.%]="(piece * 37) % 100"
-        [style.animation-delay.s]="(piece % 10) * 0.3"
-        [style.background-color]="confettiColor(piece)"
-      ></span>
-    }
-  </div>
+<div class="relative flex min-h-dvh flex-col items-center gap-6 overflow-x-hidden p-6 text-center">
+  <app-falling-hearts [showLeaves]="false" />
 
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    @for (burst of fireworkBursts; track burst.id) {
-      <div class="absolute" [style.left.%]="burst.xPct" [style.top.%]="burst.yPct">
-        @for (angle of particleAngles; track angle) {
-          <span
-            class="firework-particle absolute block h-1.5 w-1.5 rounded-full"
-            [style.background-color]="burst.color"
-            [style.color]="burst.color"
-            [style.--angle]="angle + 'deg'"
-            [style.animation-delay]="burst.delay"
-          ></span>
-        }
-      </div>
-    }
+  <div class="relative z-10 text-7xl">🎉</div>
+  <h2 class="relative z-10 font-['Caveat',cursive] text-5xl text-[#e3d5b8]">{{ t('sheSaidYes') }}</h2>
 
-    @for (fw of risingFireworks; track fw.id) {
-      <span
-        class="firework-trail absolute block h-2.5 w-1.5 rounded-full"
-        [style.left.%]="fw.xPct"
-        [style.background-color]="fw.color"
-        [style.color]="fw.color"
-        [style.--rise-bottom]="fw.riseBottomPct + '%'"
-        [style.animation-delay]="fw.delay"
-      ></span>
-      <div class="absolute" [style.left.%]="fw.xPct" [style.top.%]="fw.burstYPct">
-        @for (angle of particleAngles; track angle) {
-          <span
-            class="firework-rise-particle absolute block h-1.5 w-1.5 rounded-full"
-            [style.background-color]="fw.color"
-            [style.color]="fw.color"
-            [style.--angle]="angle + 'deg'"
-            [style.animation-delay]="fw.delay"
-          ></span>
-        }
-      </div>
-    }
-  </div>
-
-  <div class="text-7xl">🎉</div>
-  <h2 class="font-['Caveat',_cursive] text-5xl font-bold text-rose-900">{{ t('sheSaidYes') }}</h2>
-
-  <div class="grid grid-cols-2 place-items-center gap-x-6 gap-y-5 pb-6">
+  <div class="relative z-10 grid grid-cols-2 place-items-center gap-x-6 gap-y-5 pb-6">
     @for (stop of stops; track stop.id) {
       <div class="relative">
         <img
           [src]="stop.chapterImage"
           alt=""
-          class="h-28 w-28 rounded-full border-2 border-white object-cover shadow-md shadow-rose-900/30"
+          class="h-28 w-28 rounded-full border-2 border-[#e9dec0] object-cover shadow-lg shadow-black/50"
         />
         <img
           src="scavenger-hunt/photos/seal.webp"
           alt=""
-          class="absolute -bottom-2 -right-2 h-14 w-14 -rotate-12 object-contain drop-shadow"
+          class="absolute -right-2 -bottom-2 h-14 w-14 -rotate-12 object-contain drop-shadow"
         />
       </div>
     }
@@ -73,8 +24,10 @@
   <button
     type="button"
     (click)="onContinue()"
-    class="min-h-14 touch-manipulation rounded-2xl bg-rose-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-rose-900/30 transition-transform active:scale-95"
+    class="relative z-10 min-h-14 touch-manipulation rounded-sm border border-[#6b5636] bg-[#3a3f6b] px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e9dec5] uppercase shadow-lg shadow-black/40 transition-transform active:scale-95"
   >
     {{ t('continueLabel') }}
   </button>
+
+  <app-fireworks-display />
 </div>

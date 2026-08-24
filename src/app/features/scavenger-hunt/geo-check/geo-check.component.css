@@ -2,10 +2,10 @@
 @keyframes arrived-glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.45);
+    box-shadow: 0 0 0 0 rgba(74, 122, 84, 0.45);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(21, 128, 61, 0);
+    box-shadow: 0 0 0 14px rgba(74, 122, 84, 0);
   }
 }
 

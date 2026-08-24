@@ -76,18 +76,18 @@ function createSandDots(): SandDot[] {
   styleUrl: './shake-to-reveal.component.css',
   template: `
     <div class="w-full max-w-sm text-center">
-      <p class="mb-4 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-4 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ config().prompt[lang()] }}</p>
 
       @if (chapterImage(); as image) {
         <div class="relative mx-auto mb-4 aspect-square w-40">
           <img
             [src]="image"
             alt=""
-            class="absolute inset-0 h-full w-full rounded-lg object-cover shadow-md shadow-amber-900/30"
+            class="absolute inset-0 h-full w-full rounded-sm border-4 border-[#e9dec0] object-cover shadow-[0_8px_16px_rgba(0,0,0,0.4)]"
           />
           @for (dot of sandDots; track dot.id) {
             <span
-              class="sand-dot absolute rounded-full bg-amber-600"
+              class="sand-dot absolute rounded-full bg-[#a3906c]"
               [style.left.%]="dot.leftPct"
               [style.top.%]="dot.topPct"
               [style.width.%]="dotSizePct"
@@ -101,12 +101,14 @@ function createSandDots(): SandDot[] {
         </div>
 
         @if (!allCleared()) {
-          <p class="mb-4 text-amber-700">{{ t('shakeToRevealPrompt') }}</p>
+          <p class="mb-4 font-['Kalam',cursive] text-[15px] text-[#8a7550] italic">
+            {{ t('shakeToRevealPrompt') }}
+          </p>
           @if (motion.permissionState() === 'unknown' || motion.permissionState() === 'denied') {
             <button
               type="button"
               (click)="onEnableMotion()"
-              class="mb-4 min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+              class="mb-4 min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-5 py-2 font-['Spectral',serif] text-xs tracking-[.15em] text-[#33261a] uppercase"
             >
               {{ t('enableMotion') }}
             </button>
@@ -114,29 +116,33 @@ function createSandDots(): SandDot[] {
           <button
             type="button"
             (click)="clearBatch()"
-            class="min-h-11 touch-manipulation rounded-xl bg-amber-800 px-6 py-3 font-bold text-white transition-transform active:scale-95"
+            class="min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-6 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('simulateShake') }}
           </button>
         } @else {
-          <p class="mb-4 text-2xl font-black text-amber-900">{{ config().revealedWord[lang()] }}</p>
+          <p class="mb-4 font-['Caveat',cursive] text-3xl text-[#3a3f6b]">
+            {{ config().revealedWord[lang()] }}
+          </p>
           <button
             type="button"
             (click)="solved.emit()"
-            class="min-h-11 touch-manipulation rounded-xl bg-amber-800 px-6 py-3 font-bold text-white transition-transform active:scale-95"
+            class="min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-6 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('continueLabel') }}
           </button>
         }
       } @else {
         @if (!revealed()) {
-          <p class="mb-4 text-amber-700">{{ t('shakeToRevealPrompt') }}</p>
+          <p class="mb-4 font-['Kalam',cursive] text-[15px] text-[#8a7550] italic">
+            {{ t('shakeToRevealPrompt') }}
+          </p>
           <div class="mb-4 text-6xl">📳</div>
           @if (motion.permissionState() === 'unknown' || motion.permissionState() === 'denied') {
             <button
               type="button"
               (click)="onEnableMotion()"
-              class="mb-4 min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+              class="mb-4 min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-5 py-2 font-['Spectral',serif] text-xs tracking-[.15em] text-[#33261a] uppercase"
             >
               {{ t('enableMotion') }}
             </button>
@@ -144,17 +150,19 @@ function createSandDots(): SandDot[] {
           <button
             type="button"
             (click)="revealed.set(true)"
-            class="min-h-11 touch-manipulation rounded-xl bg-amber-800 px-6 py-3 font-bold text-white transition-transform active:scale-95"
+            class="min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-6 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('revealIt') }}
           </button>
         } @else {
           <div class="mb-4 text-4xl">✨</div>
-          <p class="mb-4 text-2xl font-black text-amber-900">{{ config().revealedWord[lang()] }}</p>
+          <p class="mb-4 font-['Caveat',cursive] text-3xl text-[#3a3f6b]">
+            {{ config().revealedWord[lang()] }}
+          </p>
           <button
             type="button"
             (click)="solved.emit()"
-            class="min-h-11 touch-manipulation rounded-xl bg-amber-800 px-6 py-3 font-bold text-white transition-transform active:scale-95"
+            class="min-h-11 touch-manipulation border border-[#3a2c1c]/45 px-6 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('continueLabel') }}
           </button>

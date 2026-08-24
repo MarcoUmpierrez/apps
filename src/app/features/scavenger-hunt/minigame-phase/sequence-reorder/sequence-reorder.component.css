@@ -1,0 +1,45 @@
+/* Each orderable item reads as its own torn scrap of paper pinned onto the
+   page beneath it, rather than a flat list row — reinforcing that these are
+   physical notes to be arranged, not just list entries. */
+.hunt-scrap {
+  position: relative;
+  background-color: #efe6cd;
+  background-image: url('/scavenger-hunt/textures/paper.webp');
+  background-size: 260% auto;
+  background-position: 30% 40%;
+  background-blend-mode: multiply;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.28),
+    inset 0 0 14px rgba(58, 44, 28, 0.12);
+  clip-path: polygon(
+    0% 4%,
+    18% 0%,
+    40% 2%,
+    62% 0%,
+    84% 2%,
+    100% 5%,
+    99% 40%,
+    100% 60%,
+    99% 96%,
+    82% 100%,
+    60% 98%,
+    38% 100%,
+    16% 98%,
+    0% 96%,
+    1% 60%,
+    0% 40%
+  );
+  transition: transform 0.15s ease;
+}
+
+.hunt-scrap-pin {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #d8493f, #7a211c 70%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transform: translateX(-50%);
+}

@@ -1,14 +1,13 @@
-<div
-  class="flex min-h-dvh flex-col items-center justify-center gap-8 bg-linear-to-b from-rose-100/60 to-amber-100/60 p-6 text-center"
->
-  <div class="text-6xl">💛</div>
-  <h2 class="font-['Caveat',_cursive] text-5xl font-bold text-rose-900">
+<div class="flex min-h-dvh flex-col items-center justify-center gap-8 p-6 text-center">
+  <h2 class="font-['Caveat',cursive] text-5xl text-[#e3d5b8]">
     {{ t('proposalQuestion') }}
+    <br />
+    💛
   </h2>
   <button
     type="button"
     (click)="onYes()"
-    class="min-h-16 touch-manipulation rounded-full bg-rose-700 px-12 py-5 text-2xl font-bold text-white shadow-xl shadow-rose-900/40 transition-transform active:scale-95"
+    class="min-h-16 touch-manipulation rounded-sm border border-[#6b5636] bg-[#3a3f6b] px-12 py-5 font-['Spectral',serif] text-sm tracking-[.28em] text-[#e9dec5] uppercase shadow-xl shadow-black/40 transition-transform active:scale-95"
   >
     {{ t('yesButton') }}
   </button>

@@ -120,19 +120,19 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
-        <p class="text-lg font-semibold text-amber-900">{{ t('laserReflectorPrompt') }}</p>
+        <p class="font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ t('laserReflectorPrompt') }}</p>
       }
 
       @if (!letterRevealed()) {
         <div
-          class="relative rounded-xl border-2 border-amber-800 bg-amber-50"
+          class="relative border border-[#3a2c1c]/50 bg-[#3a2c1c]/5"
           [style.width.px]="config().cols * cellSize"
           [style.height.px]="config().rows * cellSize"
         >
           @for (row of grid; track $index; let y = $index) {
             @for (cell of row; track $index; let x = $index) {
               <div
-                class="absolute box-border flex items-center justify-center border border-amber-200"
+                class="absolute box-border flex items-center justify-center border border-[#3a2c1c]/15"
                 [style.left.px]="x * cellSize"
                 [style.top.px]="y * cellSize"
                 [style.width.px]="cellSize"
@@ -146,7 +146,7 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
                     class="flex h-full w-full touch-manipulation items-center justify-center disabled:opacity-60"
                   >
                     <div
-                      class="h-1 w-7 rounded-full bg-sky-700"
+                      class="h-1 w-7 rounded-full bg-[#3a3f6b]"
                       [style.transform]="'rotate(' + orientations()[cell.mirrorIndex!] + 'deg)'"
                     ></div>
                   </button>
@@ -154,7 +154,7 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
                   <svg
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    class="h-5 w-5 text-red-700"
+                    class="h-5 w-5 text-[#9c3b32]"
                     [style.transform]="'rotate(' + emitterArrowDeg + 'deg)'"
                     style="transform-origin: 12px 12px"
                   >
@@ -192,34 +192,37 @@ function pathPixelLength(path: GridPoint[], cellSize: number): number {
         <button
           type="button"
           (click)="revealNow()"
-          class="touch-manipulation text-sm font-semibold text-amber-700 underline underline-offset-2"
+          class="touch-manipulation font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
         >
           {{ t('giveUp') }}
         </button>
       } @else if (!letterRevealed()) {
-        <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-900">
-          🎉 {{ t('wellDone') }}
-        </p>
+        <p class="font-['Caveat',cursive] text-3xl text-[#3a3f6b]">🎉 {{ t('wellDone') }}</p>
         <button
           type="button"
           (click)="letterRevealed.set(true)"
           [disabled]="!continueReady()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95 disabled:opacity-40"
+          class="min-h-14 w-full touch-manipulation border border-[#3a2c1c]/45 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#33261a] uppercase transition-transform active:scale-95 disabled:opacity-40"
         >
           {{ t('continueLabel') }}
         </button>
       } @else {
-        <div class="text-8xl font-black text-amber-900">{{ config().letter }}</div>
-        <div class="max-w-xs rounded-xl border-2 border-dashed border-amber-400 bg-amber-50 p-4">
-          <p class="mb-1 text-xs font-bold uppercase tracking-widest text-amber-600">
+        <div
+          class="flex h-28 w-28 items-center justify-center rounded-full border-2 border-[#3a2c1c]/30 font-['Spectral',serif] text-6xl text-[#3a3f6b] shadow-[0_10px_20px_rgba(0,0,0,0.15)]"
+          style="animation: stamp-in 0.5s ease-out both"
+        >
+          {{ config().letter }}
+        </div>
+        <div class="w-full max-w-xs border border-dashed border-[#3a2c1c]/30 bg-[#3a2c1c]/5 p-4">
+          <p class="mb-1 font-['Spectral',serif] text-[10px] tracking-[.22em] text-[#8a7550] uppercase">
             📓 {{ t('notebookCallout') }}
           </p>
-          <p class="text-amber-900">{{ notebookMessage() }}</p>
+          <p class="font-['Kalam',cursive] text-[15px] text-[#33261a]">{{ notebookMessage() }}</p>
         </div>
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+          class="min-h-14 w-full touch-manipulation border border-[#3a2c1c]/45 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#33261a] uppercase transition-transform active:scale-95"
         >
           {{ t('continueLabel') }}
         </button>
@@ -244,7 +247,7 @@ export class LaserReflectorGameComponent implements OnInit {
 
   readonly beam = computed(() => traceBeam(this.config(), this.orientations()));
   readonly taskComplete = computed(() => this.beam().hitTarget);
-  readonly beamColor = computed(() => (this.beam().hitTarget ? '#16a34a' : '#dc2626'));
+  readonly beamColor = computed(() => (this.beam().hitTarget ? '#4a7a54' : '#9c3b32'));
   readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   constructor() {

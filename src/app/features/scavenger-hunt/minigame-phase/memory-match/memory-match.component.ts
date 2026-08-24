@@ -14,7 +14,7 @@ interface MemoryCard {
   imports: [HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-3 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-3 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ config().prompt[lang()] }}</p>
       <div class="grid grid-cols-4 gap-2">
         @for (card of cards(); track card.id) {
           <button

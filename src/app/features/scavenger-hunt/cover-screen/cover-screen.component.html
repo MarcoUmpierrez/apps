@@ -1,33 +1,63 @@
 <div
-  class="flex min-h-dvh flex-col items-center justify-center gap-8 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+  class="relative flex min-h-dvh flex-col items-center justify-center gap-9 px-6 py-10 text-center"
+  style="animation: diary-fade-up 0.8s ease both"
 >
-  <div>
-    <h1 class="font-['Caveat',cursive] text-6xl font-bold text-amber-900">Our Journey</h1>
-    <p class="mt-3 text-amber-700">
-      {{
-        selectedLanguage() === 'es'
-          ? 'Un viaje a través de nuestra historia.'
-          : 'A journey through our story.'
-      }}
-    </p>
+  <div class="font-['Spectral',serif] text-[11px] tracking-[.32em] text-[#a3906c] uppercase">
+    {{ selectedLanguage() === 'es' ? 'Hallado en el fondo de un arcón' : 'Found at the bottom of a chest' }}
   </div>
+
+  <div class="relative h-[230px] w-[190px] drop-shadow-[0_22px_40px_rgba(0,0,0,0.8)]">
+    <div
+      class="absolute inset-[10px_6px_0_13px] rounded-xs bg-[#c3b391] bg-blend-multiply"
+      style="background-image: url('scavenger-hunt/textures/paper.webp'); background-size: 220% auto; background-position: 20% 80%"
+    ></div>
+    <div
+      class="absolute inset-[13px_9px_3px_3px] -rotate-3 rounded-xs bg-[#d8c9a6] bg-blend-multiply"
+      style="background-image: url('scavenger-hunt/textures/paper.webp'); background-size: 200% auto; background-position: 60% 30%"
+    ></div>
+    <div
+      class="absolute inset-[5px_13px_9px_9px] flex rotate-2 items-center justify-center rounded-xs bg-[#e3d6b6] bg-blend-multiply shadow-[inset_0_0_30px_rgba(80,54,22,0.3)]"
+      style="background-image: url('scavenger-hunt/textures/paper.webp'); background-size: 180% auto; background-position: 40% 60%"
+    >
+      <div class="-rotate-2 px-3 text-center">
+        <div class="font-['Spectral',serif] text-[9px] tracking-[.28em] text-[#6f5c3c]">VOL. I</div>
+        <div class="mt-2 font-['Caveat',cursive] text-2xl leading-tight text-[#3a2c1c]">
+          {{ selectedLanguage() === 'es' ? 'El Viaje Secreto' : 'The Secret Journey' }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute top-[184px] right-0 left-0.5 h-[8px] -rotate-1 rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.5)]"
+      style="background-image: repeating-linear-gradient(58deg, rgba(255,226,178,.30) 0 2px, rgba(0,0,0,.30) 2px 5px), linear-gradient(#a08256, #6a5334 45%, #4a3820)"
+    ></div>
+    <div
+      class="absolute top-8.5 right-0.5 left-0 h-1.75 -rotate-1 rounded-full shadow-[0_4px_7px_rgba(0,0,0,0.45)]"
+      style="background-image: repeating-linear-gradient(62deg, rgba(255,226,178,.26) 0 2px, rgba(0,0,0,.30) 2px 5px), linear-gradient(#96794f, #634d31 45%, #45341e)"
+    ></div>
+  </div>
+
+  <p class="max-w-65 font-['Kalam',cursive] text-sm leading-relaxed text-[#a3906c]">
+    {{
+      selectedLanguage() === 'es'
+        ? 'Un viaje lleno de descubrimientos e historias que contar.'
+        : 'A journey full of discoveries and stories to tell.'
+    }}
+  </p>
 
   <div class="flex gap-3">
     <button
       type="button"
       (click)="selectLanguage('en')"
-      [class.bg-amber-700]="selectedLanguage() === 'en'"
-      [class.text-white]="selectedLanguage() === 'en'"
-      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+      class="min-h-11 touch-manipulation rounded-sm border border-[#6b5636] px-5 py-2 font-['Spectral',serif] text-xs tracking-[.15em] uppercase"
+      [class]="selectedLanguage() === 'en' ? 'bg-[#3a3f6b] text-[#e9dec5]' : 'text-[#a3906c]'"
     >
       English
     </button>
     <button
       type="button"
       (click)="selectLanguage('es')"
-      [class.bg-amber-700]="selectedLanguage() === 'es'"
-      [class.text-white]="selectedLanguage() === 'es'"
-      class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+      class="min-h-11 touch-manipulation rounded-sm border border-[#6b5636] px-5 py-2 font-['Spectral',serif] text-xs tracking-[.15em] uppercase"
+      [class]="selectedLanguage() === 'es' ? 'bg-[#3a3f6b] text-[#e9dec5]' : 'text-[#a3906c]'"
     >
       Español
     </button>
@@ -38,13 +68,16 @@
     (pointerdown)="onBeginPointerDown()"
     (pointerup)="onBeginPointerUp()"
     (pointercancel)="onBeginPointerCancel()"
-    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+    style="animation: diary-breathe 3.4s ease-in-out infinite"
+    class="min-h-14 touch-manipulation rounded-sm border border-[#6b5636] bg-transparent px-9 py-4 font-['Spectral',serif] text-xs tracking-[.28em] text-[#e3d5b8] uppercase transition-colors active:bg-[#e3d5b8]/10"
   >
     {{ t('begin') }}
   </button>
 
   @if (devModeToastVisible()) {
-    <div class="rounded-lg bg-slate-900 px-4 py-2 text-sm text-white">
+    <div
+      class="rounded-sm border border-[#6b5636] bg-[#17110b] px-4 py-2 font-['Spectral',serif] text-xs tracking-widest text-[#e3d5b8]"
+    >
       {{ t('devModeUnlockedToast') }}
     </div>
   }

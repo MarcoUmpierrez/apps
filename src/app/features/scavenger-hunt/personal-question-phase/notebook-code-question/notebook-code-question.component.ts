@@ -10,18 +10,21 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
   imports: [FormsModule, HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-2 text-lg font-semibold text-amber-900">{{ config().question[lang()] }}</p>
-      <p class="mb-4 text-sm text-amber-700">📓 {{ referencedStopsLabel() }}</p>
+      <p class="mb-2 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">
+        {{ config().question[lang()] }}
+      </p>
+      <p class="mb-4 font-['Kalam',cursive] text-sm text-[#8a7550]">📓 {{ referencedStopsLabel() }}</p>
       <input
         type="text"
         [(ngModel)]="userInput"
         (keyup.enter)="onSubmit()"
-        class="min-h-11 w-full touch-manipulation rounded-xl border-2 border-amber-300 px-4 py-3 text-center text-lg font-medium uppercase tracking-widest text-amber-900"
+        [placeholder]="t('writeItHere')"
+        class="min-h-11 w-full touch-manipulation border-0 border-b border-[#3a2c1c]/40 bg-transparent px-1 py-3 text-center font-['Spectral',serif] text-lg tracking-[.2em] text-[#3a2c1c] uppercase outline-none placeholder:normal-case focus:border-[#3a3f6b]"
       />
       <button
         type="button"
         (click)="onSubmit()"
-        class="mt-3 min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+        class="mt-4 min-h-11 w-full touch-manipulation border border-[#3a2c1c]/45 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
       >
         {{ t('submit') }}
       </button>

@@ -8,15 +8,20 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
   imports: [HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-4 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-4 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">
+        {{ config().prompt[lang()] }}
+      </p>
       <div class="flex flex-col gap-2">
         @for (option of config().options; track $index) {
           <button
             type="button"
             (click)="onSelect($index)"
-            [class.border-amber-800]="selectedIndex() === $index"
-            [class.bg-amber-100]="selectedIndex() === $index"
-            class="min-h-11 touch-manipulation rounded-xl border-2 border-amber-300 px-4 py-3 text-left font-medium text-amber-900"
+            class="min-h-11 touch-manipulation rounded-sm border px-4 py-3 text-left font-['Spectral',serif] text-[15px] transition-colors"
+            [class]="
+              selectedIndex() === $index
+                ? 'border-[#3a3f6b] bg-[#3a3f6b]/10 text-[#3a3f6b]'
+                : 'border-[#3a2c1c]/25 text-[#33261a]'
+            "
           >
             {{ option[lang()] }}
           </button>

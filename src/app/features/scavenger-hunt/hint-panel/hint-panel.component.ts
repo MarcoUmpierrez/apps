@@ -30,18 +30,21 @@ const LEVEL_3_SECONDS = 240;
       <button
         type="button"
         (click)="showHint.set(true)"
-        class="text-sm font-semibold text-amber-800 underline underline-offset-2 touch-manipulation"
+        class="block w-full touch-manipulation font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
+        [class]="align() === 'center' ? 'text-center' : align() === 'right' ? 'text-right' : 'text-left'"
       >
         {{ needHintLabel() }}
       </button>
       @if (showHint()) {
-        <div class="mt-2 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+        <div
+          class="mt-2 border border-dashed border-[#3a2c1c]/25 p-3 font-['Kalam',cursive] text-sm text-[#7d6a4a]"
+        >
           <p>{{ hintLevel() === 0 ? comingSoonLabel() : currentHintText() }}</p>
           @if (hintLevel() === 3) {
             <button
               type="button"
               (click)="revealed.emit()"
-              class="mt-3 w-full rounded-lg bg-amber-700 py-2 font-bold text-white touch-manipulation active:scale-95 transition-transform"
+              class="mt-3 w-full touch-manipulation rounded-sm bg-[#3a3f6b] py-2 font-['Spectral',serif] text-xs tracking-[.15em] text-[#e9dec5] uppercase transition-transform active:scale-95"
             >
               {{ gotItLabel() }}
             </button>
@@ -56,6 +59,7 @@ export class HintPanelComponent implements OnDestroy {
   readonly hints = input.required<HintTriplet>();
   readonly lang = input.required<Language>();
   readonly attemptCount = input<number>(0);
+  readonly align = input<'left' | 'center' | 'right'>('center');
   readonly revealed = output<void>();
 
   readonly showHint = signal(false);

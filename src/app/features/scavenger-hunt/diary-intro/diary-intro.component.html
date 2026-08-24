@@ -1,12 +1,25 @@
 <div
-  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
+  class="flex min-h-dvh flex-col items-center justify-center gap-6 p-6 text-center"
+  style="animation: diary-page-in 0.55s cubic-bezier(.2,.7,.3,1) both"
 >
   <div class="relative w-full max-w-sm -rotate-1">
-    <div class="journal-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
-    <div class="journal-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
 
-    <div class="journal-page px-6 py-8 text-left">
-      <p class="font-['Caveat',cursive] text-2xl font-bold text-amber-800">
+    <div class="hunt-page relative px-6 py-8 text-left text-[#33261a]">
+      <img
+        src="scavenger-hunt/textures/coffee.webp"
+        alt=""
+        class="pointer-events-none absolute left-0 bottom-6 h-32 w-32 opacity-45 mix-blend-multiply"
+      />
+
+      <div
+        class="mb-4 flex items-baseline justify-between border-b border-[#3a2c1c]/20 pb-2 font-['Spectral',serif] text-[10px] tracking-[.26em] text-[#8a7550] uppercase"
+      >
+        <span>I</span>
+        <span>{{ lang() === 'es' ? 'antes de empezar' : 'before we begin' }}</span>
+      </div>
+      <p class="font-['Spectral',serif] text-[15px] leading-relaxed">
         @if (lang() === 'es') {
           En un arcón antiguo encuentras las páginas de un diario viejo. Están sueltas,
           desordenadas, llenas de tachones y garabatos. Parece que cuentan una historia que te suena
@@ -19,7 +32,7 @@
           together what happened back then.
         }
       </p>
-      <p class="font-['Caveat',cursive] text-2xl font-bold text-amber-800">
+      <p class="mt-4 font-['Caveat',cursive] text-2xl leading-snug text-[#3a3f6b]">
         @if (lang() === 'es') {
           ¡Una aventura misteriosa y llena de desafíos te espera! ¿Estás lista para continuar?
         } @else {
@@ -30,7 +43,7 @@
   </div>
 
   <label
-    class="vintage-checkbox-label flex -rotate-1 cursor-pointer items-center gap-3 rounded-lg border-2 border-amber-800/70 bg-amber-50/70 px-4 py-3 select-none"
+    class="vintage-checkbox-label flex -rotate-1 cursor-pointer items-center gap-3 rounded-sm bg-[#17110b]/40 px-4 py-3 select-none"
   >
     <span class="relative inline-flex h-7 w-7 shrink-0 items-center justify-center">
       <input
@@ -40,11 +53,11 @@
         (change)="onToggleDetectiveHat($event)"
       />
       <span
-        class="vintage-checkbox pointer-events-none absolute inset-0 rounded-sm border-2 border-amber-800 bg-amber-50 transition-colors peer-checked:bg-amber-800 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-600 peer-focus-visible:ring-offset-2"
+        class="vintage-checkbox pointer-events-none absolute inset-0 rounded-sm border-2 border-[#c9b078] bg-transparent transition-colors peer-checked:bg-[#3a3f6b] peer-focus-visible:ring-2 peer-focus-visible:ring-[#3a3f6b] peer-focus-visible:ring-offset-2"
       ></span>
       <svg
         viewBox="0 0 24 24"
-        class="pointer-events-none relative h-4 w-4 scale-0 text-amber-50 opacity-0 transition-all peer-checked:scale-100 peer-checked:opacity-100"
+        class="pointer-events-none relative h-4 w-4 scale-0 text-[#e9dec5] opacity-0 transition-all peer-checked:scale-100 peer-checked:opacity-100"
       >
         <path
           d="M4 12.5L9.5 18L20 6"
@@ -56,7 +69,7 @@
         />
       </svg>
     </span>
-    <span class="font-['Caveat',cursive] text-2xl font-bold text-amber-800">
+    <span class="font-['Caveat',cursive] text-2xl text-[#e3d5b8]">
       @if (lang() === 'es') {
         ¿Tienes puesto tu sombrero de detective?
       } @else {
@@ -69,7 +82,7 @@
     type="button"
     (click)="onContinue()"
     [disabled]="!hasDetectiveHat()"
-    class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none disabled:active:scale-100 active:scale-95"
+    class="min-h-14 touch-manipulation rounded-sm border border-[#6b5636] bg-transparent px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e3d5b8] uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-30 active:enabled:bg-[#e3d5b8]/10"
   >
     @if (lang() === 'es') {
       ¡Sí, estoy lista!

@@ -1,18 +1,23 @@
-<div
-  class="flex min-h-dvh flex-col items-center justify-center gap-4 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6"
->
-  @let question = stop().personalQuestion;
-  @if (question) {
-    @switch (question.kind) {
-      @case ('multiple-choice') {
-        <app-multiple-choice-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+<div class="flex min-h-dvh flex-col items-center justify-center gap-4 p-6">
+  <div class="relative w-full max-w-md -rotate-1">
+    <div class="hunt-tape absolute -top-3 left-6 h-6 w-16 -rotate-6 rounded-sm"></div>
+    <div class="hunt-tape absolute -top-3 right-6 h-6 w-16 rotate-3 rounded-sm"></div>
+
+    <div class="hunt-page flex flex-col items-center px-4 py-8">
+      @let question = stop().personalQuestion;
+      @if (question) {
+        @switch (question.kind) {
+          @case ('multiple-choice') {
+            <app-multiple-choice-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('free-text') {
+            <app-free-text-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+          }
+          @case ('notebook-code') {
+            <app-notebook-code-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
+          }
+        }
       }
-      @case ('free-text') {
-        <app-free-text-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
-      }
-      @case ('notebook-code') {
-        <app-notebook-code-question [config]="question" [lang]="lang()" (solved)="onSolved()" />
-      }
-    }
-  }
+    </div>
+  </div>
 </div>

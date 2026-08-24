@@ -29,11 +29,11 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
   imports: [HintPanelComponent],
   template: `
     <div class="w-full max-w-sm">
-      <p class="mb-3 text-lg font-semibold text-amber-900">{{ config().prompt[lang()] }}</p>
+      <p class="mb-3 font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ config().prompt[lang()] }}</p>
 
       <div class="mb-3 flex justify-center">
         <div
-          class="inline-grid gap-1 rounded-xl border-2 border-amber-300 bg-amber-100 p-1"
+          class="inline-grid gap-1 border border-[#3a2c1c]/50 bg-[#3a2c1c]/5 p-1"
           [style.grid-template-columns]="'repeat(' + gridCols() + ', ' + cellSizeRem() + 'rem)'"
         >
           @for (piece of slots(); track $index; let i = $index) {
@@ -42,7 +42,7 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
               (click)="onSlotClick(i)"
               [style.width.rem]="cellSizeRem()"
               [style.height.rem]="cellSizeRem()"
-              class="touch-manipulation overflow-hidden rounded border border-amber-300 bg-white"
+              class="touch-manipulation overflow-hidden rounded-xs border border-[#3a2c1c]/25 bg-[#e9dec0]"
             >
               @if (piece !== null) {
                 <div
@@ -58,14 +58,14 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
       </div>
 
       @if (!solvedLocally()) {
-        <div class="flex flex-wrap gap-1 rounded-xl border-2 border-amber-200 bg-white p-2">
+        <div class="flex flex-wrap gap-1 border border-dashed border-[#3a2c1c]/30 bg-[#3a2c1c]/5 p-2">
           @for (pieceId of tray(); track pieceId) {
             <button
               type="button"
               (click)="onTrayPieceClick(pieceId)"
               [class.ring-4]="selectedPieceId() === pieceId"
-              [class.ring-amber-600]="selectedPieceId() === pieceId"
-              class="h-12 w-12 min-h-11 min-w-11 touch-manipulation overflow-hidden rounded border border-amber-300"
+              [class.ring-[#3a3f6b]]="selectedPieceId() === pieceId"
+              class="h-12 w-12 min-h-11 min-w-11 touch-manipulation overflow-hidden rounded-xs border border-[#3a2c1c]/25"
               [style.background-image]="pieceBackgroundImage()"
               [style.background-size]="pieceBackgroundSize()"
               [style.background-position]="pieceBackgroundPosition(pieceId)"
@@ -73,19 +73,27 @@ import { UiStringKey, translateUi } from '../../ui-strings.data';
           }
         </div>
 
-        <button
-          type="button"
-          (click)="revealSolution()"
-          class="mt-3 block w-full touch-manipulation text-center text-sm font-semibold text-amber-700 underline underline-offset-2"
-        >
-          {{ t('giveUp') }}
-        </button>
-        <app-hint-panel [hints]="config().hints" [lang]="lang()" (revealed)="revealSolution()" />
+        <div class="flex items-start justify-between px-6">
+          <button
+            type="button"
+            (click)="revealSolution()"
+            class="mt-4 touch-manipulation text-left font-['Kalam',cursive] text-sm text-[#8a7550] underline underline-offset-2"
+          >
+            {{ t('giveUp') }}
+          </button>
+          <app-hint-panel
+            class="min-w-0 flex-1"
+            align="right"
+            [hints]="config().hints"
+            [lang]="lang()"
+            (revealed)="revealSolution()"
+          />
+        </div>
       } @else {
         <button
           type="button"
           (click)="solved.emit()"
-          class="min-h-11 w-full touch-manipulation rounded-xl bg-amber-800 py-3 font-bold text-white transition-transform active:scale-95"
+          class="min-h-11 w-full touch-manipulation border border-[#3a2c1c]/45 py-3 font-['Spectral',serif] text-xs tracking-[.2em] text-[#33261a] uppercase transition-transform active:scale-95"
         >
           {{ t('continueLabel') }}
         </button>

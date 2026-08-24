@@ -1,39 +1,12 @@
-<div
-  class="relative flex min-h-dvh flex-col items-center justify-between overflow-hidden bg-slate-950 text-center"
->
-  @if (!videoErrored()) {
-    <video
-      [src]="videoAsset"
-      autoplay
-      muted
-      playsinline
-      loop
-      class="absolute inset-0 h-full w-full object-cover"
-      (ended)="onContinue()"
-      (error)="onVideoError()"
-    ></video>
-  }
+<div class="hunt-wood-bg relative flex min-h-dvh flex-col items-center overflow-hidden text-center">
+  <app-fireworks-display />
 
-  <div
-    class="relative z-10 w-full bg-linear-to-b from-black/60 to-transparent p-6 pt-[calc(env(safe-area-inset-top)+1.5rem)]"
-  >
-    <p class="font-['Caveat',cursive] text-3xl font-bold text-amber-100 drop-shadow-lg">
+  <div class="relative z-10 flex flex-1 flex-col items-center justify-center gap-6 px-6">
+    <p class="font-['Caveat',cursive] text-3xl text-[#e9dec5] drop-shadow-lg">
       {{ t('finaleCongrats') }}
     </p>
+    <div class="text-7xl drop-shadow-lg">🎉</div>
   </div>
-
-  @if (videoErrored()) {
-    <div class="relative z-10 flex flex-col items-center gap-4 p-6">
-      <div class="animate-pulse text-7xl">💛</div>
-      <p class="font-['Caveat',_cursive] text-4xl font-bold text-amber-100">
-        {{
-          lang() === 'es'
-            ? 'Cada capítulo de esta historia... valió la pena.'
-            : 'Every chapter of this story... was worth it.'
-        }}
-      </p>
-    </div>
-  }
 
   <div
     class="relative z-10 w-full bg-linear-to-t from-black/70 to-transparent p-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)]"
@@ -41,7 +14,7 @@
     <button
       type="button"
       (click)="onContinue()"
-      class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+      class="min-h-14 w-full touch-manipulation rounded-sm border border-[#6b5636] bg-black/30 px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e3d5b8] uppercase backdrop-blur-sm transition-colors active:bg-[#e3d5b8]/10"
     >
       {{ t('oneLastQuestion') }}
     </button>

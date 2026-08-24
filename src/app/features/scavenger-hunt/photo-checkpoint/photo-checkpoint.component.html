@@ -1,38 +1,38 @@
-<div
-  class="flex min-h-dvh flex-col items-center justify-center gap-6 bg-linear-to-b from-amber-50/60 to-amber-100/60 p-6 text-center"
->
+<div class="flex min-h-dvh flex-col items-center justify-center gap-6 p-6 text-center">
   @if (previewDataUrl(); as photo) {
-    <p class="font-semibold text-amber-800">{{ t('photoTakenBadge') }}</p>
+    <p class="font-['Spectral',serif] text-xs tracking-[.2em] text-[#a3906c] uppercase">
+      {{ t('photoTakenBadge') }}
+    </p>
     <img
       [src]="photo"
       alt=""
-      class="max-h-[50vh] w-full max-w-xs rounded-2xl object-contain shadow-lg shadow-amber-900/30"
+      class="max-h-[50vh] w-full max-w-xs -rotate-1 rounded-sm border-4 border-[#e9dec0] object-contain shadow-xl shadow-black/50"
     />
 
     <div class="flex w-full max-w-xs flex-col gap-3">
       <button
         type="button"
         (click)="onContinue()"
-        class="min-h-14 touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+        class="min-h-14 touch-manipulation rounded-sm border border-[#6b5636] bg-transparent px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e3d5b8] uppercase transition-colors active:bg-[#e3d5b8]/10"
       >
         {{ t('continueLabel') }}
       </button>
       <button
         type="button"
         (click)="onRetake()"
-        class="min-h-11 touch-manipulation rounded-2xl border-2 border-amber-700 px-5 py-2 font-semibold text-amber-800"
+        class="min-h-11 touch-manipulation font-['Kalam',cursive] text-sm text-[#a3906c] underline underline-offset-2"
       >
         {{ t('retakePhoto') }}
       </button>
     </div>
   } @else {
     <div class="text-6xl">📸</div>
-    <p class="max-w-xs text-lg font-semibold text-amber-900">
+    <p class="max-w-xs font-['Caveat',cursive] text-2xl text-[#e3d5b8]">
       {{ stop().photoCheckpoint?.prompt?.[lang()] }}
     </p>
 
     <label
-      class="min-h-14 w-full max-w-xs touch-manipulation cursor-pointer rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+      class="min-h-14 w-full max-w-xs touch-manipulation cursor-pointer rounded-sm border border-[#6b5636] bg-transparent px-8 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#e3d5b8] uppercase transition-colors active:bg-[#e3d5b8]/10"
     >
       {{ isProcessing() ? '…' : t('takePhoto') }}
       <input
@@ -48,7 +48,7 @@
     <button
       type="button"
       (click)="onSkip()"
-      class="text-sm font-semibold text-amber-700 underline underline-offset-2"
+      class="touch-manipulation font-['Kalam',cursive] text-sm text-[#a3906c] underline underline-offset-2"
     >
       {{ t('skipPhoto') }}
     </button>
