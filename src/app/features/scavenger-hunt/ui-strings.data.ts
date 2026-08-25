@@ -31,6 +31,7 @@ export type UiStringKey =
   | 'notebookCallout'
   | 'downloadMemory'
   | 'proposalQuestion'
+  | 'proposalSubtext'
   | 'yesButton'
   | 'sheSaidYes'
   | 'ourJourney'
@@ -89,6 +90,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     notebookCallout: 'Write this in your notebook',
     downloadMemory: 'Download memory',
     proposalQuestion: 'Will you be my girlfriend?',
+    proposalSubtext: '',
     yesButton: 'Yes!',
     sheSaidYes: 'She said YES!',
     ourJourney: 'The Secret Journey',
@@ -146,6 +148,7 @@ export const UI_STRINGS: Record<Language, Record<UiStringKey, string>> = {
     notebookCallout: 'Escribe esto en tu cuaderno',
     downloadMemory: 'Descargar recuerdo',
     proposalQuestion: '¿Quieres ser mi novia?',
+    proposalSubtext: '¡dame el empate, chama!',
     yesButton: '¡Sí!',
     sheSaidYes: '¡Ella dijo SÍ!',
     ourJourney: 'El Viaje Secreto',

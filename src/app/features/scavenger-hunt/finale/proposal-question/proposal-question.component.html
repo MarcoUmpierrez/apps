@@ -4,6 +4,9 @@
     <br />
     💛
   </h2>
+  @if (t('proposalSubtext'); as subtext) {
+    <p class="font-['Caveat',cursive] text-2xl text-[#e3d5b8]/80">{{ subtext }}</p>
+  }
   <button
     type="button"
     (click)="onYes()"
