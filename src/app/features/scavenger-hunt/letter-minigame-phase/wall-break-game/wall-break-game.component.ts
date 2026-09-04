@@ -11,8 +11,8 @@ import { Language, WallBreakLetterMinigame } from '../../scavenger-hunt.types';
 import { UiStringKey, translateUi } from '../../ui-strings.data';
 import { createContinueReadySignal } from '../continue-ready.util';
 
-const CHARGE_PER_TAP = 12;
-const DECAY_PER_TICK = 2;
+const CHARGE_PER_TAP = 16;
+const DECAY_PER_TICK = 1;
 const DECAY_INTERVAL_MS = 100;
 const SHAKE_DURATION_MS = 500;
 
@@ -26,7 +26,7 @@ interface Brick {
 }
 
 const ROW_HEIGHT = 20;
-const BRICK_COLORS = ['#8c8378', '#7d7468', '#968c7e'];
+const BRICK_COLORS = ['#b45309', '#92400e', '#78350f'];
 /** Running-bond brick courses (viewBox 0 0 100 100): full-width bricks on one
  * row, half-bricks at each edge on the next, so the seams stagger like a real
  * wall instead of lining up in a grid. */
@@ -86,38 +86,33 @@ interface BrickFall {
     <div class="flex w-full max-w-sm flex-col items-center gap-5 text-center">
       @if (!taskComplete()) {
         <p class="font-['Spectral',serif] text-[15px] leading-relaxed text-[#33261a]">{{ t('wallBreakPrompt') }}</p>
-      }
 
-      <div
-        class="wall-frame relative flex h-40 w-40 items-center justify-center rounded-2xl border-2 border-amber-300 shadow-lg shadow-amber-900/20"
-        [class.wall-shake]="justHit()"
-      >
         <div
-          class="absolute inset-0 flex items-center justify-center text-7xl font-black text-amber-900"
-          [class.letter-reveal]="taskComplete()"
+          class="wall-frame relative flex h-40 w-40 items-center justify-center rounded-2xl border-2 border-amber-300 shadow-lg shadow-amber-900/20"
+          [class.wall-shake]="justHit()"
         >
-          {{ config().letter }}
+          <div class="absolute inset-0 flex items-center justify-center text-7xl font-black text-amber-900">
+            {{ config().letter }}
+          </div>
+
+          <svg class="brick-wall absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
+            @for (brick of bricks; track brick.id) {
+              <rect
+                [attr.x]="brick.x + 0.6"
+                [attr.y]="brick.y + 0.6"
+                [attr.width]="brick.width - 1.2"
+                [attr.height]="brick.height - 1.2"
+                [attr.fill]="brick.color"
+                class="brick"
+                [class.brick-fallen]="isFallen(brick.id)"
+                [style.--brick-rotate]="(fallOf(brick.id)?.rotateDeg ?? 0) + 'deg'"
+                [style.--brick-drift]="(fallOf(brick.id)?.driftPx ?? 0) + 'px'"
+                [style.animation-delay.ms]="fallOf(brick.id)?.delayMs ?? 0"
+              />
+            }
+          </svg>
         </div>
 
-        <svg class="brick-wall absolute inset-0 h-full w-full" viewBox="0 0 100 100" aria-hidden="true">
-          @for (brick of bricks; track brick.id) {
-            <rect
-              [attr.x]="brick.x + 0.6"
-              [attr.y]="brick.y + 0.6"
-              [attr.width]="brick.width - 1.2"
-              [attr.height]="brick.height - 1.2"
-              [attr.fill]="brick.color"
-              class="brick"
-              [class.brick-fallen]="isFallen(brick.id)"
-              [style.--brick-rotate]="(fallOf(brick.id)?.rotateDeg ?? 0) + 'deg'"
-              [style.--brick-drift]="(fallOf(brick.id)?.driftPx ?? 0) + 'px'"
-              [style.animation-delay.ms]="fallOf(brick.id)?.delayMs ?? 0"
-            />
-          }
-        </svg>
-      </div>
-
-      @if (!taskComplete()) {
         <p class="text-sm text-amber-700">{{ hitsLanded() }} / {{ config().hitsRequired }}</p>
 
         <div
@@ -133,7 +128,7 @@ interface BrickFall {
           <button
             type="button"
             (click)="onHit()"
-            class="min-h-14 w-full touch-manipulation rounded-2xl bg-red-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-red-900/30 transition-transform active:scale-95"
+            class="min-h-14 w-full touch-manipulation border border-[#3a2c1c]/45 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('hitIt') }}
           </button>
@@ -141,7 +136,7 @@ interface BrickFall {
           <button
             type="button"
             (click)="onCharge()"
-            class="min-h-14 w-full touch-manipulation rounded-2xl bg-amber-800 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
+            class="min-h-14 w-full touch-manipulation border border-[#3a2c1c]/45 py-4 font-['Spectral',serif] text-xs tracking-[.24em] text-[#33261a] uppercase transition-transform active:scale-95"
           >
             {{ t('chargeIt') }}
           </button>
@@ -155,6 +150,12 @@ interface BrickFall {
           {{ t('giveUp') }}
         </button>
       } @else {
+        <div
+          class="flex h-28 w-28 items-center justify-center rounded-full border-2 border-[#3a2c1c]/30 font-['Spectral',serif] text-6xl text-[#3a3f6b] shadow-[0_10px_20px_rgba(0,0,0,0.15)]"
+          style="animation: stamp-in 0.5s ease-out both"
+        >
+          {{ config().letter }}
+        </div>
         <div class="w-full max-w-xs border border-dashed border-[#3a2c1c]/30 bg-[#3a2c1c]/5 p-4">
           <p class="mb-1 font-['Spectral',serif] text-[10px] tracking-[.22em] text-[#8a7550] uppercase">
             📓 {{ t('notebookCallout') }}
@@ -194,7 +195,7 @@ export class WallBreakGameComponent implements OnDestroy {
   readonly continueReady = createContinueReadySignal(() => this.taskComplete());
 
   private readonly decayIntervalId = setInterval(() => {
-    if (this.taskComplete()) return;
+    if (this.taskComplete() || this.charge() >= 100) return;
     this.charge.update((c) => Math.max(0, c - DECAY_PER_TICK));
   }, DECAY_INTERVAL_MS);
   private shakeTimeoutId: ReturnType<typeof setTimeout> | null = null;
